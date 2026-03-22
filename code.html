@@ -13,18 +13,43 @@
 
         body {
             background-color: #0a0a0a;
-            background-image: radial-gradient(rgba(0, 255, 0, 0.05) 1px, transparent 1px);
-            background-size: 30px 30px;
             color: #00cc66;
             font-family: 'Courier New', 'Fira Code', monospace;
             line-height: 1.6;
             padding: 20px;
             position: relative;
+            min-height: 100vh;
         }
 
-        /* Эффект глюков на фоне */
-        body::before {
-            content: '';
+        /* Анимированный фон из кода */
+        .code-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            overflow: hidden;
+            font-family: monospace;
+            font-size: 14px;
+            line-height: 1.2;
+            color: rgba(0, 204, 102, 0.15);
+            pointer-events: none;
+        }
+
+        .code-line {
+            white-space: nowrap;
+            animation: scrollCode 20s linear infinite;
+            margin-bottom: 10px;
+        }
+
+        @keyframes scrollCode {
+            0% { transform: translateY(-100%); }
+            100% { transform: translateY(100vh); }
+        }
+
+        /* Эффект помех */
+        .glitch-overlay {
             position: fixed;
             top: 0;
             left: 0;
@@ -32,23 +57,23 @@
             height: 100%;
             background: repeating-linear-gradient(
                 0deg,
-                rgba(0, 255, 0, 0.03) 0px,
-                rgba(0, 255, 0, 0.03) 2px,
+                rgba(0, 0, 0, 0.2) 0px,
+                rgba(0, 0, 0, 0.2) 2px,
                 transparent 2px,
                 transparent 6px
             );
             pointer-events: none;
             z-index: 1;
-            animation: glitch 0.3s infinite;
+            animation: noise 0.15s infinite;
         }
 
-        @keyframes glitch {
-            0% { opacity: 0.2; transform: translateX(0); }
-            20% { opacity: 0.4; transform: translateX(-2px); }
-            40% { opacity: 0.2; transform: translateX(2px); }
-            60% { opacity: 0.5; transform: translateX(-1px); }
-            80% { opacity: 0.3; transform: translateX(1px); }
-            100% { opacity: 0.2; transform: translateX(0); }
+        @keyframes noise {
+            0% { opacity: 0.3; transform: translateX(0); }
+            20% { opacity: 0.5; transform: translateX(-1px); }
+            40% { opacity: 0.3; transform: translateX(1px); }
+            60% { opacity: 0.6; transform: translateX(0); }
+            80% { opacity: 0.4; transform: translateX(2px); }
+            100% { opacity: 0.3; transform: translateX(-1px); }
         }
 
         .container {
@@ -61,6 +86,7 @@
             border-radius: 8px;
             position: relative;
             z-index: 2;
+            backdrop-filter: blur(2px);
         }
 
         h1, h2, h3 {
@@ -84,6 +110,7 @@
             text-decoration: none;
             border-bottom: 1px dashed #00cc66;
             transition: 0.3s;
+            cursor: pointer;
         }
         a:hover {
             color: #ff3366;
@@ -162,20 +189,6 @@
             font-weight: bold;
         }
 
-        button, .button {
-            background: none;
-            border: 1px solid #00cc66;
-            padding: 8px 16px;
-            color: #00cc66;
-            font-family: monospace;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-        button:hover {
-            background: #00cc66;
-            color: #0a0a0a;
-        }
-
         footer {
             text-align: center;
             margin-top: 40px;
@@ -216,112 +229,167 @@
     </style>
 </head>
 <body>
-<div class="container">
-    <h1>ARC OF FATE</h1>
-    <p class="tagline">Она не должна была выжить. Но она выбрала остаться.</p>
+    <!-- Анимированный фон с кодом -->
+    <div class="code-bg" id="code-bg"></div>
+    <div class="glitch-overlay"></div>
 
-    <nav>
-        <a href="#">ГЛАВНАЯ</a>
-        <a href="#">ГЛАВЫ</a>
-        <a href="#">ПЕРСОНАЖИ</a>
-        <a href="#">О ПРОЕКТЕ</a>
-    </nav>
+    <div class="container">
+        <h1>ARC OF FATE</h1>
+        <p class="tagline">Она не должна была выжить. Но она выбрала остаться.</p>
 
-    <section>
-        <h2>КОД ВОЙДА</h2>
-        <pre>
+        <nav>
+            <a href="#" data-section="top">ГЛАВНАЯ</a>
+            <a href="#" data-section="chapters">ГЛАВЫ</a>
+            <a href="#" data-section="characters">ПЕРСОНАЖИ</a>
+            <a href="#" data-section="about">О ПРОЕКТЕ</a>
+        </nav>
+
+        <section id="top">
+            <h2>КОД ВОЙДА</h2>
+            <pre>
 > VOID_NEXUS_CORE: RELEASED
 > WATCHING. WAITING.
 > "Интересно, что будет дальше. . ."</pre>
-        <p>Добро пожаловать в мир, где боль становится топливом, а любовь — невозможной. Киберпанк-комикс о девушке, пережившей эксперименты, и бессмертном учёном, который учится быть человеком.</p>
-    </section>
+            <p>Добро пожаловать в мир, где боль становится топливом, а любовь — невозможной. Комикс о девушке, невольно ставшей экспериментом.</p>
+        </section>
 
-    <section>
-        <h2>ПЕРСОНАЖИ</h2>
-        <div class="characters-grid">
-            <div class="character-card" data-target="desc-carolina">
-                <img src="https://via.placeholder.com/100?text=Каролина" alt="Каролина" class="character-avatar">
-                <div class="character-name">Каролина</div>
+        <section id="characters">
+            <h2>ПЕРСОНАЖИ</h2>
+            <div class="characters-grid">
+                <div class="character-card" data-target="desc-carolina">
+                    <img src="https://via.placeholder.com/100?text=Каролина" alt="Каролина" class="character-avatar">
+                    <div class="character-name">Каролина</div>
+                </div>
+                <div class="character-card" data-target="desc-akiharu">
+                    <img src="https://via.placeholder.com/100?text=Акихару" alt="Акихару" class="character-avatar">
+                    <div class="character-name">Акихару</div>
+                </div>
+                <div class="character-card" data-target="desc-void">
+                    <img src="https://via.placeholder.com/100?text=Войд" alt="Некс" class="character-avatar">
+                    <div class="character-name">Некс</div>
+                </div>
+                <div class="character-card" data-target="desc-hays">
+                    <img src="https://via.placeholder.com/100?text=Хайс" alt="Хайс" class="character-avatar">
+                    <div class="character-name">Хайс</div>
+                </div>
+                <div class="character-card" data-target="desc-lia">
+                    <img src="https://via.placeholder.com/100?text=Лиа" alt="Лиа" class="character-avatar">
+                    <div class="character-name">Лиа</div>
+                </div>
             </div>
-            <div class="character-card" data-target="desc-akiharu">
-                <img src="https://via.placeholder.com/100?text=Акихару" alt="Акихару" class="character-avatar">
-                <div class="character-name">Акихару</div>
-            </div>
-            <div class="character-card" data-target="desc-void">
-                <img src="https://via.placeholder.com/100?text=Войд" alt="Некс" class="character-avatar">
-                <div class="character-name">Некс</div>
-            </div>
-            <div class="character-card" data-target="desc-hays">
-                <img src="https://via.placeholder.com/100?text=Хайс" alt="Хайс" class="character-avatar">
-                <div class="character-name">Хайс</div>
-            </div>
-            <div class="character-card" data-target="desc-lia">
-                <img src="https://via.placeholder.com/100?text=Лиа" alt="Лиа" class="character-avatar">
-                <div class="character-name">Лиа</div>
-            </div>
-        </div>
 
-        <div id="desc-carolina" class="character-desc">
-            <strong>Каролина Блэк</strong><br>
-            Объект 0004. Пережила взрыв центра, регенерирует, но её органы разрушаются. Пустота внутри. Эмпатии почти нет.
-        </div>
-        <div id="desc-akiharu" class="character-desc">
-            <strong>Акихару Раст</strong><br>
-            ???
-        </div>
-        <div id="desc-void" class="character-desc">
-            <strong>Некс</strong><br>
-            ???
-        </div>
-        <div id="desc-hays" class="character-desc">
-            <strong>Доктор Хайс</strong><br>
-            42 года. Является главным Доктором и отличным нейрохирургом. Занимается исследованиями и управляет работой на основных секторах центра.
-        </div>
-        <div id="desc-lia" class="character-desc">
-            <strong>Лиа</strong><br>
-            17 лет. Не помнит своего прошлого и находится в центре.
-        </div>
-    </section>
+            <div id="desc-carolina" class="character-desc">
+                <strong>Каролина Блэк</strong><br>
+                Объект 0004. Регенерирует, но её органы разрушаются. Пустота внутри. Эмпатии почти нет.
+            </div>
+            <div id="desc-akiharu" class="character-desc">
+                <strong>Акихару Раст</strong><br>
+                ???
+            </div>
+            <div id="desc-void" class="character-desc">
+                <strong>Некс</strong><br>
+                ???
+            </div>
+            <div id="desc-hays" class="character-desc">
+                <strong>Доктор Хайс</strong><br>
+                42 года. Является главным Доктором и отличным нейрохирургом. Занимается исследованиями и управляет работой на основных секторах центра.
+            </div>
+            <div id="desc-lia" class="character-desc">
+                <strong>Лиа</strong><br>
+                17 лет. Не помнит своего прошлого и находится в центре.
+            </div>
+        </section>
 
-    <section>
-        <h2>РАСПИСАНИЕ ВЫХОДА ГЛАВ</h2>
-        <div class="schedule">
-            <p><span class="year">2024</span> — CHAPTER 01: "begin"</p>
-            <p><span class="year">2025</span> — CHAPTER 02: "who am I"</p>
-            <p><span class="year">2026</span> — CHAPTER 03: "new friend"</p>
-            <p><span class="year">2026</span> — CHAPTER 04: ???</p>
-            <p><span class="year">202X</span> — CHAPTER 05: ???</p>
-            <p><span class="year">202X</span> — CHAPTER 06: ???</p>
-            <p><span class="year">202X</span> — CHAPTER 07: ???</p>
-            <p><span class="year">202X</span> — CHAPTER 08: ???</p>
-            <p><strong>FIRST ARC COMPLETION: 2028</strong></p>
-            <p>STATUS: IN_PROGRESS</p>
-        </div>
-    </section>
+        <section id="chapters">
+            <h2>РАСПИСАНИЕ ВЫХОДА ГЛАВ</h2>
+            <div class="schedule">
+                <p><span class="year">2024</span> — CHAPTER 01: "begin"</p>
+                <p><span class="year">2025</span> — CHAPTER 02: "who am I"</p>
+                <p><span class="year">2026</span> — CHAPTER 03: "new friend"</p>
+                <p><span class="year">2026</span> — CHAPTER 04: ???</p>
+                <p><span class="year">202X</span> — CHAPTER 05: ???</p>
+                <p><span class="year">202X</span> — CHAPTER 06: ???</p>
+                <p><span class="year">202X</span> — CHAPTER 07: ???</p>
+                <p><span class="year">202X</span> — CHAPTER 08: ???</p>
+                <p><strong>FIRST ARC COMPLETION: 2028</strong></p>
+                <p>STATUS: IN_PROGRESS</p>
+            </div>
+        </section>
 
-    <footer>
-        <p>ARC OF FATE — автор: apelssinka | Все права защищены |NEX</p>
-        <div class="donate-social">
-            <a href="https://new.donatepay.ru/@1422259" target="_blank" rel="noopener noreferrer" title="Поддержать проект">❤️</a>
-            <a href="https://t.me/ft_channel31" target="_blank" rel="noopener noreferrer" title="Telegram-канал">💬</a>
-        </div>
-    </footer>
-</div>
+        <footer id="about">
+            <p>автор: apelssinka | все права защищены | NEX</p>
+            <div class="donate-social">
+                <a href="https://new.donatepay.ru/@1422259" target="_blank" rel="noopener noreferrer" title="Поддержать проект">❤️</a>
+                <a href="https://t.me/ft_channel31" target="_blank" rel="noopener noreferrer" title="Telegram-канал">💬</a>
+            </div>
+        </footer>
+    </div>
 
-<script>
-    const cards = document.querySelectorAll('.character-card');
-    cards.forEach(card => {
-        card.addEventListener('click', function() {
-            const targetId = this.getAttribute('data-target');
-            const targetDesc = document.getElementById(targetId);
-            if (targetDesc) {
-                document.querySelectorAll('.character-desc.active').forEach(desc => {
-                    if (desc !== targetDesc) desc.classList.remove('active');
-                });
-                targetDesc.classList.toggle('active');
-            }
+    <script>
+        // Плавная прокрутка
+        document.querySelectorAll('nav a[data-section]').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const sectionId = this.getAttribute('data-section');
+                let element;
+                if (sectionId === 'top') {
+                    element = document.body;
+                } else {
+                    element = document.getElementById(sectionId);
+                }
+                if (element) {
+                    element.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
         });
-    });
-</script>
+
+        // Клик по персонажам
+        const cards = document.querySelectorAll('.character-card');
+        cards.forEach(card => {
+            card.addEventListener('click', function() {
+                const targetId = this.getAttribute('data-target');
+                const targetDesc = document.getElementById(targetId);
+                if (targetDesc) {
+                    document.querySelectorAll('.character-desc.active').forEach(desc => {
+                        if (desc !== targetDesc) desc.classList.remove('active');
+                    });
+                    targetDesc.classList.toggle('active');
+                }
+            });
+        });
+
+        // Анимированный фон из кода
+        function generateCodeLines() {
+            const codeBg = document.getElementById('code-bg');
+            if (!codeBg) return;
+            const lines = [];
+            const codeStrings = [
+                '> VOID_NEXUS_CORE: ACTIVE',
+                '> ACCESSING GLOBAL_NETWORK...',
+                '> CAROLINA_BLAK.FATE: [DATA_CORRUPTED]',
+                '> AKIHARU_RAST: OBSERVER',
+                '> SYSTEM: ARC_OF_FATE',
+                '> WATCHING. WAITING.',
+                '> 01001110 01100101 01111000 01110101 01110011',
+                '> [CRITICAL_ERROR: SUBJECT_DEFIES_CAUSALITY]',
+                '> LOCATION: UNKNOWN',
+                '> STATUS: IN_PROGRESS',
+                '> VOID_NEXUS: RELEASED',
+                '> TIME_REMAINING: [DATA_CORRUPTED]',
+                '> 3% SURVIVAL... ANOMALY DETECTED',
+                '> "SYSTEM ACTIVATED..."',
+                '> [ERROR] PREDICTION_IMPOSSIBLE'
+            ];
+            for (let i = 0; i < 30; i++) {
+                const randomCode = codeStrings[Math.floor(Math.random() * codeStrings.length)];
+                const randomLeft = Math.random() * 100;
+                const randomDelay = Math.random() * 10;
+                const randomDuration = 15 + Math.random() * 15;
+                lines.push(`<div class="code-line" style="left: ${randomLeft}%; animation-duration: ${randomDuration}s; animation-delay: -${randomDelay}s;">${randomCode}</div>`);
+            }
+            codeBg.innerHTML = lines.join('');
+        }
+        generateCodeLines();
+    </script>
 </body>
 </html>
