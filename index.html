@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Arc of Fate — комикс</title>
     <style>
-        /* Общие стили */
         * {
             margin: 0;
             padding: 0;
@@ -20,9 +19,38 @@
             font-family: 'Courier New', 'Fira Code', monospace;
             line-height: 1.6;
             padding: 20px;
+            position: relative;
         }
 
-        /* Контейнер */
+        /* Эффект глюков на фоне */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: repeating-linear-gradient(
+                0deg,
+                rgba(0, 255, 0, 0.03) 0px,
+                rgba(0, 255, 0, 0.03) 2px,
+                transparent 2px,
+                transparent 6px
+            );
+            pointer-events: none;
+            z-index: 1;
+            animation: glitch 0.3s infinite;
+        }
+
+        @keyframes glitch {
+            0% { opacity: 0.2; transform: translateX(0); }
+            20% { opacity: 0.4; transform: translateX(-2px); }
+            40% { opacity: 0.2; transform: translateX(2px); }
+            60% { opacity: 0.5; transform: translateX(-1px); }
+            80% { opacity: 0.3; transform: translateX(1px); }
+            100% { opacity: 0.2; transform: translateX(0); }
+        }
+
         .container {
             max-width: 1100px;
             margin: 0 auto;
@@ -31,9 +59,10 @@
             box-shadow: 0 0 20px rgba(0, 204, 102, 0.2);
             padding: 30px;
             border-radius: 8px;
+            position: relative;
+            z-index: 2;
         }
 
-        /* Заголовки */
         h1, h2, h3 {
             color: #ff3366;
             text-transform: uppercase;
@@ -50,7 +79,6 @@
             text-shadow: 0 0 5px #ff3366;
         }
 
-        /* Ссылки */
         a {
             color: #00cc66;
             text-decoration: none;
@@ -62,7 +90,6 @@
             border-bottom-color: #ff3366;
         }
 
-        /* Навигация */
         nav {
             margin: 20px 0;
             padding: 10px 0;
@@ -77,7 +104,6 @@
             font-weight: bold;
         }
 
-        /* Блок персонажей */
         .characters-grid {
             display: flex;
             flex-wrap: wrap;
@@ -123,7 +149,6 @@
             display: block;
         }
 
-        /* Расписание глав */
         .schedule {
             margin: 40px 0;
             border-left: 2px solid #ff3366;
@@ -137,7 +162,6 @@
             font-weight: bold;
         }
 
-        /* Кнопка */
         button, .button {
             background: none;
             border: 1px solid #00cc66;
@@ -159,6 +183,36 @@
             border-top: 1px solid #00cc66;
             padding-top: 20px;
         }
+
+        .donate-social {
+            margin-top: 15px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+        .donate-social a {
+            font-size: 2rem;
+            border-bottom: none;
+            transition: transform 0.2s;
+            display: inline-block;
+        }
+        .donate-social a:hover {
+            transform: scale(1.1);
+            color: #ff3366;
+        }
+
+        .tagline {
+            color: #ff3366;
+            font-style: italic;
+            margin: 10px 0;
+        }
+        pre {
+            background: #0a0a0a;
+            padding: 15px;
+            border: 1px solid #00cc66;
+            overflow-x: auto;
+            font-family: monospace;
+        }
     </style>
 </head>
 <body>
@@ -173,52 +227,43 @@
         <a href="#">О ПРОЕКТЕ</a>
     </nav>
 
-    <!-- Вступление / трейлер -->
     <section>
         <h2>КОД ВОЙДА</h2>
-        <pre style="background:#0a0a0a; padding:15px; border:1px solid #00cc66; overflow-x:auto;">
+        <pre>
 > VOID_NEXUS_CORE: RELEASED
 > WATCHING. WAITING.
-> "Интересно, что будет дальше. . ."
-        </pre>
-        <p>Добро пожаловать в мир, где боль становится топливом, а любовь — невозможной.Комикс о девушке, попавшей в исследовательский центр после своей кончины.</p>
+> "Интересно, что будет дальше. . ."</pre>
+        <p>Добро пожаловать в мир, где боль становится топливом, а любовь — невозможной. Киберпанк-комикс о девушке, пережившей эксперименты, и бессмертном учёном, который учится быть человеком.</p>
     </section>
 
-    <!-- Персонажи с триггерами -->
     <section>
         <h2>ПЕРСОНАЖИ</h2>
         <div class="characters-grid">
-            <!-- Каролина -->
             <div class="character-card" data-target="desc-carolina">
                 <img src="https://via.placeholder.com/100?text=Каролина" alt="Каролина" class="character-avatar">
                 <div class="character-name">Каролина</div>
             </div>
-            <!-- Акихару -->
             <div class="character-card" data-target="desc-akiharu">
                 <img src="https://via.placeholder.com/100?text=Акихару" alt="Акихару" class="character-avatar">
                 <div class="character-name">Акихару</div>
             </div>
-            <!-- Войд Некс -->
             <div class="character-card" data-target="desc-void">
                 <img src="https://via.placeholder.com/100?text=Войд" alt="Некс" class="character-avatar">
                 <div class="character-name">Некс</div>
             </div>
-            <!-- Асура -->
             <div class="character-card" data-target="desc-hays">
                 <img src="https://via.placeholder.com/100?text=Хайс" alt="Хайс" class="character-avatar">
                 <div class="character-name">Хайс</div>
             </div>
-            <!-- Лайл -->
             <div class="character-card" data-target="desc-lia">
                 <img src="https://via.placeholder.com/100?text=Лиа" alt="Лиа" class="character-avatar">
                 <div class="character-name">Лиа</div>
             </div>
- 
+        </div>
 
-        <!-- Описания (изначально скрыты) -->
         <div id="desc-carolina" class="character-desc">
             <strong>Каролина Блэк</strong><br>
-            Объект 0004. Пережила взрыв центра, регенерирует, но её органы разрушаются. Пустота внутри Эмпатии почти нет.
+            Объект 0004. Пережила взрыв центра, регенерирует, но её органы разрушаются. Пустота внутри. Эмпатии почти нет.
         </div>
         <div id="desc-akiharu" class="character-desc">
             <strong>Акихару Раст</strong><br>
@@ -236,10 +281,8 @@
             <strong>Лиа</strong><br>
             17 лет. Не помнит своего прошлого и находится в центре.
         </div>
-        
     </section>
 
-    <!-- Расписание глав -->
     <section>
         <h2>РАСПИСАНИЕ ВЫХОДА ГЛАВ</h2>
         <div class="schedule">
@@ -257,19 +300,21 @@
     </section>
 
     <footer>
-        <p>ARC OF FATE — автор: [ваше имя] | Все права защищены | дизайн в стиле VOID NEXUS</p>
+        <p>ARC OF FATE — автор: apelssinka | Все права защищены | дизайн в стиле VOID NEXUS</p>
+        <div class="donate-social">
+            <a href="https://new.donatepay.ru/@1422259" target="_blank" rel="noopener noreferrer" title="Поддержать проект">❤️</a>
+            <a href="https://t.me/ft_channel31" target="_blank" rel="noopener noreferrer" title="Telegram-канал">💬</a>
+        </div>
     </footer>
 </div>
 
 <script>
-    // Клик по мини-изображению показывает описание персонажа
     const cards = document.querySelectorAll('.character-card');
     cards.forEach(card => {
         card.addEventListener('click', function() {
             const targetId = this.getAttribute('data-target');
             const targetDesc = document.getElementById(targetId);
             if (targetDesc) {
-                // Закрываем все другие открытые описания
                 document.querySelectorAll('.character-desc.active').forEach(desc => {
                     if (desc !== targetDesc) desc.classList.remove('active');
                 });
