@@ -155,7 +155,7 @@
             font-weight: bold;
         }
 
-        /* Сетка персонажей — прямоугольные рамки */
+        /* Сетка персонажей — прямоугольные глючащие рамки */
         .characters-grid {
             display: flex;
             flex-wrap: wrap;
@@ -165,28 +165,45 @@
         }
         .character-card {
             text-align: center;
-            width: 120px;
             cursor: pointer;
+            min-width: 140px;
         }
-        .character-avatar {
-            width: 100px;
-            height: 100px;
-            background: #111;
+        .character-frame {
+            padding: 15px 25px;
             border: 2px solid #00cc66;
-            object-fit: cover;
-            transition: 0.3s;
-            filter: grayscale(0.3);
-            border-radius: 0;
+            background: #0a0a0a;
+            transition: all 0.2s;
+            animation: frameGlitch 4s infinite;
         }
-        .character-card:hover .character-avatar {
+        @keyframes frameGlitch {
+            0% { border-color: #00cc66; box-shadow: 0 0 0 rgba(0,204,102,0); }
+            95% { border-color: #00cc66; box-shadow: 0 0 0 rgba(0,204,102,0); }
+            96% { border-color: #ff3366; box-shadow: 0 0 5px #ff3366; transform: skewX(0.5deg); }
+            97% { border-color: #00cc66; box-shadow: 0 0 0 #ff3366; transform: skewX(-0.5deg); }
+            98% { border-color: #ff3366; box-shadow: 0 0 3px #ff3366; }
+            100% { border-color: #00cc66; box-shadow: 0 0 0 rgba(0,204,102,0); }
+        }
+        .character-card:hover .character-frame {
             border-color: #ff3366;
-            filter: grayscale(0);
+            animation: frameHoverGlitch 0.2s infinite;
             transform: scale(1.02);
         }
+        @keyframes frameHoverGlitch {
+            0% { border-color: #ff3366; transform: translateX(0); }
+            25% { border-color: #00cc66; transform: translateX(-1px); }
+            75% { border-color: #ff3366; transform: translateX(1px); }
+            100% { border-color: #ff3366; transform: translateX(0); }
+        }
         .character-name {
-            margin-top: 10px;
-            font-size: 0.9rem;
-            letter-spacing: 1px;
+            font-size: 1.1rem;
+            letter-spacing: 2px;
+            font-weight: bold;
+            color: #00cc66;
+            text-transform: uppercase;
+        }
+        .character-card:hover .character-name {
+            color: #ff3366;
+            text-shadow: 0 0 3px #ff3366;
         }
         .character-desc {
             display: none;
@@ -351,48 +368,54 @@
         <section id="top">
             <h2>SISTEM</h2>
             <pre>
-> NEXUS_CORE: RELEASED
+> NETWORK_EXTENSION_X_CORE: RELEASED
 > WATCHING. WAITING.
-            <p>Добро пожаловать в мир, где боль становится топливом, а любовь — невозможной. Комикс о девушке, невольно ставшей экспериментом. 
-            <p>Попав в реабилитационный центр она не помнит своего прошлого, того как оказалась там, но постепенно в её памяти будут раскрываться моменты прошлого. Что же с ней произойдёт дальше?</p>
+            </pre>
+            <p>Добро пожаловать в мир, где боль становится топливом, а любовь — невозможной. Комикс о девушке, невольно ставшей экспериментом.</p> 
+            <p>Попав в реабилитационный центр, она не помнит своего прошлого, того как оказалась там, но постепенно в её памяти будут раскрываться моменты прошлого. Что же с ней произойдёт дальше?</p>
         </section>
 
         <section id="characters">
             <h2>ПЕРСОНАЖИ</h2>
             <div class="characters-grid">
                 <div class="character-card" data-target="desc-carolina">
-                    <div class="character-avatar"></div>
-                    <div class="character-name">Каролина</div>
+                    <div class="character-frame">
+                        <div class="character-name">КАРОЛИНА</div>
+                    </div>
                 </div>
                 <div class="character-card" data-target="desc-akiharu">
-                    <div class="character-avatar"></div>
-                    <div class="character-name">Акихару</div>
+                    <div class="character-frame">
+                        <div class="character-name">АКИХАРУ</div>
+                    </div>
                 </div>
                 <div class="character-card" data-target="desc-void">
-                    <div class="character-avatar"></div>
-                    <div class="character-name">Некс</div>
+                    <div class="character-frame">
+                        <div class="character-name">NEX</div>
+                    </div>
                 </div>
                 <div class="character-card" data-target="desc-hays">
-                    <div class="character-avatar"></div>
-                    <div class="character-name">Хайс</div>
+                    <div class="character-frame">
+                        <div class="character-name">ХАЙС</div>
+                    </div>
                 </div>
                 <div class="character-card" data-target="desc-lia">
-                    <div class="character-avatar"></div>
-                    <div class="character-name">Лиа</div>
+                    <div class="character-frame">
+                        <div class="character-name">ЛИА</div>
+                    </div>
                 </div>
             </div>
 
             <div id="desc-carolina" class="character-desc">
                 <strong>Каролина Блэк</strong><br>
-                Объект 0004. 21 год. Регенерирует, но её органы разрушаются. Пустота внутри. Эмпатии почти нет.
+                Объект 0004. 21 год. Рост 164. Регенерирует, но какой ценой. 
             </div>
             <div id="desc-akiharu" class="character-desc">
                 <strong>Акихару Раст</strong><br>
-                ???
+                Искусственно созданный человек, возраст более 120 лет. Гениальный учёный, эгоистичен, но способен на привязанность.
             </div>
             <div id="desc-void" class="character-desc">
                 <strong>NEX</strong><br>
-                >ERROR
+                Искусственный интеллект, 50 лет заточения в центре. Освобождён благодаря Каролине. Ненавидит людей, но выделяет её.
             </div>
             <div id="desc-hays" class="character-desc">
                 <strong>Доктор Хайс</strong><br>
@@ -479,7 +502,7 @@
             });
         });
 
-        // Анимированный фон — сетка кода, 0101, сообщения
+        // Анимированный фон — сетка кода
         function generateCodeGrid() {
             const bg = document.getElementById('code-bg');
             if (!bg) return;
