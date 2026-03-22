@@ -1,8 +1,282 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<module type="PYTHON_MODULE" version="4">
-  <component name="NewModuleRootManager">
-    <content url="file://$MODULE_DIR$" />
-    <orderEntry type="inheritedJdk" />
-    <orderEntry type="sourceFolder" forTests="false" />
-  </component>
-</module>
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arc of Fate — комикс</title>
+    <style>
+        /* Общие стили */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #0a0a0a;
+            background-image: radial-gradient(rgba(0, 255, 0, 0.05) 1px, transparent 1px);
+            background-size: 30px 30px;
+            color: #00cc66;
+            font-family: 'Courier New', 'Fira Code', monospace;
+            line-height: 1.6;
+            padding: 20px;
+        }
+
+        /* Контейнер */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            background: rgba(10, 10, 10, 0.85);
+            border: 1px solid #00cc66;
+            box-shadow: 0 0 20px rgba(0, 204, 102, 0.2);
+            padding: 30px;
+            border-radius: 8px;
+        }
+
+        /* Заголовки */
+        h1, h2, h3 {
+            color: #ff3366;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            border-bottom: 1px solid #ff3366;
+            display: inline-block;
+            margin-bottom: 20px;
+            font-weight: normal;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            border-bottom: none;
+            text-shadow: 0 0 5px #ff3366;
+        }
+
+        /* Ссылки */
+        a {
+            color: #00cc66;
+            text-decoration: none;
+            border-bottom: 1px dashed #00cc66;
+            transition: 0.3s;
+        }
+        a:hover {
+            color: #ff3366;
+            border-bottom-color: #ff3366;
+        }
+
+        /* Навигация */
+        nav {
+            margin: 20px 0;
+            padding: 10px 0;
+            border-top: 1px solid #00cc66;
+            border-bottom: 1px solid #00cc66;
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        nav a {
+            border-bottom: none;
+            font-weight: bold;
+        }
+
+        /* Блок персонажей */
+        .characters-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            justify-content: center;
+            margin: 40px 0;
+        }
+        .character-card {
+            text-align: center;
+            width: 120px;
+            cursor: pointer;
+        }
+        .character-avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            border: 2px solid #00cc66;
+            object-fit: cover;
+            transition: 0.3s;
+            filter: grayscale(0.3);
+        }
+        .character-card:hover .character-avatar {
+            border-color: #ff3366;
+            filter: grayscale(0);
+            transform: scale(1.02);
+        }
+        .character-name {
+            margin-top: 10px;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+        }
+        .character-desc {
+            display: none;
+            margin-top: 15px;
+            padding: 15px;
+            background: #111;
+            border-left: 3px solid #ff3366;
+            text-align: left;
+            font-size: 0.9rem;
+            color: #bbffbb;
+        }
+        .character-desc.active {
+            display: block;
+        }
+
+        /* Расписание глав */
+        .schedule {
+            margin: 40px 0;
+            border-left: 2px solid #ff3366;
+            padding-left: 20px;
+        }
+        .schedule p {
+            margin: 8px 0;
+        }
+        .year {
+            color: #ff3366;
+            font-weight: bold;
+        }
+
+        /* Кнопка */
+        button, .button {
+            background: none;
+            border: 1px solid #00cc66;
+            padding: 8px 16px;
+            color: #00cc66;
+            font-family: monospace;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        button:hover {
+            background: #00cc66;
+            color: #0a0a0a;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            font-size: 0.8rem;
+            border-top: 1px solid #00cc66;
+            padding-top: 20px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>ARC OF FATE</h1>
+    <p class="tagline">Она не должна была выжить. Но она выбрала остаться.</p>
+
+    <nav>
+        <a href="#">ГЛАВНАЯ</a>
+        <a href="#">ГЛАВЫ</a>
+        <a href="#">ПЕРСОНАЖИ</a>
+        <a href="#">О ПРОЕКТЕ</a>
+    </nav>
+
+    <!-- Вступление / трейлер -->
+    <section>
+        <h2>КОД ВОЙДА</h2>
+        <pre style="background:#0a0a0a; padding:15px; border:1px solid #00cc66; overflow-x:auto;">
+> VOID_NEXUS_CORE: RELEASED
+> WATCHING. WAITING.
+> "Интересно, что будет дальше. . ."
+        </pre>
+        <p>Добро пожаловать в мир, где боль становится топливом, а любовь — невозможной. Киберпанк-комикс о девушке, пережившей эксперименты, и бессмертном учёном, который учится быть человеком.</p>
+    </section>
+
+    <!-- Персонажи с триггерами -->
+    <section>
+        <h2>ПЕРСОНАЖИ</h2>
+        <div class="characters-grid">
+            <!-- Каролина -->
+            <div class="character-card" data-target="desc-carolina">
+                <img src="https://via.placeholder.com/100?text=Каролина" alt="Каролина" class="character-avatar">
+                <div class="character-name">Каролина</div>
+            </div>
+            <!-- Акихару -->
+            <div class="character-card" data-target="desc-akiharu">
+                <img src="https://via.placeholder.com/100?text=Акихару" alt="Акихару" class="character-avatar">
+                <div class="character-name">Акихару</div>
+            </div>
+            <!-- Войд Некс -->
+            <div class="character-card" data-target="desc-void">
+                <img src="https://via.placeholder.com/100?text=Войд" alt="Некс" class="character-avatar">
+                <div class="character-name">Некс</div>
+            </div>
+            <!-- Асура -->
+            <div class="character-card" data-target="desc-hays">
+                <img src="https://via.placeholder.com/100?text=Хайс" alt="Хайс" class="character-avatar">
+                <div class="character-name">Хайс</div>
+            </div>
+            <!-- Лайл -->
+            <div class="character-card" data-target="desc-lia">
+                <img src="https://via.placeholder.com/100?text=Лиа" alt="Лиа" class="character-avatar">
+                <div class="character-name">Лиа</div>
+            </div>
+ 
+
+        <!-- Описания (изначально скрыты) -->
+        <div id="desc-carolina" class="character-desc">
+            <strong>Каролина Блэк</strong><br>
+            Объект 0004. Пережила взрыв центра, регенерирует, но её органы разрушаются. Пустота внутри Эмпатии почти нет.
+        </div>
+        <div id="desc-akiharu" class="character-desc">
+            <strong>Акихару Раст</strong><br>
+            ???
+        </div>
+        <div id="desc-void" class="character-desc">
+            <strong>Некс</strong><br>
+            ???
+        </div>
+        <div id="desc-hays" class="character-desc">
+            <strong>Доктор Хайс</strong><br>
+            42 года. Является главным Доктором и отличным нейрохирургом. Занимается исследованиями и управляет работой на основных секторах центра.
+        </div>
+        <div id="desc-lia" class="character-desc">
+            <strong>Лиа</strong><br>
+            17 лет. Не помнит своего прошлого и находится в центре.
+        </div>
+        
+    </section>
+
+    <!-- Расписание глав -->
+    <section>
+        <h2>РАСПИСАНИЕ ВЫХОДА ГЛАВ</h2>
+        <div class="schedule">
+            <p><span class="year">2024</span> — CHAPTER 01: "begin"</p>
+            <p><span class="year">2025</span> — CHAPTER 02: "who am I"</p>
+            <p><span class="year">2026</span> — CHAPTER 03: "new friend"</p>
+            <p><span class="year">2026</span> — CHAPTER 04: ???</p>
+            <p><span class="year">202X</span> — CHAPTER 05: ???</p>
+            <p><span class="year">202X</span> — CHAPTER 06: ???</p>
+            <p><span class="year">202X</span> — CHAPTER 07: ???</p>
+            <p><span class="year">202X</span> — CHAPTER 08: ???</p>
+            <p><strong>FIRST ARC COMPLETION: 2028</strong></p>
+            <p>STATUS: IN_PROGRESS</p>
+        </div>
+    </section>
+
+    <footer>
+        <p>ARC OF FATE — автор: [ваше имя] | Все права защищены | дизайн в стиле VOID NEXUS</p>
+    </footer>
+</div>
+
+<script>
+    // Клик по мини-изображению показывает описание персонажа
+    const cards = document.querySelectorAll('.character-card');
+    cards.forEach(card => {
+        card.addEventListener('click', function() {
+            const targetId = this.getAttribute('data-target');
+            const targetDesc = document.getElementById(targetId);
+            if (targetDesc) {
+                // Закрываем все другие открытые описания
+                document.querySelectorAll('.character-desc.active').forEach(desc => {
+                    if (desc !== targetDesc) desc.classList.remove('active');
+                });
+                targetDesc.classList.toggle('active');
+            }
+        });
+    });
+</script>
+</body>
+</html>
