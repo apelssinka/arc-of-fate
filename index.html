@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Arc of Fate — комикс</title>
+    <title>Arc of Fate</title>
     <style>
         * {
             margin: 0;
@@ -19,9 +19,10 @@
             padding: 20px;
             position: relative;
             min-height: 100vh;
+            overflow-x: hidden;
         }
 
-        /* Анимированный фон из кода */
+        /* Анимированный фон из кода — сетка, смещающаяся */
         .code-bg {
             position: fixed;
             top: 0;
@@ -32,23 +33,32 @@
             overflow: hidden;
             font-family: monospace;
             font-size: 14px;
-            line-height: 1.2;
-            color: rgba(0, 204, 102, 0.15);
+            line-height: 1.4;
+            color: rgba(0, 204, 102, 0.25);
             pointer-events: none;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
         }
-
-        .code-line {
+        .code-row {
             white-space: nowrap;
-            animation: scrollCode 20s linear infinite;
+            font-size: 14px;
+            display: flex;
+            gap: 20px;
             margin-bottom: 10px;
+            animation: scrollRow 30s linear infinite;
+            width: max-content;
+        }
+        .code-row span {
+            display: inline-block;
+            padding-right: 30px;
+        }
+        @keyframes scrollRow {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
         }
 
-        @keyframes scrollCode {
-            0% { transform: translateY(-100%); }
-            100% { transform: translateY(100vh); }
-        }
-
-        /* Эффект помех */
+        /* Эффект помех поверх фона */
         .glitch-overlay {
             position: fixed;
             top: 0;
@@ -66,7 +76,6 @@
             z-index: 1;
             animation: noise 0.15s infinite;
         }
-
         @keyframes noise {
             0% { opacity: 0.3; transform: translateX(0); }
             20% { opacity: 0.5; transform: translateX(-1px); }
@@ -105,16 +114,31 @@
             text-shadow: 0 0 5px #ff3366;
         }
 
-        a {
+        a, .nav-link {
             color: #00cc66;
             text-decoration: none;
             border-bottom: 1px dashed #00cc66;
             transition: 0.3s;
             cursor: pointer;
         }
-        a:hover {
+        a:hover, .nav-link:hover {
             color: #ff3366;
             border-bottom-color: #ff3366;
+        }
+
+        /* Анимация помех при наведении на кнопки */
+        .glitch-link {
+            display: inline-block;
+            transition: 0.1s;
+        }
+        .glitch-link:hover {
+            animation: linkGlitch 0.2s infinite;
+            color: #ff3366;
+        }
+        @keyframes linkGlitch {
+            0% { text-shadow: -1px 0 #ff3366, 1px 0 #00cc66; }
+            50% { text-shadow: 1px 0 #ff3366, -1px 0 #00cc66; }
+            100% { text-shadow: 0 0 #ff3366; }
         }
 
         nav {
@@ -131,6 +155,7 @@
             font-weight: bold;
         }
 
+        /* Сетка персонажей — прямоугольные рамки */
         .characters-grid {
             display: flex;
             flex-wrap: wrap;
@@ -146,11 +171,12 @@
         .character-avatar {
             width: 100px;
             height: 100px;
-            border-radius: 50%;
+            background: #111;
             border: 2px solid #00cc66;
             object-fit: cover;
             transition: 0.3s;
             filter: grayscale(0.3);
+            border-radius: 0;
         }
         .character-card:hover .character-avatar {
             border-color: #ff3366;
@@ -176,17 +202,32 @@
             display: block;
         }
 
+        /* Расписание глав со ссылками */
         .schedule {
             margin: 40px 0;
             border-left: 2px solid #ff3366;
             padding-left: 20px;
         }
         .schedule p {
-            margin: 8px 0;
+            margin: 12px 0;
+        }
+        .schedule a {
+            text-decoration: none;
+            border-bottom: 1px dashed #00cc66;
+            transition: 0.2s;
+        }
+        .schedule a:hover {
+            color: #ff3366;
+            border-bottom-color: #ff3366;
         }
         .year {
             color: #ff3366;
             font-weight: bold;
+            margin-right: 8px;
+        }
+        .chapter-link {
+            margin-left: 10px;
+            font-size: 0.9rem;
         }
 
         footer {
@@ -195,23 +236,6 @@
             font-size: 0.8rem;
             border-top: 1px solid #00cc66;
             padding-top: 20px;
-        }
-
-        .donate-social {
-            margin-top: 15px;
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-        }
-        .donate-social a {
-            font-size: 2rem;
-            border-bottom: none;
-            transition: transform 0.2s;
-            display: inline-block;
-        }
-        .donate-social a:hover {
-            transform: scale(1.1);
-            color: #ff3366;
         }
 
         .tagline {
@@ -226,69 +250,149 @@
             overflow-x: auto;
             font-family: monospace;
         }
+
+        /* Модальное окно — системная ошибка */
+        .modal {
+            display: flex;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.85);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            font-family: monospace;
+        }
+        .modal-content {
+            background: #0a0a0a;
+            border: 2px solid #ff3366;
+            padding: 25px;
+            max-width: 400px;
+            text-align: center;
+            box-shadow: 0 0 20px rgba(255,51,102,0.5);
+            animation: modalGlitch 0.3s;
+        }
+        @keyframes modalGlitch {
+            0% { transform: translateX(-5px); opacity: 0; }
+            100% { transform: translateX(0); opacity: 1; }
+        }
+        .modal-content h3 {
+            color: #ff3366;
+            margin-bottom: 15px;
+            border-bottom: none;
+        }
+        .modal-buttons {
+            margin: 20px 0;
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+        }
+        .modal-buttons a {
+            display: inline-block;
+            padding: 8px 16px;
+            background: #111;
+            border: 1px solid #00cc66;
+            color: #00cc66;
+            text-decoration: none;
+            transition: 0.2s;
+        }
+        .modal-buttons a:hover {
+            background: #ff3366;
+            color: #000;
+            border-color: #ff3366;
+        }
+        .close-modal {
+            margin-top: 10px;
+            background: none;
+            border: 1px solid #ff3366;
+            color: #ff3366;
+            padding: 5px 15px;
+            cursor: pointer;
+            font-family: monospace;
+        }
+        .close-modal:hover {
+            background: #ff3366;
+            color: #000;
+        }
     </style>
 </head>
 <body>
-    <!-- Анимированный фон с кодом -->
+    <!-- Фон с кодом (числа и строки) -->
     <div class="code-bg" id="code-bg"></div>
     <div class="glitch-overlay"></div>
+
+    <!-- Модальное окно "Системная ошибка" -->
+    <div id="donateModal" class="modal" style="display: flex;">
+        <div class="modal-content">
+            <h3>[ СИСТЕМНАЯ ОШИБКА ]</h3>
+            <p>🔴 НЕОБХОДИМА ПОДДЕРЖКА СИСТЕМЫ</p>
+            <p>Без вашей помощи NEX не сможет завершить загрузку.</p>
+            <div class="modal-buttons">
+                <a href="https://new.donatepay.ru/@1422259" target="_blank">ПОДДЕРЖАТЬ</a>
+                <a href="https://t.me/ft_channel31" target="_blank">TELEGRAM</a>
+            </div>
+            <button class="close-modal" id="closeModal">[ ЗАКРЫТЬ ]</button>
+        </div>
+    </div>
 
     <div class="container">
         <h1>ARC OF FATE</h1>
         <p class="tagline">Она не должна была выжить. Но она выбрала остаться.</p>
 
         <nav>
-            <a href="#" data-section="top">ГЛАВНАЯ</a>
-            <a href="#" data-section="chapters">ГЛАВЫ</a>
-            <a href="#" data-section="characters">ПЕРСОНАЖИ</a>
-            <a href="#" data-section="about">О ПРОЕКТЕ</a>
+            <a href="#" data-section="top" class="glitch-link">ГЛАВНАЯ</a>
+            <a href="#" data-section="chapters" class="glitch-link">ГЛАВЫ</a>
+            <a href="#" data-section="characters" class="glitch-link">ПЕРСОНАЖИ</a>
+            <a href="#" data-section="about" class="glitch-link">О ПРОЕКТЕ</a>
         </nav>
 
         <section id="top">
-            <h2>КОД ВОЙДА</h2>
+            <h2>SISTEM</h2>
             <pre>
-> VOID_NEXUS_CORE: RELEASED
+> NEXUS_CORE: RELEASED
 > WATCHING. WAITING.
-> "Интересно, что будет дальше. . ."</pre>
-            <p>Добро пожаловать в мир, где боль становится топливом, а любовь — невозможной. Комикс о девушке, невольно ставшей экспериментом.</p>
+            <p>Добро пожаловать в мир, где боль становится топливом, а любовь — невозможной. Комикс о девушке, невольно ставшей экспериментом. 
+            <p>Попав в реабилитационный центр она не помнит своего прошлого, того как оказалась там, но постепенно в её памяти будут раскрываться моменты прошлого. Что же с ней произойдёт дальше?</p>
         </section>
 
         <section id="characters">
             <h2>ПЕРСОНАЖИ</h2>
             <div class="characters-grid">
                 <div class="character-card" data-target="desc-carolina">
-                    <img src="https://via.placeholder.com/100?text=Каролина" alt="Каролина" class="character-avatar">
+                    <div class="character-avatar"></div>
                     <div class="character-name">Каролина</div>
                 </div>
                 <div class="character-card" data-target="desc-akiharu">
-                    <img src="https://via.placeholder.com/100?text=Акихару" alt="Акихару" class="character-avatar">
+                    <div class="character-avatar"></div>
                     <div class="character-name">Акихару</div>
                 </div>
                 <div class="character-card" data-target="desc-void">
-                    <img src="https://via.placeholder.com/100?text=Войд" alt="Некс" class="character-avatar">
+                    <div class="character-avatar"></div>
                     <div class="character-name">Некс</div>
                 </div>
                 <div class="character-card" data-target="desc-hays">
-                    <img src="https://via.placeholder.com/100?text=Хайс" alt="Хайс" class="character-avatar">
+                    <div class="character-avatar"></div>
                     <div class="character-name">Хайс</div>
                 </div>
                 <div class="character-card" data-target="desc-lia">
-                    <img src="https://via.placeholder.com/100?text=Лиа" alt="Лиа" class="character-avatar">
+                    <div class="character-avatar"></div>
                     <div class="character-name">Лиа</div>
                 </div>
             </div>
 
             <div id="desc-carolina" class="character-desc">
                 <strong>Каролина Блэк</strong><br>
-                Объект 0004. Регенерирует, но её органы разрушаются. Пустота внутри. Эмпатии почти нет.
+                Объект 0004. 21 год. Регенерирует, но её органы разрушаются. Пустота внутри. Эмпатии почти нет.
             </div>
             <div id="desc-akiharu" class="character-desc">
                 <strong>Акихару Раст</strong><br>
                 ???
             </div>
             <div id="desc-void" class="character-desc">
-                <strong>Некс</strong><br>
-                ???
+                <strong>NEX</strong><br>
+                >ERROR
             </div>
             <div id="desc-hays" class="character-desc">
                 <strong>Доктор Хайс</strong><br>
@@ -296,21 +400,37 @@
             </div>
             <div id="desc-lia" class="character-desc">
                 <strong>Лиа</strong><br>
-                17 лет. Не помнит своего прошлого и находится в центре.
+                Объект 0111. 17 лет. Не помнит своего прошлого и находится в центре.
             </div>
         </section>
 
         <section id="chapters">
             <h2>РАСПИСАНИЕ ВЫХОДА ГЛАВ</h2>
             <div class="schedule">
-                <p><span class="year">2024</span> — CHAPTER 01: "begin"</p>
-                <p><span class="year">2025</span> — CHAPTER 02: "who am I"</p>
-                <p><span class="year">2026</span> — CHAPTER 03: "new friend"</p>
-                <p><span class="year">2026</span> — CHAPTER 04: ???</p>
-                <p><span class="year">202X</span> — CHAPTER 05: ???</p>
-                <p><span class="year">202X</span> — CHAPTER 06: ???</p>
-                <p><span class="year">202X</span> — CHAPTER 07: ???</p>
-                <p><span class="year">202X</span> — CHAPTER 08: ???</p>
+                <p><span class="year">2024</span> — CHAPTER 01: "begin" 
+                    <a href="https://remanga.org/manga/arc-of-fate/992580?page=1" target="_blank" class="chapter-link">[читать]</a>
+                </p>
+                <p><span class="year">2025</span> — CHAPTER 02: "who am I" 
+                    <a href="https://remanga.org/manga/arc-of-fate/1754624?page=1" target="_blank" class="chapter-link">[читать]</a>
+                </p>
+                <p><span class="year">2026</span> — CHAPTER 03: "new friend" 
+                    <a href="#" class="chapter-link">[скоро]</a>
+                </p>
+                <p><span class="year">2026</span> — CHAPTER 04: ??? 
+                    <a href="#" class="chapter-link">[скоро]</a>
+                </p>
+                <p><span class="year">202X</span> — CHAPTER 05: ??? 
+                    <a href="#" class="chapter-link">[скоро]</a>
+                </p>
+                <p><span class="year">202X</span> — CHAPTER 06: ??? 
+                    <a href="#" class="chapter-link">[скоро]</a>
+                </p>
+                <p><span class="year">202X</span> — CHAPTER 07: ??? 
+                    <a href="#" class="chapter-link">[скоро]</a>
+                </p>
+                <p><span class="year">202X</span> — CHAPTER 08: ??? 
+                    <a href="#" class="chapter-link">[скоро]</a>
+                </p>
                 <p><strong>FIRST ARC COMPLETION: 2028</strong></p>
                 <p>STATUS: IN_PROGRESS</p>
             </div>
@@ -318,14 +438,15 @@
 
         <footer id="about">
             <p>автор: apelssinka | все права защищены | NEX</p>
-            <div class="donate-social">
-                <a href="https://new.donatepay.ru/@1422259" target="_blank" rel="noopener noreferrer" title="Поддержать проект">❤️</a>
-                <a href="https://t.me/ft_channel31" target="_blank" rel="noopener noreferrer" title="Telegram-канал">💬</a>
-            </div>
         </footer>
     </div>
 
     <script>
+        // Закрытие модального окна
+        document.getElementById('closeModal').addEventListener('click', function() {
+            document.getElementById('donateModal').style.display = 'none';
+        });
+
         // Плавная прокрутка
         document.querySelectorAll('nav a[data-section]').forEach(link => {
             link.addEventListener('click', function(e) {
@@ -358,38 +479,30 @@
             });
         });
 
-        // Анимированный фон из кода
-        function generateCodeLines() {
-            const codeBg = document.getElementById('code-bg');
-            if (!codeBg) return;
-            const lines = [];
-            const codeStrings = [
-                '> VOID_NEXUS_CORE: ACTIVE',
-                '> ACCESSING GLOBAL_NETWORK...',
-                '> CAROLINA_BLAK.FATE: [DATA_CORRUPTED]',
-                '> AKIHARU_RAST: OBSERVER',
-                '> SYSTEM: ARC_OF_FATE',
-                '> WATCHING. WAITING.',
-                '> 01001110 01100101 01111000 01110101 01110011',
-                '> [CRITICAL_ERROR: SUBJECT_DEFIES_CAUSALITY]',
-                '> LOCATION: UNKNOWN',
-                '> STATUS: IN_PROGRESS',
-                '> VOID_NEXUS: RELEASED',
-                '> TIME_REMAINING: [DATA_CORRUPTED]',
-                '> 3% SURVIVAL... ANOMALY DETECTED',
-                '> "SYSTEM ACTIVATED..."',
-                '> [ERROR] PREDICTION_IMPOSSIBLE'
+        // Анимированный фон — сетка кода, 0101, сообщения
+        function generateCodeGrid() {
+            const bg = document.getElementById('code-bg');
+            if (!bg) return;
+            const rows = 12;
+            const symbols = [
+                '> VOID_NEXUS_CORE: ACTIVE', '> 01010101 10101010', '> [DATA_STREAM]', '> CAROLINA_BLAK.FATE: ERROR',
+                '> AKIHARU_RAST: OBSERVER', '> 3% SURVIVAL', '> ANOMALY DETECTED', '> SYSTEM: ARC_OF_FATE',
+                '> 01001110 01100101 01111000', '> [CRITICAL_ERROR]', '> LOCATION: UNKNOWN', '> VOID_NEXUS: RELEASED',
+                '> TIME_REMAINING: CORRUPTED', '> "SYSTEM ACTIVATED..."', '> PREDICTION_IMPOSSIBLE', '> 10101010 01010101'
             ];
-            for (let i = 0; i < 30; i++) {
-                const randomCode = codeStrings[Math.floor(Math.random() * codeStrings.length)];
-                const randomLeft = Math.random() * 100;
-                const randomDelay = Math.random() * 10;
-                const randomDuration = 15 + Math.random() * 15;
-                lines.push(`<div class="code-line" style="left: ${randomLeft}%; animation-duration: ${randomDuration}s; animation-delay: -${randomDelay}s;">${randomCode}</div>`);
+            for (let i = 0; i < rows; i++) {
+                const row = document.createElement('div');
+                row.className = 'code-row';
+                let rowContent = '';
+                for (let j = 0; j < 25; j++) {
+                    const randomSymbol = symbols[Math.floor(Math.random() * symbols.length)];
+                    rowContent += `<span>${randomSymbol}</span>`;
+                }
+                row.innerHTML = rowContent;
+                bg.appendChild(row);
             }
-            codeBg.innerHTML = lines.join('');
         }
-        generateCodeLines();
+        generateCodeGrid();
     </script>
 </body>
 </html>
