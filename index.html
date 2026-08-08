@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Arc of Fate</title>
-    
     <meta name="yandex-verification" content="2f4b656845ef9f38" />
     <meta name="google-site-verification" content="d62u_CfO-t">
     <meta name="description" content="Arc of Fate — мрачный киберпанк-комикс о девушке, пережившей эксперименты, и бессмертном учёном, который учится быть человеком.">
@@ -17,28 +16,19 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Arc of Fate — комикс">
     <meta name="twitter:description" content="Киберпанк-комикс о девушке, пережившей эксперименты, и бессмертном учёном.">
-    
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext x='50' y='80' font-size='70' text-anchor='middle' fill='%23ff3366' font-family='monospace'%3E⌇%3C/text%3E%3C/svg%3E">
-    
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-
         body {
-            background-color: #0a0a0a;
-            color: #00cc66;
+            background-color: #0a0a0a; color: #00cc66;
             font-family: 'Courier New', 'Fira Code', monospace;
-            line-height: 1.6;
-            padding: 20px;
-            position: relative;
-            min-height: 100vh;
-            overflow-x: hidden;
-            scroll-behavior: smooth;
+            line-height: 1.6; padding: 20px; position: relative;
+            min-height: 100vh; overflow-x: hidden; scroll-behavior: smooth;
         }
-
         .code-bg {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0;
             overflow: hidden; font-family: monospace; font-size: 14px; line-height: 1.4;
-            color: rgba(0, 204, 102, 0.25); pointer-events: none;
+            color: rgba(0,204,102,0.25); pointer-events: none;
             display: flex; flex-direction: column; justify-content: space-around;
         }
         .code-row {
@@ -46,40 +36,29 @@
             margin-bottom: 10px; animation: scrollRow 30s linear infinite; width: max-content;
         }
         .code-row span { display: inline-block; padding-right: 30px; }
-        @keyframes scrollRow {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-50%); }
-        }
-
+        @keyframes scrollRow { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
         .glitch-overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: repeating-linear-gradient(0deg, rgba(0,0,0,0.2) 0px, rgba(0,0,0,0.2) 2px, transparent 2px, transparent 6px);
             pointer-events: none; z-index: 1; animation: noise 0.15s infinite;
         }
         @keyframes noise {
-            0% { opacity: 0.3; transform: translateX(0); }
-            20% { opacity: 0.5; transform: translateX(-1px); }
-            40% { opacity: 0.3; transform: translateX(1px); }
-            60% { opacity: 0.6; transform: translateX(0); }
-            80% { opacity: 0.4; transform: translateX(2px); }
-            100% { opacity: 0.3; transform: translateX(-1px); }
+            0% { opacity: 0.3; transform: translateX(0); } 20% { opacity: 0.5; transform: translateX(-1px); }
+            40% { opacity: 0.3; transform: translateX(1px); } 60% { opacity: 0.6; transform: translateX(0); }
+            80% { opacity: 0.4; transform: translateX(2px); } 100% { opacity: 0.3; transform: translateX(-1px); }
         }
-
         .container {
             max-width: 1100px; margin: 0 auto; background: rgba(10,10,10,0.85);
             border: 1px solid #00cc66; box-shadow: 0 0 20px rgba(0,204,102,0.2);
             padding: 30px; border-radius: 8px; position: relative; z-index: 2; overflow: visible;
         }
-
         h1, h2, h3 {
             color: #ff3366; text-transform: uppercase; letter-spacing: 2px;
             border-bottom: 1px solid #ff3366; display: inline-block; margin-bottom: 20px; font-weight: normal;
         }
         h1 { font-size: 2.5rem; border-bottom: none; text-shadow: 0 0 5px #ff3366; }
-
         a, .nav-link { color: #00cc66; text-decoration: none; border-bottom: 1px dashed #00cc66; transition: 0.3s; cursor: pointer; }
         a:hover, .nav-link:hover { color: #ff3366; border-bottom-color: #ff3366; }
-
         .glitch-link { display: inline-block; transition: 0.1s; }
         .glitch-link:hover { animation: linkGlitch 0.2s infinite; color: #ff3366; }
         @keyframes linkGlitch {
@@ -87,19 +66,11 @@
             50% { text-shadow: 1px 0 #ff3366, -1px 0 #00cc66; }
             100% { text-shadow: 0 0 #ff3366; }
         }
-
-        nav {
-            margin: 20px 0; padding: 10px 0; border-top: 1px solid #00cc66;
-            border-bottom: 1px solid #00cc66; display: flex; gap: 20px; flex-wrap: wrap;
-        }
+        nav { margin: 20px 0; padding: 10px 0; border-top: 1px solid #00cc66; border-bottom: 1px solid #00cc66; display: flex; gap: 20px; flex-wrap: wrap; }
         nav a { border-bottom: none; font-weight: bold; cursor: pointer; }
-
         .characters-grid { display: flex; flex-wrap: wrap; gap: 30px; justify-content: center; margin: 40px 0; }
         .character-card { text-align: center; cursor: pointer; min-width: 140px; }
-        .character-frame {
-            padding: 15px 25px; border: 2px solid #00cc66; background: #0a0a0a;
-            transition: all 0.2s; animation: frameGlitch 4s infinite;
-        }
+        .character-frame { padding: 15px 25px; border: 2px solid #00cc66; background: #0a0a0a; transition: all 0.2s; animation: frameGlitch 4s infinite; }
         @keyframes frameGlitch {
             0% { border-color: #00cc66; box-shadow: 0 0 0 rgba(0,204,102,0); }
             95% { border-color: #00cc66; box-shadow: 0 0 0 rgba(0,204,102,0); }
@@ -117,9 +88,7 @@
         }
         .character-name { font-size: 1.1rem; letter-spacing: 2px; font-weight: bold; color: #00cc66; text-transform: uppercase; }
         .character-card:hover .character-name { color: #ff3366; text-shadow: 0 0 3px #ff3366; }
-
         .about-section { margin: 30px 0; padding: 20px; background: rgba(0,204,102,0.02); border-left: 3px solid #ff3366; }
-
         .floating-buttons { position: fixed; bottom: 20px; right: 20px; z-index: 50; display: flex; flex-direction: column; gap: 10px; }
         .floating-btn {
             background: #0a0a0a; border: 1px solid #00cc66; padding: 12px 18px; cursor: pointer;
@@ -128,13 +97,11 @@
             text-align: center; text-decoration: none;
         }
         .floating-btn:hover { border-color: #ff3366; box-shadow: 0 0 25px rgba(255,51,102,0.3); color: #ff3366; text-shadow: 0 0 5px #ff3366; }
-
         .modal-overlay {
             display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(0,0,0,0.9); z-index: 100; justify-content: center; align-items: center; flex-direction: column;
         }
         .modal-overlay.active { display: flex; }
-
         .modal-content {
             background: #0a0a0a; border: 2px solid #ff3366;
             box-shadow: 0 0 30px rgba(255,51,102,0.3), inset 0 0 30px rgba(255,51,102,0.05);
@@ -145,11 +112,7 @@
         .modal-content::-webkit-scrollbar { width: 5px; }
         .modal-content::-webkit-scrollbar-track { background: #0a0a0a; }
         .modal-content::-webkit-scrollbar-thumb { background: #ff3366; border-radius: 3px; }
-
-        /* Окно Акихару — лагающая рамка */
-        #modal-akiharu .modal-content {
-            animation: modalIn 0.3s ease-out, akiharuBorderGlitch 0.3s infinite;
-        }
+        #modal-akiharu .modal-content { animation: modalIn 0.3s ease-out, akiharuBorderGlitch 0.3s infinite; }
         @keyframes akiharuBorderGlitch {
             0% { border-color: #ff3366; box-shadow: 0 0 30px rgba(255,51,102,0.3), inset 0 0 30px rgba(255,51,102,0.05); }
             10% { border-color: #ff3366; box-shadow: 0 0 30px rgba(255,51,102,0.3), inset 0 0 30px rgba(255,51,102,0.05); }
@@ -165,49 +128,16 @@
             54% { border-color: #ff3366; box-shadow: 0 0 30px rgba(255,51,102,0.3), inset 0 0 30px rgba(255,51,102,0.05); }
             100% { border-color: #ff3366; box-shadow: 0 0 30px rgba(255,51,102,0.3), inset 0 0 30px rgba(255,51,102,0.05); }
         }
-
         .modal-close {
             position: sticky; top: 0; float: right; color: #ff3366; font-size: 24px;
             cursor: pointer; border: none; background: none; font-family: monospace; transition: 0.2s; z-index: 101;
         }
         .modal-close:hover { text-shadow: 0 0 10px #ff3366; transform: scale(1.2); }
-
         .modal-character-name {
             text-align: center; font-size: 1.6rem; color: #ff3366; text-shadow: 0 0 10px #ff3366;
             letter-spacing: 3px; margin-bottom: 15px; text-transform: uppercase;
         }
-
         .hologram-container { position: relative; width: 250px; height: 350px; margin: 0 auto 25px; display: flex; justify-content: center; align-items: center; }
-
-        /* Изображение Акихару — сильное лагание */
-        #modal-akiharu .hologram-image {
-            max-width: 100%; max-height: 100%; object-fit: contain;
-            filter: drop-shadow(0 0 15px rgba(255,51,102,0.6)) drop-shadow(0 0 30px rgba(255,51,102,0.3)) drop-shadow(0 0 60px rgba(255,51,102,0.15));
-            opacity: 0.8; mix-blend-mode: screen;
-            animation: akiharuHologramGlitch 0.25s infinite;
-        }
-        @keyframes akiharuHologramGlitch {
-            0% { transform: translate(0, 0); opacity: 0.8; filter: drop-shadow(0 0 15px rgba(255,51,102,0.6)) drop-shadow(0 0 30px rgba(255,51,102,0.3)); }
-            5% { transform: translate(0, 0); opacity: 0.8; }
-            6% { transform: translate(-3px, 1px); opacity: 0.9; filter: drop-shadow(0 0 25px rgba(255,51,102,0.9)) drop-shadow(0 0 50px rgba(255,51,102,0.5)); }
-            7% { transform: translate(2px, -1px); opacity: 0.6; filter: drop-shadow(0 0 10px rgba(0,204,102,0.5)) drop-shadow(0 0 20px rgba(0,204,102,0.2)); }
-            8% { transform: translate(0, 0); opacity: 0.8; filter: drop-shadow(0 0 15px rgba(255,51,102,0.6)) drop-shadow(0 0 30px rgba(255,51,102,0.3)); }
-            12% { transform: translate(0, 0); opacity: 0.8; }
-            13% { transform: translate(4px, -2px); opacity: 0.7; filter: drop-shadow(0 0 30px rgba(255,51,102,0.8)) drop-shadow(0 0 60px rgba(255,51,102,0.4)); }
-            14% { transform: translate(-2px, 1px); opacity: 0.85; }
-            15% { transform: translate(0, 0); opacity: 0.75; filter: drop-shadow(0 0 15px rgba(255,51,102,0.6)) drop-shadow(0 0 30px rgba(255,51,102,0.3)); }
-            40% { transform: translate(0, 0); opacity: 0.8; }
-            41% { transform: translate(-5px, 0); opacity: 0.5; filter: drop-shadow(0 0 40px rgba(0,204,102,0.7)) drop-shadow(0 0 80px rgba(0,204,102,0.3)); }
-            42% { transform: translate(3px, -1px); opacity: 0.9; filter: drop-shadow(0 0 20px rgba(255,51,102,0.7)); }
-            43% { transform: translate(0, 0); opacity: 0.8; filter: drop-shadow(0 0 15px rgba(255,51,102,0.6)) drop-shadow(0 0 30px rgba(255,51,102,0.3)); }
-            70% { transform: translate(0, 0); opacity: 0.8; }
-            71% { transform: translate(2px, 3px); opacity: 0.65; filter: drop-shadow(0 0 35px rgba(255,51,102,0.9)); }
-            72% { transform: translate(-1px, -2px); opacity: 0.9; }
-            73% { transform: translate(0, 0); opacity: 0.8; filter: drop-shadow(0 0 15px rgba(255,51,102,0.6)) drop-shadow(0 0 30px rgba(255,51,102,0.3)); }
-            100% { transform: translate(0, 0); opacity: 0.8; }
-        }
-
-        /* Обычное изображение для других персонажей */
         .hologram-image {
             max-width: 100%; max-height: 100%; object-fit: contain;
             filter: drop-shadow(0 0 15px rgba(255,51,102,0.6)) drop-shadow(0 0 30px rgba(255,51,102,0.3)) drop-shadow(0 0 60px rgba(255,51,102,0.15));
@@ -218,7 +148,29 @@
             0% { opacity: 0.8; } 5% { opacity: 0.85; } 10% { opacity: 0.75; } 15% { opacity: 0.85; } 20% { opacity: 0.8; }
             50% { opacity: 0.7; } 52% { opacity: 0.9; } 54% { opacity: 0.75; } 56% { opacity: 0.8; } 100% { opacity: 0.8; }
         }
-
+        #modal-akiharu .hologram-image {
+            animation: akiharuHologramGlitch 0.25s infinite;
+        }
+        @keyframes akiharuHologramGlitch {
+            0% { transform: translate(0,0); opacity: 0.8; filter: drop-shadow(0 0 15px rgba(255,51,102,0.6)) drop-shadow(0 0 30px rgba(255,51,102,0.3)); }
+            5% { transform: translate(0,0); opacity: 0.8; }
+            6% { transform: translate(-3px,1px); opacity: 0.9; filter: drop-shadow(0 0 25px rgba(255,51,102,0.9)) drop-shadow(0 0 50px rgba(255,51,102,0.5)); }
+            7% { transform: translate(2px,-1px); opacity: 0.6; filter: drop-shadow(0 0 10px rgba(0,204,102,0.5)) drop-shadow(0 0 20px rgba(0,204,102,0.2)); }
+            8% { transform: translate(0,0); opacity: 0.8; filter: drop-shadow(0 0 15px rgba(255,51,102,0.6)) drop-shadow(0 0 30px rgba(255,51,102,0.3)); }
+            12% { transform: translate(0,0); opacity: 0.8; }
+            13% { transform: translate(4px,-2px); opacity: 0.7; filter: drop-shadow(0 0 30px rgba(255,51,102,0.8)) drop-shadow(0 0 60px rgba(255,51,102,0.4)); }
+            14% { transform: translate(-2px,1px); opacity: 0.85; }
+            15% { transform: translate(0,0); opacity: 0.75; filter: drop-shadow(0 0 15px rgba(255,51,102,0.6)) drop-shadow(0 0 30px rgba(255,51,102,0.3)); }
+            40% { transform: translate(0,0); opacity: 0.8; }
+            41% { transform: translate(-5px,0); opacity: 0.5; filter: drop-shadow(0 0 40px rgba(0,204,102,0.7)) drop-shadow(0 0 80px rgba(0,204,102,0.3)); }
+            42% { transform: translate(3px,-1px); opacity: 0.9; filter: drop-shadow(0 0 20px rgba(255,51,102,0.7)); }
+            43% { transform: translate(0,0); opacity: 0.8; filter: drop-shadow(0 0 15px rgba(255,51,102,0.6)) drop-shadow(0 0 30px rgba(255,51,102,0.3)); }
+            70% { transform: translate(0,0); opacity: 0.8; }
+            71% { transform: translate(2px,3px); opacity: 0.65; filter: drop-shadow(0 0 35px rgba(255,51,102,0.9)); }
+            72% { transform: translate(-1px,-2px); opacity: 0.9; }
+            73% { transform: translate(0,0); opacity: 0.8; filter: drop-shadow(0 0 15px rgba(255,51,102,0.6)) drop-shadow(0 0 30px rgba(255,51,102,0.3)); }
+            100% { transform: translate(0,0); opacity: 0.8; }
+        }
         .hologram-platform {
             position: absolute; bottom: -20px; left: 50%; transform: translateX(-50%); width: 120px; height: 4px;
             background: linear-gradient(90deg, transparent, #ff3366, #ff3366, transparent); border-radius: 50%;
@@ -237,13 +189,11 @@
             pointer-events: none; animation: scannerSweep 3s ease-in-out infinite;
         }
         @keyframes scannerSweep { 0% { top: 0%; opacity: 0; } 20% { opacity: 1; } 80% { opacity: 1; } 100% { top: 100%; opacity: 0; } }
-
         .hologram-info {
             color: #00cc66; font-family: 'Courier New', monospace; text-align: left;
             border-top: 1px dashed #ff3366; padding-top: 15px; margin-top: 10px;
             font-size: 0.85rem; line-height: 1.7; white-space: pre-line;
         }
-
         .chapters-section { margin: 30px 0; }
         .chapter-item {
             display: flex; justify-content: space-between; align-items: center; padding: 10px 15px;
@@ -255,25 +205,20 @@
     </style>
 </head>
 <body>
-
     <div class="code-bg" id="codeBg"></div>
     <div class="glitch-overlay"></div>
-
     <div class="container">
         <h1>ARC OF FATE</h1>
-
         <nav>
             <a onclick="scrollToSection('about')" class="glitch-link">> О комиксе</a>
             <a onclick="scrollToSection('characters')" class="glitch-link">> Персонажи</a>
             <a onclick="scrollToSection('chapters')" class="glitch-link">> Главы</a>
             <a href="#" class="glitch-link">> Мир</a>
         </nav>
-
         <h2 id="about">> О КОМИКСЕ</h2>
         <div class="about-section">
             <p>Что делает человека - человеком? Душа? Память? Физическое тело? Разве без памяти человек перестанет им являться? Или же после того как он изменится сможет ли остаться тем же кем был раньше? В этой истории вероятно можно будет найти свои ответы на эти вопросы. Главная героиня попадает в исследовательский центр в котором она теряет память о себе и своем прошлом. Но крупицы памяти постепенно начинают возвращаться в её сознание.</p>
         </div>
-
         <h2 id="characters">> ПЕРСОНАЖИ</h2>
         <div class="characters-grid">
             <div class="character-card" onclick="openCharacterModal('akiharu')">
@@ -286,7 +231,6 @@
                 <div class="character-frame"><span class="character-name">NEX</span></div>
             </div>
         </div>
-
         <h2 id="chapters">> ГЛАВЫ</h2>
         <div class="chapters-section">
             <div class="chapter-item">
@@ -307,13 +251,10 @@
             </div>
         </div>
     </div>
-
     <div class="floating-buttons">
         <a href="https://www.donationalerts.com/r/apelssinka" target="_blank" class="floating-btn">💰 ПОДДЕРЖАТЬ</a>
         <a href="https://t.me/apelssinka" target="_blank" class="floating-btn">📡 ТЕЛЕГРАМ</a>
     </div>
-
-    <!-- Модальное окно Акихару -->
     <div class="modal-overlay" id="modal-akiharu">
         <div class="modal-content">
             <button class="modal-close" onclick="closeAllModals()">✕</button>
@@ -324,8 +265,7 @@
                 <img src="images/IMG_9776.PNG" alt="Акихару" class="hologram-image">
                 <div class="hologram-platform"></div>
             </div>
-            <div class="hologram-info">
-ДОСЬЕ ОБЪЕКТА
+            <div class="hologram-info">ДОСЬЕ ОБЪЕКТА
 
 ОБОЗНАЧЕНИЕ
 A-013
@@ -439,4 +379,15 @@ A-013 практически непрерывно задавал вопросы.
 
 ИНЦИДЕНТ И УНИЧТОЖЕНИЕ ЛАБОРАТОРИИ
 Последние архивные записи лаборатории крайне фрагментарны.
-Известно лишь, что незадолго до шест
+Известно лишь, что незадолго до шестого года существования объекта внутри комплекса произошел крупный инцидент.
+После него лаборатория была уничтожена.
+Большинство исследовательских материалов исчезло.
+Практически весь персонал погиб или пропал без вести.
+Объект A-013 исчез.
+Достоверных данных о событиях того дня не сохранилось.
+
+СОБСТВЕННАЯ ЛАБОРАТОРИЯ
+После многих десятилетий скитаний Акихару приступил к реализации собственного проекта.
+В удаленном регионе был построен закрытый исследовательский комплекс.
+Источники финансирования до сих пор не установлены.
+Предположительно за годы жизни объект сформировал огромное количество связей среди ученых, предпринимателей и посредников.
