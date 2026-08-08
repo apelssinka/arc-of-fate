@@ -213,7 +213,6 @@
             text-shadow: 0 0 3px #ff3366;
         }
 
-        /* О комиксе */
         .about-section {
             margin: 30px 0;
             padding: 20px;
@@ -221,21 +220,6 @@
             border-left: 3px solid #ff3366;
         }
 
-        /* Досье */
-        .dossier-section {
-            margin: 30px 0;
-        }
-        .dossier-text {
-            background: #0d0d0d;
-            padding: 20px;
-            border: 1px solid #00cc66;
-            font-family: 'Courier New', monospace;
-            white-space: pre-line;
-            color: #00cc66;
-            opacity: 0.9;
-        }
-
-        /* Донат */
         .donate-popup {
             position: fixed;
             bottom: 20px;
@@ -263,7 +247,7 @@
             text-shadow: 0 0 5px #ff3366;
         }
 
-        /* Модальное окно персонажа */
+        /* Модальное окно */
         .modal-overlay {
             display: none;
             position: fixed;
@@ -286,7 +270,7 @@
             border: 1px solid #ff3366;
             box-shadow: 0 0 30px rgba(255, 51, 102, 0.3), inset 0 0 30px rgba(255, 51, 102, 0.05);
             padding: 30px;
-            max-width: 550px;
+            max-width: 600px;
             width: 90%;
             max-height: 85vh;
             overflow-y: auto;
@@ -299,7 +283,6 @@
             100% { opacity: 1; transform: scale(1); }
         }
 
-        /* Стилизация скроллбара */
         .modal-content::-webkit-scrollbar {
             width: 5px;
         }
@@ -332,9 +315,9 @@
         /* Голограмма */
         .hologram-container {
             position: relative;
-            width: 220px;
-            height: 300px;
-            margin: 0 auto 20px;
+            width: 250px;
+            height: 350px;
+            margin: 0 auto 25px;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -344,31 +327,32 @@
             max-width: 100%;
             max-height: 100%;
             object-fit: contain;
-            opacity: 0.2;
-            filter: brightness(0.3);
-            position: relative;
-            z-index: 2;
+            opacity: 0.7;
+            filter:
+                drop-shadow(0 0 15px rgba(255, 51, 102, 0.7))
+                drop-shadow(0 0 35px rgba(255, 51, 102, 0.4))
+                drop-shadow(0 0 60px rgba(255, 51, 102, 0.2));
+            animation: hologramFloat 4s ease-in-out infinite, hologramFlicker 5s infinite;
+            mix-blend-mode: screen;
         }
 
-        /* SVG контуры поверх изображения */
-        .hologram-outline {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 3;
-            pointer-events: none;
+        @keyframes hologramFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-6px); }
         }
 
-        .contour-line {
-            position: absolute;
-            background: rgba(255, 51, 102, 0.7);
-            animation: contourGlow 2s ease-in-out infinite;
-        }
-        @keyframes contourGlow {
-            0%, 100% { box-shadow: 0 0 3px #ff3366, 0 0 8px rgba(255, 51, 102, 0.4); }
-            50% { box-shadow: 0 0 6px #ff3366, 0 0 15px rgba(255, 51, 102, 0.6); }
+        @keyframes hologramFlicker {
+            0% { opacity: 0.7; }
+            3% { opacity: 0.8; }
+            6% { opacity: 0.65; }
+            9% { opacity: 0.8; }
+            12% { opacity: 0.7; }
+            40% { opacity: 0.6; }
+            42% { opacity: 0.85; }
+            44% { opacity: 0.7; }
+            46% { opacity: 0.8; }
+            48% { opacity: 0.65; }
+            100% { opacity: 0.7; }
         }
 
         .hologram-platform {
@@ -376,7 +360,7 @@
             bottom: -15px;
             left: 50%;
             transform: translateX(-50%);
-            width: 100px;
+            width: 110px;
             height: 3px;
             background: linear-gradient(90deg, transparent, #ff3366, #ff3366, transparent);
             border-radius: 50%;
@@ -385,8 +369,8 @@
             z-index: 4;
         }
         @keyframes platformPulse {
-            0%, 100% { opacity: 0.4; width: 100px; }
-            50% { opacity: 1; width: 130px; }
+            0%, 100% { opacity: 0.4; width: 110px; }
+            50% { opacity: 1; width: 140px; }
         }
 
         .scan-lines {
@@ -397,29 +381,35 @@
             height: 100%;
             pointer-events: none;
             z-index: 5;
-            background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(255, 51, 102, 0.05) 2px, rgba(255, 51, 102, 0.05) 4px);
-            animation: scanMove 8s linear infinite;
+            background: repeating-linear-gradient(
+                0deg,
+                transparent,
+                transparent 3px,
+                rgba(255, 51, 102, 0.04) 3px,
+                rgba(255, 51, 102, 0.04) 6px
+            );
+            animation: scanMove 6s linear infinite;
         }
         @keyframes scanMove {
             0% { background-position: 0 0; }
-            100% { background-position: 0 100px; }
+            100% { background-position: 0 150px; }
         }
 
         .scanner-bar {
             position: absolute;
             left: 0;
             width: 100%;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, rgba(255, 51, 102, 0.8), transparent);
+            height: 2px;
+            background: linear-gradient(90deg, transparent, rgba(255, 51, 102, 0.7), transparent);
             pointer-events: none;
             z-index: 6;
-            animation: scannerSweep 3s ease-in-out infinite;
+            animation: scannerSweep 3.5s ease-in-out infinite;
         }
         @keyframes scannerSweep {
-            0% { top: 0%; opacity: 0; }
-            15% { opacity: 1; }
-            85% { opacity: 1; }
-            100% { top: 100%; opacity: 0; }
+            0% { top: -5%; opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { top: 105%; opacity: 0; }
         }
 
         .hologram-info {
@@ -429,10 +419,9 @@
             border-top: 1px dashed #ff3366;
             padding-top: 15px;
             margin-top: 10px;
-        }
-        .hologram-info p {
-            margin: 6px 0;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
+            line-height: 1.7;
+            white-space: pre-line;
         }
         .hologram-info .label {
             color: #ff3366;
@@ -491,29 +480,11 @@
             <a href="#" class="glitch-link">> Мир</a>
         </nav>
 
-        <!-- О комиксе -->
         <h2>> О КОМИКСЕ</h2>
         <div class="about-section">
             <p>Arc of Fate — это мрачный киберпанк-комикс, действие которого разворачивается в антиутопическом будущем. История рассказывает о девушке, пережившей жестокие эксперименты, и бессмертном учёном, который пытается понять, что значит быть человеком. Судьбы переплетаются в мире, где технологии стирают границы между реальностью и иллюзией, между жизнью и кодом.</p>
         </div>
 
-        <!-- Досье -->
-        <h2>> ДОСЬЕ</h2>
-        <div class="dossier-section">
-            <div class="dossier-text">
-╔══════════════════════════════════════╗
-║   ДОСЬЕ: СУБЪЕКТ "АКИХАРУ"         ║
-╠══════════════════════════════════════╣
-║ Статус:    ████████████  АКТИВЕН     ║
-║ Уровень:   ████████████  ОМЕГА       ║
-║ Протокол:  ████████████  НАБЛЮДЕНИЕ  ║
-║ Локация:   ████████████  СЕКТОР 7    ║
-║ Угроза:    ████████████  КРИТИЧЕСКАЯ ║
-╚══════════════════════════════════════╝
-            </div>
-        </div>
-
-        <!-- Персонажи -->
         <h2>> ПЕРСОНАЖИ</h2>
         <div class="characters-grid">
             <div class="character-card" onclick="openCharacterModal('akiharu')">
@@ -533,7 +504,6 @@
             </div>
         </div>
 
-        <!-- Главы -->
         <h2>> ГЛАВЫ</h2>
         <div class="chapters-section">
             <div class="chapter-item">
@@ -568,21 +538,168 @@
             <div class="hologram-container">
                 <div class="scan-lines"></div>
                 <div class="scanner-bar"></div>
-                <img src="images/IMG_9766.PNG" alt="Акихару" class="hologram-image" id="hologramImg">
-                <div class="hologram-outline" id="hologramOutline"></div>
+                <img src="images/IMG_9776.PNG" alt="Акихару" class="hologram-image">
                 <div class="hologram-platform"></div>
             </div>
             <div class="hologram-info">
-                <p><span class="label">▸ Статус:</span> Активен</p>
-                <p><span class="label">▸ Имя:</span> Акихару</p>
-                <p><span class="label">▸ Роль:</span> Главный герой</p>
-                <p><span class="label">▸ Происхождение:</span> Пережил эксперименты NEX</p>
-                <p><span class="label">▸ Особенности:</span> Скрытая сила, фрагментированная память</p>
-                <p><span class="label">▸ Описание:</span> Девушка, пережившая жестокие эксперименты в лабораториях корпорации NEX. Её память фрагментирована, но внутри неё дремлет сила, способная изменить ход истории. Она борется за свою человечность в мире, где технологии стирают грань между человеком и машиной.</p>
-                <p><span class="label">▸ Фракция:</span> Сопротивление</p>
-                <p><span class="label">▸ Уровень угрозы:</span> Омега</p>
-                <p><span class="label">▸ Текущая локация:</span> Сектор 7</p>
-                <p style="margin-top: 10px; color: #ff3366; opacity: 0.7;">// ДАННЫЕ ОБНОВЛЕНЫ: [ДАТА ЗАСЕКРЕЧЕНА]</p>
+ДОСЬЕ ОБЪЕКТА
+
+ОБОЗНАЧЕНИЕ
+A-013
+
+ТЕКУЩЕЕ ИМЯ
+Акихару Раст
+
+ИЗВЕСТНЫЕ ПСЕВДОНИМЫ
+Неизвестно. Предположительно использовал десятки различных личностей и документов за период существования.
+
+СТАТУС
+Активен.
+
+МЕСТОНАХОЖДЕНИЕ
+Не установлено.
+
+ВОЗРАСТ
+Более 100 лет.
+
+ВНЕШНИЙ ВОЗРАСТ
+20–25 лет.
+
+РОСТ
+200 см.
+
+ПРОИСХОЖДЕНИЕ
+Искусственно созданный человек.
+
+УРОВЕНЬ УГРОЗЫ
+Высокий.
+
+ОБЩАЯ ИНФОРМАЦИЯ
+Акихару Раст, первоначально известный как объект A-013, считается одним из первых успешных случаев создания полноценного искусственного человека.
+По сохранившимся данным, проект был реализован около ста лет назад в небольшой нелегальной исследовательской лаборатории, расположенной на окраине Германии.
+На момент создания человечество уже располагало примитивными искусственными интеллектами и механизированными андроидами. Однако целью проекта являлось создание не машины, а полноценного биологического человека, способного развиваться естественным образом.
+Создатели стремились получить организм, который невозможно было бы отличить от обычного человека ни физически, ни психологически.
+Результатом эксперимента стал объект A-013.
+Проект был признан успешным.
+
+ПЕРВЫЕ ДНИ СУЩЕСТВОВАНИЯ
+После активации объект демонстрировал поведение, характерное для новорожденного сознания.
+Он не понимал собственного происхождения, назначения и устройства окружающего мира.
+Сотрудники лаборатории начали процесс ускоренного обучения.
+Практически сразу стало очевидно, что объект обладает феноменальной скоростью усвоения информации.
+Материал, на изучение которого обычному человеку требовались годы, объект осваивал за считанные дни.
+К концу первого года существования A-013 уже свободно понимал программы обучения уровня средней школы.
+Предварительная оценка интеллектуальных способностей превышала 300 IQ.
+
+ПОВЕДЕНИЕ В ЛАБОРАТОРИИ
+Наиболее необычной особенностью объекта оказалась его любознательность.
+A-013 практически непрерывно задавал вопросы.
+Особенно его интересовали следующие темы:
+· природа человека;
+· собственное происхождение;
+· устройство организма;
+· смерть;
+· сознание;
+· причины своего создания.
+На многие вопросы сотрудники предпочитали не отвечать.
+Подобное отношение вызывало у объекта непонимание.
+В отличие от андроидов и автоматизированных систем лаборатории, A-013 не воспринимал себя собственностью исследовательского комплекса.
+Он искренне не понимал, почему обязан подчиняться людям, если сам является человеком.
+Согласно ранним записям наблюдений, объект неоднократно высказывал мысль:
+«Если я человек, почему ко мне относятся как к инструменту?»
+
+ВЗАИМООТНОШЕНИЯ С ПЕРСОНАЛОМ
+Несмотря на первоначальные опасения, A-013 быстро начал взаимодействовать с сотрудниками комплекса.
+Он проявлял дружелюбие, помогал исследователям и активно интересовался их работой.
+Объект регулярно покидал выделенный ему сектор, чтобы наблюдать за деятельностью ученых.
+Со временем он начал участвовать в исследованиях самостоятельно.
+Особенно заметным было его стремление обучаться.
+Он просил объяснять принципы работы оборудования, рассказывал собственные гипотезы и нередко предлагал решения проблем.
+Многие сотрудники начали воспринимать его скорее как молодого коллегу, чем как экспериментальный образец.
+Однако руководство проекта относилось к подобным отношениям крайне негативно.
+
+К ПЯТОМУ ГОДУ СУЩЕСТВОВАНИЯ
+К пятому году жизни объект:
+· свободно владел примерно пятью языками;
+· участвовал в научных исследованиях;
+· самостоятельно изучал медицину;
+· изучал инженерию;
+· критиковал методы работы старших сотрудников;
+· демонстрировал способности к аналитике, значительно превосходящие человеческие.
+Некоторые исследователи открыто называли A-013 величайшим достижением проекта.
+Другие начали рассматривать его как потенциальную угрозу.
+
+БИОЛОГИЧЕСКИЕ ОСОБЕННОСТИ
+В процессе наблюдений были выявлены серьезные отличия от человеческой физиологии.
+Среди них:
+Замедленное старение
+Скорость клеточного старения объекта существенно ниже человеческой.
+Замедленный рост волос
+Рост волос происходил в десятки раз медленнее нормы.
+Повышенная регенерация
+Повреждения тканей восстанавливались значительно быстрее.
+Повышенная адаптация
+Организм демонстрировал высокую устойчивость к внешним воздействиям.
+Выносливость
+Даже спустя десятилетия объект мог функционировать при минимальном количестве сна и отдыха.
+
+КРИЗИС ПРОЕКТА
+По мере развития A-013 перед исследователями возник вопрос, к какой категории следует относить объект.
+Он больше не являлся обычным экспериментом.
+Он не был машиной.
+Не был программой.
+Не был животным.
+Однако юридически человеком также не считался.
+Руководство проекта начало опасаться последствий существования подобного создания.
+Дополнительным фактором стал его стремительно растущий интеллект.
+Становилось очевидно, что удерживать объект под контролем становится все сложнее.
+
+ИНЦИДЕНТ И УНИЧТОЖЕНИЕ ЛАБОРАТОРИИ
+Последние архивные записи лаборатории крайне фрагментарны.
+Известно лишь, что незадолго до шестого года существования объекта внутри комплекса произошел крупный инцидент.
+После него лаборатория была уничтожена.
+Большинство исследовательских материалов исчезло.
+Практически весь персонал погиб или пропал без вести.
+Объект A-013 исчез.
+Достоверных данных о событиях того дня не сохранилось.
+
+СОБСТВЕННАЯ ЛАБОРАТОРИЯ
+После многих десятилетий скитаний Акихару приступил к реализации собственного проекта.
+В удаленном регионе был построен закрытый исследовательский комплекс.
+Источники финансирования до сих пор не установлены.
+Предположительно за годы жизни объект сформировал огромное количество связей среди ученых, предпринимателей и посредников.
+
+ТЕКУЩАЯ ДЕЯТЕЛЬНОСТЬ
+На сегодняшний день Акихару Раст связывают с производством:
+· экспериментальных материалов;
+· медицинских технологий;
+· инженерных разработок;
+· специализированного оборудования.
+Часть продукции продается частным организациям и корпорациям.
+
+ПСИХОЛОГИЧЕСКИЙ ПРОФИЛЬ
+Основные черты
+· чрезвычайно умен;
+· эгоистичен;
+· уверен в себе;
+· прагматичен;
+· любознателен;
+· терпелив;
+· расчетлив;
+· харизматичен.
+Особенности
+Даже спустя более века существования объект сохранил ту же черту, которая отличала его в детстве:
+непреодолимое желание понимать устройство мира.
+По мнению аналитиков, большинство его действий продиктовано не жаждой власти или богатства, а стремлением получить новые знания.
+
+ЗАКЛЮЧЕНИЕ
+A-013 начинал свое существование как научный эксперимент.
+Спустя столетие он превратился в самостоятельную фигуру, обладающую огромным опытом, знаниями и ресурсами.
+Его невозможно отнести ни к людям, ни к машинам.
+Он пережил собственных создателей.
+Пережил лабораторию, в которой был создан.
+И, вероятно, переживет еще многие поколения людей, продолжающих задаваться тем же вопросом, который когда-то задал он сам:
+«Что делает человека человеком?»
             </div>
         </div>
     </div>
@@ -592,7 +709,7 @@
         <div class="modal-content">
             <button class="modal-close" onclick="closeAllModals()">✕</button>
             <div class="modal-character-name">КАРОЛИНА</div>
-            <div class="hologram-container" style="width: 220px; height: 300px; border: 1px dashed #ff3366; display: flex; align-items: center; justify-content: center;">
+            <div class="hologram-container" style="width: 250px; height: 350px; border: 1px dashed #ff3366; display: flex; align-items: center; justify-content: center;">
                 <span style="color: #ff3366; font-size: 0.9rem; opacity: 0.6; text-align: center;">[ ГОЛОГРАММА<br>ЗАГРУЖАЕТСЯ ]</span>
             </div>
             <div class="hologram-info">
@@ -607,7 +724,7 @@
         <div class="modal-content">
             <button class="modal-close" onclick="closeAllModals()">✕</button>
             <div class="modal-character-name">NEX</div>
-            <div class="hologram-container" style="width: 220px; height: 300px; border: 1px dashed #ff3366; display: flex; align-items: center; justify-content: center;">
+            <div class="hologram-container" style="width: 250px; height: 350px; border: 1px dashed #ff3366; display: flex; align-items: center; justify-content: center;">
                 <span style="color: #ff3366; font-size: 0.9rem; opacity: 0.6; text-align: center;">[ ГОЛОГРАММА<br>ЗАГРУЖАЕТСЯ ]</span>
             </div>
             <div class="hologram-info">
@@ -618,7 +735,6 @@
     </div>
 
     <script>
-        // Фон с кодом
         const codeBg = document.getElementById('codeBg');
         const codeFragments = [
             'class Subject { constructor() { this.memory = []; } recall() { return this.memory.filter(m => !m.corrupted); } }',
@@ -642,102 +758,4 @@
             row.className = 'code-row';
             let rowContent = '';
             for (let j = 0; j < 6; j++) {
-                const frag = codeFragments[Math.floor(Math.random() * codeFragments.length)];
-                rowContent += `<span>${frag}</span>`;
-            }
-            row.innerHTML = rowContent + rowContent;
-            codeBg.appendChild(row);
-        }
-
-        document.querySelectorAll('.code-row').forEach((row, index) => {
-            row.style.animationDuration = (25 + Math.random() * 20) + 's';
-            if (Math.random() > 0.5) {
-                row.style.animationDirection = 'reverse';
-            }
-        });
-
-        // Генерация красных контуров поверх изображения
-        function generateOutlines() {
-            const outlineContainer = document.getElementById('hologramOutline');
-            if (!outlineContainer) return;
-
-            outlineContainer.innerHTML = '';
-
-            // Контуры лица и фигуры (стилизованные линии)
-            const contours = [
-                // Левая сторона лица
-                { top: '15%', left: '25%', width: '2px', height: '25%', rotate: '0deg' },
-                // Правая сторона лица
-                { top: '15%', left: '65%', width: '2px', height: '25%', rotate: '0deg' },
-                // Линия подбородка
-                { top: '42%', left: '28%', width: '40%', height: '1px', rotate: '0deg' },
-                // Глаза
-                { top: '25%', left: '35%', width: '8%', height: '1px', rotate: '0deg' },
-                { top: '25%', left: '55%', width: '8%', height: '1px', rotate: '0deg' },
-                // Плечи
-                { top: '55%', left: '15%', width: '35%', height: '1px', rotate: '-8deg' },
-                { top: '55%', left: '48%', width: '35%', height: '1px', rotate: '8deg' },
-                // Туловище
-                { top: '42%', left: '48%', width: '1px', height: '30%', rotate: '0deg' },
-                // Руки
-                { top: '58%', left: '12%', width: '2px', height: '20%', rotate: '-5deg' },
-                { top: '58%', left: '82%', width: '2px', height: '20%', rotate: '5deg' },
-                // Дополнительные линии
-                { top: '20%', left: '30%', width: '5%', height: '1px', rotate: '15deg' },
-                { top: '20%', left: '60%', width: '5%', height: '1px', rotate: '-15deg' },
-                { top: '35%', left: '33%', width: '6%', height: '1px', rotate: '0deg' },
-                { top: '35%', left: '57%', width: '6%', height: '1px', rotate: '0deg' },
-                { top: '48%', left: '42%', width: '2px', height: '5%', rotate: '0deg' },
-                { top: '70%', left: '30%', width: '15%', height: '1px', rotate: '5deg' },
-                { top: '70%', left: '52%', width: '15%', height: '1px', rotate: '-5deg' }
-            ];
-
-            contours.forEach(c => {
-                const line = document.createElement('div');
-                line.className = 'contour-line';
-                line.style.cssText = `
-                    top: ${c.top};
-                    left: ${c.left};
-                    width: ${c.width};
-                    height: ${c.height};
-                    transform: rotate(${c.rotate});
-                `;
-                outlineContainer.appendChild(line);
-            });
-        }
-
-        // Модальные окна
-        function openCharacterModal(character) {
-            closeAllModals();
-            const modal = document.getElementById('modal-' + character);
-            if (modal) {
-                modal.classList.add('active');
-                if (character === 'akiharu') {
-                    setTimeout(generateOutlines, 100);
-                }
-            }
-        }
-
-        function closeAllModals() {
-            document.querySelectorAll('.modal-overlay').forEach(modal => {
-                modal.classList.remove('active');
-            });
-        }
-
-        document.querySelectorAll('.modal-overlay').forEach(overlay => {
-            overlay.addEventListener('click', function(e) {
-                if (e.target === overlay) {
-                    closeAllModals();
-                }
-            });
-        });
-
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape') {
-                closeAllModals();
-            }
-        });
-    </script>
-
-</body>
-</html>
+                const frag = codeFrag
