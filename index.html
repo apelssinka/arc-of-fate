@@ -212,7 +212,6 @@
             text-shadow: 0 0 3px #ff3366;
         }
 
-        /* О комиксе */
         .about-section {
             margin: 30px 0;
             padding: 20px;
@@ -220,7 +219,6 @@
             border-left: 3px solid #ff3366;
         }
 
-        /* Донат и телеграм */
         .floating-buttons {
             position: fixed;
             bottom: 20px;
@@ -314,6 +312,16 @@
         .modal-close:hover {
             text-shadow: 0 0 10px #ff3366;
             transform: scale(1.2);
+        }
+
+        .modal-character-name {
+            text-align: center;
+            font-size: 1.6rem;
+            color: #ff3366;
+            text-shadow: 0 0 10px #ff3366;
+            letter-spacing: 3px;
+            margin-bottom: 15px;
+            text-transform: uppercase;
         }
 
         /* Голограмма */
@@ -417,15 +425,6 @@
             line-height: 1.7;
             white-space: pre-line;
         }
-        .modal-character-name {
-            text-align: center;
-            font-size: 1.6rem;
-            color: #ff3366;
-            text-shadow: 0 0 10px #ff3366;
-            letter-spacing: 3px;
-            margin-bottom: 15px;
-            text-transform: uppercase;
-        }
 
         .chapters-section {
             margin: 30px 0;
@@ -515,7 +514,6 @@
         </div>
     </div>
 
-    <!-- Плавающие кнопки -->
     <div class="floating-buttons">
         <a href="https://www.donationalerts.com/r/apelssinka" target="_blank" class="floating-btn">💰 ПОДДЕРЖАТЬ</a>
         <a href="https://t.me/apelssinka" target="_blank" class="floating-btn">📡 ТЕЛЕГРАМ</a>
@@ -754,4 +752,5 @@ A-013 начинал свое существование как научный �
             codeBg.appendChild(row);
         }
 
-       
+        document.querySelectorAll('.code-row').forEach((row, index) => {
+            row.style.animationDuration = (25 + Math.random
