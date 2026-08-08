@@ -6,7 +6,6 @@
     <title>Arc of Fate</title>
 
     <meta name="yandex-verification" content="2f4b656845ef9f38" />
-
     <meta name="google-site-verification" content="d62u_CfO-t">
 
     <meta name="description" content="Arc of Fate — мрачный киберпанк-комикс о девушке, пережившей эксперименты, и бессмертном учёном, который учится быть человеком.">
@@ -214,7 +213,57 @@
             text-shadow: 0 0 3px #ff3366;
         }
 
-        /* Модальное окно */
+        /* О комиксе */
+        .about-section {
+            margin: 30px 0;
+            padding: 20px;
+            background: rgba(0, 204, 102, 0.02);
+            border-left: 3px solid #ff3366;
+        }
+
+        /* Досье */
+        .dossier-section {
+            margin: 30px 0;
+        }
+        .dossier-text {
+            background: #0d0d0d;
+            padding: 20px;
+            border: 1px solid #00cc66;
+            font-family: 'Courier New', monospace;
+            white-space: pre-line;
+            color: #00cc66;
+            opacity: 0.9;
+        }
+
+        /* Донат */
+        .donate-popup {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 50;
+            background: #0a0a0a;
+            border: 1px solid #00cc66;
+            padding: 15px 20px;
+            cursor: pointer;
+            transition: 0.3s;
+            box-shadow: 0 0 15px rgba(0, 204, 102, 0.2);
+        }
+        .donate-popup:hover {
+            border-color: #ff3366;
+            box-shadow: 0 0 25px rgba(255, 51, 102, 0.3);
+        }
+        .donate-text {
+            color: #00cc66;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+        }
+        .donate-popup:hover .donate-text {
+            color: #ff3366;
+            text-shadow: 0 0 5px #ff3366;
+        }
+
+        /* Модальное окно персонажа */
         .modal-overlay {
             display: none;
             position: fixed;
@@ -222,7 +271,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.85);
+            background: rgba(0, 0, 0, 0.9);
             z-index: 100;
             justify-content: center;
             align-items: center;
@@ -236,9 +285,11 @@
             background: #0a0a0a;
             border: 1px solid #ff3366;
             box-shadow: 0 0 30px rgba(255, 51, 102, 0.3), inset 0 0 30px rgba(255, 51, 102, 0.05);
-            padding: 40px;
-            max-width: 600px;
+            padding: 30px;
+            max-width: 550px;
             width: 90%;
+            max-height: 85vh;
+            overflow-y: auto;
             position: relative;
             border-radius: 4px;
             animation: modalIn 0.3s ease-out;
@@ -248,10 +299,22 @@
             100% { opacity: 1; transform: scale(1); }
         }
 
+        /* Стилизация скроллбара */
+        .modal-content::-webkit-scrollbar {
+            width: 5px;
+        }
+        .modal-content::-webkit-scrollbar-track {
+            background: #0a0a0a;
+        }
+        .modal-content::-webkit-scrollbar-thumb {
+            background: #ff3366;
+            border-radius: 3px;
+        }
+
         .modal-close {
-            position: absolute;
-            top: 15px;
-            right: 20px;
+            position: sticky;
+            top: 0;
+            float: right;
             color: #ff3366;
             font-size: 24px;
             cursor: pointer;
@@ -259,6 +322,7 @@
             background: none;
             font-family: monospace;
             transition: 0.2s;
+            z-index: 101;
         }
         .modal-close:hover {
             text-shadow: 0 0 10px #ff3366;
@@ -268,9 +332,9 @@
         /* Голограмма */
         .hologram-container {
             position: relative;
-            width: 250px;
-            height: 350px;
-            margin: 0 auto 25px;
+            width: 220px;
+            height: 300px;
+            margin: 0 auto 20px;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -280,52 +344,51 @@
             max-width: 100%;
             max-height: 100%;
             object-fit: contain;
-            filter:
-                drop-shadow(0 0 15px rgba(255, 51, 102, 0.6))
-                drop-shadow(0 0 30px rgba(255, 51, 102, 0.3))
-                drop-shadow(0 0 60px rgba(255, 51, 102, 0.15));
-            opacity: 0.8;
-            animation: hologramFloat 3s ease-in-out infinite, hologramFlicker 4s infinite;
-            mix-blend-mode: screen;
+            opacity: 0.2;
+            filter: brightness(0.3);
+            position: relative;
+            z-index: 2;
         }
 
-        @keyframes hologramFloat {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-5px); }
+        /* SVG контуры поверх изображения */
+        .hologram-outline {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 3;
+            pointer-events: none;
         }
 
-        @keyframes hologramFlicker {
-            0% { opacity: 0.8; }
-            5% { opacity: 0.85; }
-            10% { opacity: 0.75; }
-            15% { opacity: 0.85; }
-            20% { opacity: 0.8; }
-            50% { opacity: 0.7; }
-            52% { opacity: 0.9; }
-            54% { opacity: 0.75; }
-            56% { opacity: 0.8; }
-            100% { opacity: 0.8; }
+        .contour-line {
+            position: absolute;
+            background: rgba(255, 51, 102, 0.7);
+            animation: contourGlow 2s ease-in-out infinite;
+        }
+        @keyframes contourGlow {
+            0%, 100% { box-shadow: 0 0 3px #ff3366, 0 0 8px rgba(255, 51, 102, 0.4); }
+            50% { box-shadow: 0 0 6px #ff3366, 0 0 15px rgba(255, 51, 102, 0.6); }
         }
 
-        /* Платформа голограммы */
         .hologram-platform {
             position: absolute;
-            bottom: -20px;
+            bottom: -15px;
             left: 50%;
             transform: translateX(-50%);
-            width: 120px;
-            height: 4px;
+            width: 100px;
+            height: 3px;
             background: linear-gradient(90deg, transparent, #ff3366, #ff3366, transparent);
             border-radius: 50%;
             filter: blur(2px);
             animation: platformPulse 2s ease-in-out infinite;
+            z-index: 4;
         }
         @keyframes platformPulse {
-            0%, 100% { opacity: 0.5; width: 120px; }
-            50% { opacity: 1; width: 140px; }
+            0%, 100% { opacity: 0.4; width: 100px; }
+            50% { opacity: 1; width: 130px; }
         }
 
-        /* Линии сканирования */
         .scan-lines {
             position: absolute;
             top: 0;
@@ -333,7 +396,8 @@
             width: 100%;
             height: 100%;
             pointer-events: none;
-            background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(255, 51, 102, 0.03) 2px, rgba(255, 51, 102, 0.03) 4px);
+            z-index: 5;
+            background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(255, 51, 102, 0.05) 2px, rgba(255, 51, 102, 0.05) 4px);
             animation: scanMove 8s linear infinite;
         }
         @keyframes scanMove {
@@ -341,20 +405,20 @@
             100% { background-position: 0 100px; }
         }
 
-        /* Горизонтальная линия сканера */
         .scanner-bar {
             position: absolute;
             left: 0;
             width: 100%;
-            height: 2px;
-            background: linear-gradient(90deg, transparent, rgba(255, 51, 102, 0.6), transparent);
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255, 51, 102, 0.8), transparent);
             pointer-events: none;
+            z-index: 6;
             animation: scannerSweep 3s ease-in-out infinite;
         }
         @keyframes scannerSweep {
             0% { top: 0%; opacity: 0; }
-            20% { opacity: 1; }
-            80% { opacity: 1; }
+            15% { opacity: 1; }
+            85% { opacity: 1; }
             100% { top: 100%; opacity: 0; }
         }
 
@@ -368,6 +432,7 @@
         }
         .hologram-info p {
             margin: 6px 0;
+            font-size: 0.9rem;
         }
         .hologram-info .label {
             color: #ff3366;
@@ -375,15 +440,14 @@
         }
         .modal-character-name {
             text-align: center;
-            font-size: 1.8rem;
+            font-size: 1.6rem;
             color: #ff3366;
             text-shadow: 0 0 10px #ff3366;
             letter-spacing: 3px;
-            margin-bottom: 5px;
+            margin-bottom: 15px;
             text-transform: uppercase;
         }
 
-        /* Секция с главами */
         .chapters-section {
             margin: 30px 0;
         }
@@ -396,6 +460,8 @@
             margin: 8px 0;
             background: rgba(0, 204, 102, 0.03);
             transition: 0.3s;
+            flex-wrap: wrap;
+            gap: 10px;
         }
         .chapter-item:hover {
             background: rgba(0, 204, 102, 0.08);
@@ -410,7 +476,6 @@
 </head>
 <body>
 
-    <!-- Анимированный фон -->
     <div class="code-bg" id="codeBg"></div>
     <div class="glitch-overlay"></div>
 
@@ -425,6 +490,28 @@
             <a href="#" class="glitch-link">> Персонажи</a>
             <a href="#" class="glitch-link">> Мир</a>
         </nav>
+
+        <!-- О комиксе -->
+        <h2>> О КОМИКСЕ</h2>
+        <div class="about-section">
+            <p>Arc of Fate — это мрачный киберпанк-комикс, действие которого разворачивается в антиутопическом будущем. История рассказывает о девушке, пережившей жестокие эксперименты, и бессмертном учёном, который пытается понять, что значит быть человеком. Судьбы переплетаются в мире, где технологии стирают границы между реальностью и иллюзией, между жизнью и кодом.</p>
+        </div>
+
+        <!-- Досье -->
+        <h2>> ДОСЬЕ</h2>
+        <div class="dossier-section">
+            <div class="dossier-text">
+╔══════════════════════════════════════╗
+║   ДОСЬЕ: СУБЪЕКТ "АКИХАРУ"         ║
+╠══════════════════════════════════════╣
+║ Статус:    ████████████  АКТИВЕН     ║
+║ Уровень:   ████████████  ОМЕГА       ║
+║ Протокол:  ████████████  НАБЛЮДЕНИЕ  ║
+║ Локация:   ████████████  СЕКТОР 7    ║
+║ Угроза:    ████████████  КРИТИЧЕСКАЯ ║
+╚══════════════════════════════════════╝
+            </div>
+        </div>
 
         <!-- Персонажи -->
         <h2>> ПЕРСОНАЖИ</h2>
@@ -468,6 +555,11 @@
         </div>
     </div>
 
+    <!-- Донат -->
+    <div class="donate-popup" onclick="window.open('https://www.donationalerts.com/r/apelssinka', '_blank')">
+        <span class="donate-text">💰 ПОДДЕРЖАТЬ ПРОЕКТ</span>
+    </div>
+
     <!-- Модальное окно Акихару -->
     <div class="modal-overlay" id="modal-akiharu">
         <div class="modal-content">
@@ -476,15 +568,21 @@
             <div class="hologram-container">
                 <div class="scan-lines"></div>
                 <div class="scanner-bar"></div>
-                <img src="images/IMG_9766.PNG" alt="Акихару" class="hologram-image">
+                <img src="images/IMG_9766.PNG" alt="Акихару" class="hologram-image" id="hologramImg">
+                <div class="hologram-outline" id="hologramOutline"></div>
                 <div class="hologram-platform"></div>
             </div>
             <div class="hologram-info">
-                <p><span class="label">Статус:</span> Активен</p>
-                <p><span class="label">Роль:</span> Главный герой</p>
-                <p><span class="label">Происхождение:</span> Пережил эксперименты</p>
-                <p><span class="label">Особенности:</span> Скрытая сила, фрагментированная память</p>
-                <p><span class="label">Описание:</span> Девушка, пережившая жестокие эксперименты. Борется за свою человечность в мире, где технологии стирают грань между человеком и машиной.</p>
+                <p><span class="label">▸ Статус:</span> Активен</p>
+                <p><span class="label">▸ Имя:</span> Акихару</p>
+                <p><span class="label">▸ Роль:</span> Главный герой</p>
+                <p><span class="label">▸ Происхождение:</span> Пережил эксперименты NEX</p>
+                <p><span class="label">▸ Особенности:</span> Скрытая сила, фрагментированная память</p>
+                <p><span class="label">▸ Описание:</span> Девушка, пережившая жестокие эксперименты в лабораториях корпорации NEX. Её память фрагментирована, но внутри неё дремлет сила, способная изменить ход истории. Она борется за свою человечность в мире, где технологии стирают грань между человеком и машиной.</p>
+                <p><span class="label">▸ Фракция:</span> Сопротивление</p>
+                <p><span class="label">▸ Уровень угрозы:</span> Омега</p>
+                <p><span class="label">▸ Текущая локация:</span> Сектор 7</p>
+                <p style="margin-top: 10px; color: #ff3366; opacity: 0.7;">// ДАННЫЕ ОБНОВЛЕНЫ: [ДАТА ЗАСЕКРЕЧЕНА]</p>
             </div>
         </div>
     </div>
@@ -494,12 +592,12 @@
         <div class="modal-content">
             <button class="modal-close" onclick="closeAllModals()">✕</button>
             <div class="modal-character-name">КАРОЛИНА</div>
-            <div class="hologram-container" style="width: 250px; height: 350px; border: 1px dashed #ff3366; display: flex; align-items: center; justify-content: center;">
-                <span style="color: #ff3366; font-size: 0.9rem; opacity: 0.6;">[ ГОЛОГРАММА ЗАГРУЖАЕТСЯ ]</span>
+            <div class="hologram-container" style="width: 220px; height: 300px; border: 1px dashed #ff3366; display: flex; align-items: center; justify-content: center;">
+                <span style="color: #ff3366; font-size: 0.9rem; opacity: 0.6; text-align: center;">[ ГОЛОГРАММА<br>ЗАГРУЖАЕТСЯ ]</span>
             </div>
             <div class="hologram-info">
-                <p><span class="label">Статус:</span> [Данные скоро появятся]</p>
-                <p><span class="label">Информация:</span> Скоро будет добавлена</p>
+                <p><span class="label">▸ Статус:</span> [Данные скоро появятся]</p>
+                <p><span class="label">▸ Информация:</span> Файл персонажа будет добавлен позже.</p>
             </div>
         </div>
     </div>
@@ -509,18 +607,18 @@
         <div class="modal-content">
             <button class="modal-close" onclick="closeAllModals()">✕</button>
             <div class="modal-character-name">NEX</div>
-            <div class="hologram-container" style="width: 250px; height: 350px; border: 1px dashed #ff3366; display: flex; align-items: center; justify-content: center;">
-                <span style="color: #ff3366; font-size: 0.9rem; opacity: 0.6;">[ ГОЛОГРАММА ЗАГРУЖАЕТСЯ ]</span>
+            <div class="hologram-container" style="width: 220px; height: 300px; border: 1px dashed #ff3366; display: flex; align-items: center; justify-content: center;">
+                <span style="color: #ff3366; font-size: 0.9rem; opacity: 0.6; text-align: center;">[ ГОЛОГРАММА<br>ЗАГРУЖАЕТСЯ ]</span>
             </div>
             <div class="hologram-info">
-                <p><span class="label">Статус:</span> [Данные скоро появятся]</p>
-                <p><span class="label">Информация:</span> Скоро будет добавлена</p>
+                <p><span class="label">▸ Статус:</span> [Данные скоро появятся]</p>
+                <p><span class="label">▸ Информация:</span> Файл персонажа будет добавлен позже.</p>
             </div>
         </div>
     </div>
 
     <script>
-        // Генерация фона с кодом
+        // Фон с кодом
         const codeBg = document.getElementById('codeBg');
         const codeFragments = [
             'class Subject { constructor() { this.memory = []; } recall() { return this.memory.filter(m => !m.corrupted); } }',
@@ -551,7 +649,6 @@
             codeBg.appendChild(row);
         }
 
-        // Скорости строк
         document.querySelectorAll('.code-row').forEach((row, index) => {
             row.style.animationDuration = (25 + Math.random() * 20) + 's';
             if (Math.random() > 0.5) {
@@ -559,12 +656,65 @@
             }
         });
 
+        // Генерация красных контуров поверх изображения
+        function generateOutlines() {
+            const outlineContainer = document.getElementById('hologramOutline');
+            if (!outlineContainer) return;
+
+            outlineContainer.innerHTML = '';
+
+            // Контуры лица и фигуры (стилизованные линии)
+            const contours = [
+                // Левая сторона лица
+                { top: '15%', left: '25%', width: '2px', height: '25%', rotate: '0deg' },
+                // Правая сторона лица
+                { top: '15%', left: '65%', width: '2px', height: '25%', rotate: '0deg' },
+                // Линия подбородка
+                { top: '42%', left: '28%', width: '40%', height: '1px', rotate: '0deg' },
+                // Глаза
+                { top: '25%', left: '35%', width: '8%', height: '1px', rotate: '0deg' },
+                { top: '25%', left: '55%', width: '8%', height: '1px', rotate: '0deg' },
+                // Плечи
+                { top: '55%', left: '15%', width: '35%', height: '1px', rotate: '-8deg' },
+                { top: '55%', left: '48%', width: '35%', height: '1px', rotate: '8deg' },
+                // Туловище
+                { top: '42%', left: '48%', width: '1px', height: '30%', rotate: '0deg' },
+                // Руки
+                { top: '58%', left: '12%', width: '2px', height: '20%', rotate: '-5deg' },
+                { top: '58%', left: '82%', width: '2px', height: '20%', rotate: '5deg' },
+                // Дополнительные линии
+                { top: '20%', left: '30%', width: '5%', height: '1px', rotate: '15deg' },
+                { top: '20%', left: '60%', width: '5%', height: '1px', rotate: '-15deg' },
+                { top: '35%', left: '33%', width: '6%', height: '1px', rotate: '0deg' },
+                { top: '35%', left: '57%', width: '6%', height: '1px', rotate: '0deg' },
+                { top: '48%', left: '42%', width: '2px', height: '5%', rotate: '0deg' },
+                { top: '70%', left: '30%', width: '15%', height: '1px', rotate: '5deg' },
+                { top: '70%', left: '52%', width: '15%', height: '1px', rotate: '-5deg' }
+            ];
+
+            contours.forEach(c => {
+                const line = document.createElement('div');
+                line.className = 'contour-line';
+                line.style.cssText = `
+                    top: ${c.top};
+                    left: ${c.left};
+                    width: ${c.width};
+                    height: ${c.height};
+                    transform: rotate(${c.rotate});
+                `;
+                outlineContainer.appendChild(line);
+            });
+        }
+
         // Модальные окна
         function openCharacterModal(character) {
             closeAllModals();
             const modal = document.getElementById('modal-' + character);
             if (modal) {
                 modal.classList.add('active');
+                if (character === 'akiharu') {
+                    setTimeout(generateOutlines, 100);
+                }
             }
         }
 
@@ -574,7 +724,6 @@
             });
         }
 
-        // Закрытие по клику на фон
         document.querySelectorAll('.modal-overlay').forEach(overlay => {
             overlay.addEventListener('click', function(e) {
                 if (e.target === overlay) {
@@ -583,7 +732,6 @@
             });
         });
 
-        // Закрытие по Escape
         document.addEventListener('keydown', function(e) {
             if (e.key === 'Escape') {
                 closeAllModals();
