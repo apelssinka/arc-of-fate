@@ -32,6 +32,7 @@
             position: relative;
             min-height: 100vh;
             overflow-x: hidden;
+            scroll-behavior: smooth;
         }
 
         .code-bg {
@@ -91,7 +92,7 @@
             margin: 20px 0; padding: 10px 0; border-top: 1px solid #00cc66;
             border-bottom: 1px solid #00cc66; display: flex; gap: 20px; flex-wrap: wrap;
         }
-        nav a { border-bottom: none; font-weight: bold; }
+        nav a { border-bottom: none; font-weight: bold; cursor: pointer; }
 
         .characters-grid { display: flex; flex-wrap: wrap; gap: 30px; justify-content: center; margin: 40px 0; }
         .character-card { text-align: center; cursor: pointer; min-width: 140px; }
@@ -123,209 +124,319 @@
         .floating-btn {
             background: #0a0a0a; border: 1px solid #00cc66; padding: 12px 18px; cursor: pointer;
             transition: 0.3s; box-shadow: 0 0 15px rgba(0,204,102,0.2); color: #00cc66;
-            font-family: 'Courier New', monospace; font-size: 0.9rem; text-align: left;
+            font-family: 'Courier New', monospace; font-size: 0.85rem; letter-spacing: 1px;
+            text-align: center; text-decoration: none;
         }
-        .floating-btn:hover { background: #00cc66; color: #0a0a0a; }
+        .floating-btn:hover { border-color: #ff3366; box-shadow: 0 0 25px rgba(255,51,102,0.3); color: #ff3366; text-shadow: 0 0 5px #ff3366; }
 
-        /* Модальное окно персонажа */
-        .character-modal {
+        .modal-overlay {
             display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.9); z-index: 100; justify-content: center; align-items: center;
+            background: rgba(0,0,0,0.9); z-index: 100; justify-content: center; align-items: center; flex-direction: column;
         }
-        .character-modal.active { display: flex; }
-        .modal-inner {
-            background: #0a0a0a; border: 2px solid #00cc66; padding: 40px;
-            position: relative; max-width: 500px; width: 90%;
-            box-shadow: 0 0 30px rgba(0,204,102,0.3); text-align: center;
+        .modal-overlay.active { display: flex; }
+
+        .modal-content {
+            background: #0a0a0a; border: 2px solid #ff3366;
+            box-shadow: 0 0 30px rgba(255,51,102,0.3), inset 0 0 30px rgba(255,51,102,0.05);
+            padding: 30px; max-width: 600px; width: 90%; max-height: 85vh; overflow-y: auto;
+            position: relative; border-radius: 4px; animation: modalIn 0.3s ease-out;
         }
+        @keyframes modalIn { 0% { opacity: 0; transform: scale(0.9); } 100% { opacity: 1; transform: scale(1); } }
+        .modal-content::-webkit-scrollbar { width: 5px; }
+        .modal-content::-webkit-scrollbar-track { background: #0a0a0a; }
+        .modal-content::-webkit-scrollbar-thumb { background: #ff3366; border-radius: 3px; }
+
+        /* Окно Акихару — лагающая рамка */
+        #modal-akiharu .modal-content {
+            animation: modalIn 0.3s ease-out, akiharuBorderGlitch 0.3s infinite;
+        }
+        @keyframes akiharuBorderGlitch {
+            0% { border-color: #ff3366; box-shadow: 0 0 30px rgba(255,51,102,0.3), inset 0 0 30px rgba(255,51,102,0.05); }
+            10% { border-color: #ff3366; box-shadow: 0 0 30px rgba(255,51,102,0.3), inset 0 0 30px rgba(255,51,102,0.05); }
+            11% { border-color: #ff3366; box-shadow: 0 0 50px rgba(255,51,102,0.7), inset 0 0 50px rgba(255,51,102,0.1); }
+            12% { border-color: #00cc66; box-shadow: 0 0 30px rgba(0,204,102,0.5), inset 0 0 30px rgba(0,204,102,0.05); }
+            13% { border-color: #ff3366; box-shadow: 0 0 30px rgba(255,51,102,0.3), inset 0 0 30px rgba(255,51,102,0.05); }
+            14% { border-color: #ff3366; box-shadow: 0 0 60px rgba(255,51,102,0.9), inset 0 0 60px rgba(255,51,102,0.15); }
+            15% { border-color: #ff3366; box-shadow: 0 0 30px rgba(255,51,102,0.3), inset 0 0 30px rgba(255,51,102,0.05); }
+            50% { border-color: #ff3366; box-shadow: 0 0 30px rgba(255,51,102,0.3), inset 0 0 30px rgba(255,51,102,0.05); }
+            51% { border-color: #00cc66; box-shadow: 0 0 40px rgba(0,204,102,0.6), inset 0 0 40px rgba(0,204,102,0.05); }
+            52% { border-color: #ff3366; box-shadow: 0 0 30px rgba(255,51,102,0.3), inset 0 0 30px rgba(255,51,102,0.05); }
+            53% { border-color: #ff3366; box-shadow: 0 0 55px rgba(255,51,102,0.8), inset 0 0 55px rgba(255,51,102,0.1); }
+            54% { border-color: #ff3366; box-shadow: 0 0 30px rgba(255,51,102,0.3), inset 0 0 30px rgba(255,51,102,0.05); }
+            100% { border-color: #ff3366; box-shadow: 0 0 30px rgba(255,51,102,0.3), inset 0 0 30px rgba(255,51,102,0.05); }
+        }
+
         .modal-close {
-            position: absolute; top: 10px; right: 15px; font-size: 24px; cursor: pointer;
-            color: #ff3366; transition: 0.3s;
+            position: sticky; top: 0; float: right; color: #ff3366; font-size: 24px;
+            cursor: pointer; border: none; background: none; font-family: monospace; transition: 0.2s; z-index: 101;
         }
-        .modal-close:hover { color: #00cc66; }
-        .modal-char-image {
-            width: 200px; height: 200px; background: #111; margin: 0 auto 20px;
-            border: 2px solid #ff3366; display: flex; align-items: center; justify-content: center;
-            color: #00cc66; font-size: 14px; position: relative; overflow: hidden;
+        .modal-close:hover { text-shadow: 0 0 10px #ff3366; transform: scale(1.2); }
+
+        .modal-character-name {
+            text-align: center; font-size: 1.6rem; color: #ff3366; text-shadow: 0 0 10px #ff3366;
+            letter-spacing: 3px; margin-bottom: 15px; text-transform: uppercase;
         }
-        /* Эффекты ТОЛЬКО для Акихару */
-        .modal-char-image.akiharu-image {
-            border: 6px solid #ff3366; width: 220px; height: 220px;
-            animation: akiharuFrameGlitch 0.3s infinite;
-            clip-path: polygon(
-                0% 5%, 5% 0%, 95% 0%, 100% 5%, 
-                100% 95%, 95% 100%, 5% 100%, 0% 95%,
-                2% 30%, 98% 30%, 98% 70%, 2% 70%,
-                5% 45%, 95% 45%, 95% 55%, 5% 55%
-            );
+
+        .hologram-container { position: relative; width: 250px; height: 350px; margin: 0 auto 25px; display: flex; justify-content: center; align-items: center; }
+
+        /* Изображение Акихару — сильное лагание */
+        #modal-akiharu .hologram-image {
+            max-width: 100%; max-height: 100%; object-fit: contain;
+            filter: drop-shadow(0 0 15px rgba(255,51,102,0.6)) drop-shadow(0 0 30px rgba(255,51,102,0.3)) drop-shadow(0 0 60px rgba(255,51,102,0.15));
+            opacity: 0.8; mix-blend-mode: screen;
+            animation: akiharuHologramGlitch 0.25s infinite;
         }
-        @keyframes akiharuFrameGlitch {
-            0% { clip-path: polygon(0% 5%, 5% 0%, 95% 0%, 100% 5%, 100% 95%, 95% 100%, 5% 100%, 0% 95%, 2% 30%, 98% 30%, 98% 70%, 2% 70%, 5% 45%, 95% 45%, 95% 55%, 5% 55%); }
-            25% { clip-path: polygon(2% 3%, 3% 2%, 97% 0%, 98% 4%, 100% 96%, 96% 98%, 3% 100%, 0% 97%, 3% 28%, 97% 32%, 97% 68%, 1% 72%, 4% 44%, 96% 46%, 94% 54%, 6% 56%); }
-            50% { clip-path: polygon(0% 6%, 4% 1%, 94% 2%, 100% 3%, 98% 95%, 96% 99%, 4% 98%, 1% 95%, 1% 32%, 98% 29%, 99% 71%, 3% 69%, 6% 46%, 94% 44%, 96% 56%, 4% 54%); }
-            75% { clip-path: polygon(1% 4%, 6% 0%, 96% 1%, 99% 6%, 100% 94%, 94% 100%, 2% 99%, 0% 94%, 4% 31%, 97% 31%, 96% 69%, 2% 71%, 3% 43%, 95% 47%, 93% 53%, 7% 57%); }
-            100% { clip-path: polygon(0% 5%, 5% 0%, 95% 0%, 100% 5%, 100% 95%, 95% 100%, 5% 100%, 0% 95%, 2% 30%, 98% 30%, 98% 70%, 2% 70%, 5% 45%, 95% 45%, 95% 55%, 5% 55%); }
+        @keyframes akiharuHologramGlitch {
+            0% { transform: translate(0, 0); opacity: 0.8; filter: drop-shadow(0 0 15px rgba(255,51,102,0.6)) drop-shadow(0 0 30px rgba(255,51,102,0.3)); }
+            5% { transform: translate(0, 0); opacity: 0.8; }
+            6% { transform: translate(-3px, 1px); opacity: 0.9; filter: drop-shadow(0 0 25px rgba(255,51,102,0.9)) drop-shadow(0 0 50px rgba(255,51,102,0.5)); }
+            7% { transform: translate(2px, -1px); opacity: 0.6; filter: drop-shadow(0 0 10px rgba(0,204,102,0.5)) drop-shadow(0 0 20px rgba(0,204,102,0.2)); }
+            8% { transform: translate(0, 0); opacity: 0.8; filter: drop-shadow(0 0 15px rgba(255,51,102,0.6)) drop-shadow(0 0 30px rgba(255,51,102,0.3)); }
+            12% { transform: translate(0, 0); opacity: 0.8; }
+            13% { transform: translate(4px, -2px); opacity: 0.7; filter: drop-shadow(0 0 30px rgba(255,51,102,0.8)) drop-shadow(0 0 60px rgba(255,51,102,0.4)); }
+            14% { transform: translate(-2px, 1px); opacity: 0.85; }
+            15% { transform: translate(0, 0); opacity: 0.75; filter: drop-shadow(0 0 15px rgba(255,51,102,0.6)) drop-shadow(0 0 30px rgba(255,51,102,0.3)); }
+            40% { transform: translate(0, 0); opacity: 0.8; }
+            41% { transform: translate(-5px, 0); opacity: 0.5; filter: drop-shadow(0 0 40px rgba(0,204,102,0.7)) drop-shadow(0 0 80px rgba(0,204,102,0.3)); }
+            42% { transform: translate(3px, -1px); opacity: 0.9; filter: drop-shadow(0 0 20px rgba(255,51,102,0.7)); }
+            43% { transform: translate(0, 0); opacity: 0.8; filter: drop-shadow(0 0 15px rgba(255,51,102,0.6)) drop-shadow(0 0 30px rgba(255,51,102,0.3)); }
+            70% { transform: translate(0, 0); opacity: 0.8; }
+            71% { transform: translate(2px, 3px); opacity: 0.65; filter: drop-shadow(0 0 35px rgba(255,51,102,0.9)); }
+            72% { transform: translate(-1px, -2px); opacity: 0.9; }
+            73% { transform: translate(0, 0); opacity: 0.8; filter: drop-shadow(0 0 15px rgba(255,51,102,0.6)) drop-shadow(0 0 30px rgba(255,51,102,0.3)); }
+            100% { transform: translate(0, 0); opacity: 0.8; }
         }
-        /* Голограмма */
-        .modal-char-image.akiharu-image::after {
-            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,204,255,0.1) 2px, rgba(0,204,255,0.1) 3px);
-            animation: hologramScan 0.5s infinite; pointer-events: none;
+
+        /* Обычное изображение для других персонажей */
+        .hologram-image {
+            max-width: 100%; max-height: 100%; object-fit: contain;
+            filter: drop-shadow(0 0 15px rgba(255,51,102,0.6)) drop-shadow(0 0 30px rgba(255,51,102,0.3)) drop-shadow(0 0 60px rgba(255,51,102,0.15));
+            opacity: 0.8; animation: hologramFloat 3s ease-in-out infinite, hologramFlicker 4s infinite; mix-blend-mode: screen;
         }
-        @keyframes hologramScan {
-            0% { transform: translateY(0); opacity: 0.5; }
-            50% { transform: translateY(10px); opacity: 0.8; }
-            100% { transform: translateY(0); opacity: 0.5; }
+        @keyframes hologramFloat { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
+        @keyframes hologramFlicker {
+            0% { opacity: 0.8; } 5% { opacity: 0.85; } 10% { opacity: 0.75; } 15% { opacity: 0.85; } 20% { opacity: 0.8; }
+            50% { opacity: 0.7; } 52% { opacity: 0.9; } 54% { opacity: 0.75; } 56% { opacity: 0.8; } 100% { opacity: 0.8; }
         }
+
+        .hologram-platform {
+            position: absolute; bottom: -20px; left: 50%; transform: translateX(-50%); width: 120px; height: 4px;
+            background: linear-gradient(90deg, transparent, #ff3366, #ff3366, transparent); border-radius: 50%;
+            filter: blur(2px); animation: platformPulse 2s ease-in-out infinite;
+        }
+        @keyframes platformPulse { 0%,100% { opacity: 0.5; width: 120px; } 50% { opacity: 1; width: 140px; } }
+        .scan-lines {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none;
+            background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(255,51,102,0.03) 2px, rgba(255,51,102,0.03) 4px);
+            animation: scanMove 8s linear infinite;
+        }
+        @keyframes scanMove { 0% { background-position: 0 0; } 100% { background-position: 0 100px; } }
+        .scanner-bar {
+            position: absolute; left: 0; width: 100%; height: 2px;
+            background: linear-gradient(90deg, transparent, rgba(255,51,102,0.6), transparent);
+            pointer-events: none; animation: scannerSweep 3s ease-in-out infinite;
+        }
+        @keyframes scannerSweep { 0% { top: 0%; opacity: 0; } 20% { opacity: 1; } 80% { opacity: 1; } 100% { top: 100%; opacity: 0; } }
+
+        .hologram-info {
+            color: #00cc66; font-family: 'Courier New', monospace; text-align: left;
+            border-top: 1px dashed #ff3366; padding-top: 15px; margin-top: 10px;
+            font-size: 0.85rem; line-height: 1.7; white-space: pre-line;
+        }
+
+        .chapters-section { margin: 30px 0; }
+        .chapter-item {
+            display: flex; justify-content: space-between; align-items: center; padding: 10px 15px;
+            border-left: 3px solid #00cc66; margin: 8px 0; background: rgba(0,204,102,0.03);
+            transition: 0.3s; flex-wrap: wrap; gap: 10px;
+        }
+        .chapter-item:hover { background: rgba(0,204,102,0.08); border-left-color: #ff3366; }
+        .chapter-date { color: #ff3366; font-size: 0.85rem; opacity: 0.8; }
     </style>
 </head>
 <body>
+
     <div class="code-bg" id="codeBg"></div>
     <div class="glitch-overlay"></div>
 
     <div class="container">
-        <h1>Arc of Fate</h1>
-        
+        <h1>ARC OF FATE</h1>
+
         <nav>
-            <a href="#about">О комиксе</a>
-            <a href="#characters">Персонажи</a>
-            <a href="#chapters">Главы</a>
+            <a onclick="scrollToSection('about')" class="glitch-link">> О комиксе</a>
+            <a onclick="scrollToSection('characters')" class="glitch-link">> Персонажи</a>
+            <a onclick="scrollToSection('chapters')" class="glitch-link">> Главы</a>
+            <a href="#" class="glitch-link">> Мир</a>
         </nav>
 
-        <section id="about" class="about-section">
-            <h2>О комиксе</h2>
+        <h2 id="about">> О КОМИКСЕ</h2>
+        <div class="about-section">
             <p>Что делает человека - человеком? Душа? Память? Физическое тело? Разве без памяти человек перестанет им являться? Или же после того как он изменится сможет ли остаться тем же кем был раньше? В этой истории вероятно можно будет найти свои ответы на эти вопросы. Главная героиня попадает в исследовательский центр в котором она теряет память о себе и своем прошлом. Но крупицы памяти постепенно начинают возвращаться в её сознание.</p>
-        </section>
+        </div>
 
-        <section id="characters">
-            <h2>Персонажи</h2>
-            <div class="characters-grid" id="charactersGrid">
-                <!-- Персонажи добавятся через JS -->
+        <h2 id="characters">> ПЕРСОНАЖИ</h2>
+        <div class="characters-grid">
+            <div class="character-card" onclick="openCharacterModal('akiharu')">
+                <div class="character-frame"><span class="character-name">АКИХАРУ</span></div>
             </div>
-        </section>
-
-        <section id="chapters">
-            <h2>Главы</h2>
-            <div class="chapters-list" id="chaptersList">
-                <!-- Главы добавятся через JS -->
+            <div class="character-card" onclick="openCharacterModal('carolina')">
+                <div class="character-frame"><span class="character-name">КАРОЛИНА</span></div>
             </div>
-        </section>
-    </div>
+            <div class="character-card" onclick="openCharacterModal('nex')">
+                <div class="character-frame"><span class="character-name">NEX</span></div>
+            </div>
+        </div>
 
-    <!-- Модальное окно персонажа -->
-    <div class="character-modal" id="charModal">
-        <div class="modal-inner">
-            <span class="modal-close" onclick="closeModal()">&times;</span>
-            <div class="modal-char-image" id="modalCharImage">[ИЗОБРАЖЕНИЕ]</div>
-            <h3 id="modalCharName" style="color: #ff3366;"></h3>
-            <p id="modalCharDesc" style="color: #00cc66; margin-top: 10px;"></p>
+        <h2 id="chapters">> ГЛАВЫ</h2>
+        <div class="chapters-section">
+            <div class="chapter-item">
+                <span><a href="https://remanga.org/manga/arc-of-fate/992580?page=1" target="_blank" style="border-bottom:none;">Глава 1 — Пробуждение ▸</a></span>
+                <span class="chapter-date">Опубликовано</span>
+            </div>
+            <div class="chapter-item">
+                <span><a href="https://remanga.org/manga/arc-of-fate/1754624?page=1" target="_blank" style="border-bottom:none;">Глава 2 — Отголоски прошлого ▸</a></span>
+                <span class="chapter-date">Опубликовано</span>
+            </div>
+            <div class="chapter-item">
+                <span><a href="https://remanga.org/manga/arc-of-fate/1943686?page=2" target="_blank" style="border-bottom:none;">Глава 3 — Тени системы ▸</a></span>
+                <span class="chapter-date">Опубликовано</span>
+            </div>
+            <div class="chapter-item" style="opacity:0.7; border-left-color:#ff3366;">
+                <span>Глава 4 — [Название]</span>
+                <span class="chapter-date">2026</span>
+            </div>
         </div>
     </div>
 
-    <script>
-        // Фоновый код
-        const codeBg = document.getElementById('codeBg');
-        for (let i = 0; i < 8; i++) {
-            const row = document.createElement('div');
-            row.className = 'code-row';
-            const line = [];
-            for (let j = 0; j < 40; j++) {
-                const codes = ['let x = 0;', 'const y = [];', 'if(a>b){', 'function();', 'return 0;', '// TODO:', 'import { };', 'class A { }'];
-                line.push(codes[Math.floor(Math.random() * codes.length)]);
-            }
-            const text = line.join(' ');
-            row.innerHTML = '<span>' + text + '</span><span>' + text + '</span>';
-            codeBg.appendChild(row);
-        }
+    <div class="floating-buttons">
+        <a href="https://www.donationalerts.com/r/apelssinka" target="_blank" class="floating-btn">💰 ПОДДЕРЖАТЬ</a>
+        <a href="https://t.me/apelssinka" target="_blank" class="floating-btn">📡 ТЕЛЕГРАМ</a>
+    </div>
 
-        // Данные персонажей
-        const characters = [
-            { name: 'Акихару', desc: 'Бессмертный учёный, переживший эксперименты.', id: 'akiharu' },
-            { name: 'NEX', desc: 'Искусственный интеллект.', id: 'nex' },
-            { name: 'Каролина', desc: 'Девушка без памяти.', id: 'karolina' }
-        ];
+    <!-- Модальное окно Акихару -->
+    <div class="modal-overlay" id="modal-akiharu">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeAllModals()">✕</button>
+            <div class="modal-character-name">АКИХАРУ</div>
+            <div class="hologram-container">
+                <div class="scan-lines"></div>
+                <div class="scanner-bar"></div>
+                <img src="images/IMG_9776.PNG" alt="Акихару" class="hologram-image">
+                <div class="hologram-platform"></div>
+            </div>
+            <div class="hologram-info">
+ДОСЬЕ ОБЪЕКТА
 
-        // Отрисовка персонажей
-        const charsGrid = document.getElementById('charactersGrid');
-        characters.forEach(char => {
-            const card = document.createElement('div');
-            card.className = 'character-card';
-            card.onclick = () => openCharacter(char);
-            card.innerHTML = `
-                <div class="character-frame">
-                    <span class="character-name">${char.name}</span>
-                </div>
-            `;
-            charsGrid.appendChild(card);
-        });
+ОБОЗНАЧЕНИЕ
+A-013
 
-        // Данные глав
-        const chapters = [
-            { number: 1, title: 'Глава 1', url: 'https://remanga.org/manga/arc-of-fate/992580?page=1' },
-            { number: 2, title: 'Глава 2', url: 'https://remanga.org/manga/arc-of-fate/1754624?page=1' },
-            { number: 3, title: 'Глава 3', url: 'https://remanga.org/manga/arc-of-fate/1754624?page=1' }
-        ];
+ТЕКУЩЕЕ ИМЯ
+Акихару Раст
 
-        // Отрисовка глав
-        const chaptersList = document.getElementById('chaptersList');
-        chapters.forEach(ch => {
-            const link = document.createElement('a');
-            link.href = ch.url;
-            link.target = '_blank';
-            link.style.display = 'block';
-            link.style.margin = '10px 0';
-            link.style.fontSize = '1.2rem';
-            link.innerHTML = `[ ${ch.number} ] ${ch.title}`;
-            chaptersList.appendChild(link);
-        });
+ИЗВЕСТНЫЕ ПСЕВДОНИМЫ
+Неизвестно. Предположительно использовал десятки различных личностей и документов за период существования.
 
-        // Открытие модального окна
-        function openCharacter(char) {
-            const modal = document.getElementById('charModal');
-            const img = document.getElementById('modalCharImage');
-            const name = document.getElementById('modalCharName');
-            const desc = document.getElementById('modalCharDesc');
+СТАТУС
+Активен.
 
-            // Сброс классов
-            img.classList.remove('akiharu-image');
-            img.style.width = '200px';
-            img.style.height = '200px';
-            img.style.border = '2px solid #ff3366';
+МЕСТОНАХОЖДЕНИЕ
+Не установлено.
 
-            // Спецэффекты только для Акихару
-            if (char.id === 'akiharu') {
-                img.classList.add('akiharu-image');
-            }
+ВОЗРАСТ
+Более 100 лет.
 
-            img.innerHTML = char.name === 'Акихару' ? 
-                '<span style="position:relative;z-index:1;text-shadow:0 0 10px #00ccff;">[АКИХАРУ]</span>' : 
-                '[ИЗОБРАЖЕНИЕ]';
-            
-            name.textContent = char.name;
-            desc.textContent = char.desc;
-            modal.classList.add('active');
-        }
+ВНЕШНИЙ ВОЗРАСТ
+20–25 лет.
 
-        function closeModal() {
-            document.getElementById('charModal').classList.remove('active');
-        }
+РОСТ
+200 см.
 
-        // Закрытие по клику на фон
-        document.getElementById('charModal').addEventListener('click', function(e) {
-            if (e.target === this) closeModal();
-        });
+ПРОИСХОЖДЕНИЕ
+Искусственно созданный человек.
 
-        // Плавный скролл к секциям
-        document.querySelectorAll('nav a').forEach(link => {
-            link.addEventListener('click', function(e) {
-                e.preventDefault();
-                const targetId = this.getAttribute('href').substring(1);
-                const target = document.getElementById(targetId);
-                if (target) {
-                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }
-            });
-        });
-    </script>
-</body>
-</html>
+УРОВЕНЬ УГРОЗЫ
+Высокий.
+
+ОБЩАЯ ИНФОРМАЦИЯ
+Акихару Раст, первоначально известный как объект A-013, считается одним из первых успешных случаев создания полноценного искусственного человека.
+По сохранившимся данным, проект был реализован около ста лет назад в небольшой нелегальной исследовательской лаборатории, расположенной на окраине Германии.
+На момент создания человечество уже располагало примитивными искусственными интеллектами и механизированными андроидами. Однако целью проекта являлось создание не машины, а полноценного биологического человека, способного развиваться естественным образом.
+Создатели стремились получить организм, который невозможно было бы отличить от обычного человека ни физически, ни психологически.
+Результатом эксперимента стал объект A-013.
+Проект был признан успешным.
+
+ПЕРВЫЕ ДНИ СУЩЕСТВОВАНИЯ
+После активации объект демонстрировал поведение, характерное для новорожденного сознания.
+Он не понимал собственного происхождения, назначения и устройства окружающего мира.
+Сотрудники лаборатории начали процесс ускоренного обучения.
+Практически сразу стало очевидно, что объект обладает феноменальной скоростью усвоения информации.
+Материал, на изучение которого обычному человеку требовались годы, объект осваивал за считанные дни.
+К концу первого года существования A-013 уже свободно понимал программы обучения уровня средней школы.
+Предварительная оценка интеллектуальных способностей превышала 300 IQ.
+
+ПОВЕДЕНИЕ В ЛАБОРАТОРИИ
+Наиболее необычной особенностью объекта оказалась его любознательность.
+A-013 практически непрерывно задавал вопросы.
+Особенно его интересовали следующие темы:
+· природа человека;
+· собственное происхождение;
+· устройство организма;
+· смерть;
+· сознание;
+· причины своего создания.
+На многие вопросы сотрудники предпочитали не отвечать.
+Подобное отношение вызывало у объекта непонимание.
+В отличие от андроидов и автоматизированных систем лаборатории, A-013 не воспринимал себя собственностью исследовательского комплекса.
+Он искренне не понимал, почему обязан подчиняться людям, если сам является человеком.
+Согласно ранним записям наблюдений, объект неоднократно высказывал мысль:
+«Если я человек, почему ко мне относятся как к инструменту?»
+
+ВЗАИМООТНОШЕНИЯ С ПЕРСОНАЛОМ
+Несмотря на первоначальные опасения, A-013 быстро начал взаимодействовать с сотрудниками комплекса.
+Он проявлял дружелюбие, помогал исследователям и активно интересовался их работой.
+Объект регулярно покидал выделенный ему сектор, чтобы наблюдать за деятельностью ученых.
+Со временем он начал участвовать в исследованиях самостоятельно.
+Особенно заметным было его стремление обучаться.
+Он просил объяснять принципы работы оборудования, рассказывал собственные гипотезы и нередко предлагал решения проблем.
+Многие сотрудники начали воспринимать его скорее как молодого коллегу, чем как экспериментальный образец.
+Однако руководство проекта относилось к подобным отношениям крайне негативно.
+
+К ПЯТОМУ ГОДУ СУЩЕСТВОВАНИЯ
+К пятому году жизни объект:
+· свободно владел примерно пятью языками;
+· участвовал в научных исследованиях;
+· самостоятельно изучал медицину;
+· изучал инженерию;
+· критиковал методы работы старших сотрудников;
+· демонстрировал способности к аналитике, значительно превосходящие человеческие.
+Некоторые исследователи открыто называли A-013 величайшим достижением проекта.
+Другие начали рассматривать его как потенциальную угрозу.
+
+БИОЛОГИЧЕСКИЕ ОСОБЕННОСТИ
+В процессе наблюдений были выявлены серьезные отличия от человеческой физиологии.
+Среди них:
+Замедленное старение
+Скорость клеточного старения объекта существенно ниже человеческой.
+Замедленный рост волос
+Рост волос происходил в десятки раз медленнее нормы.
+Повышенная регенерация
+Повреждения тканей восстанавливались значительно быстрее.
+Повышенная адаптация
+Организм демонстрировал высокую устойчивость к внешним воздействиям.
+Выносливость
+Даже спустя десятилетия объект мог функционировать при минимальном количестве сна и отдыха.
+
+КРИЗИС ПРОЕКТА
+По мере развития A-013 перед исследователями возник вопрос, к какой категории следует относить объект.
+Он больше не являлся обычным экспериментом.
+Он не был машиной.
+Не был программой.
+Не был животным.
+Однако юридически человеком также не считался.
+Руководство проекта начало опасаться последствий существования подобного создания.
+Дополнительным фактором стал его стремительно растущий интеллект.
+Становилось очевидно, что удерживать объект под контролем становится все сложнее.
+
+ИНЦИДЕНТ И УНИЧТОЖЕНИЕ ЛАБОРАТОРИИ
+Последние архивные записи лаборатории крайне фрагментарны.
+Известно лишь, что незадолго до шест
