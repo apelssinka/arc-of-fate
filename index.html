@@ -64,8 +64,6 @@
         .hologram-image{max-width:100%;max-height:100%;object-fit:contain;filter:drop-shadow(0 0 15px rgba(255,51,102,0.6)) drop-shadow(0 0 30px rgba(255,51,102,0.3)) drop-shadow(0 0 60px rgba(255,51,102,0.15));opacity:.8;animation:hologramFloat 3s ease-in-out infinite,hologramFlicker 4s infinite;mix-blend-mode:screen}
         @keyframes hologramFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
         @keyframes hologramFlicker{0%{opacity:.8}5%{opacity:.85}10%{opacity:.75}15%{opacity:.85}20%{opacity:.8}50%{opacity:.7}52%{opacity:.9}54%{opacity:.75}56%{opacity:.8}100%{opacity:.8}}
-        #modal-akiharu .hologram-image{animation:akiharuHologramGlitch .25s infinite}
-        @keyframes akiharuHologramGlitch{0%{transform:translate(0,0);opacity:.8;filter:drop-shadow(0 0 15px rgba(255,51,102,0.6))}5%{opacity:.8}6%{transform:translate(-3px,1px);opacity:.9;filter:drop-shadow(0 0 25px rgba(255,51,102,0.9))}7%{transform:translate(2px,-1px);opacity:.6;filter:drop-shadow(0 0 10px rgba(0,204,102,0.5))}8%{transform:translate(0,0);opacity:.8}12%{opacity:.8}13%{transform:translate(4px,-2px);opacity:.7;filter:drop-shadow(0 0 30px rgba(255,51,102,0.8))}14%{transform:translate(-2px,1px);opacity:.85}15%{transform:translate(0,0);opacity:.75}40%{opacity:.8}41%{transform:translate(-5px,0);opacity:.5;filter:drop-shadow(0 0 40px rgba(0,204,102,0.7))}42%{transform:translate(3px,-1px);opacity:.9}43%{transform:translate(0,0);opacity:.8}70%{opacity:.8}71%{transform:translate(2px,3px);opacity:.65;filter:drop-shadow(0 0 35px rgba(255,51,102,0.9))}72%{transform:translate(-1px,-2px);opacity:.9}73%{opacity:.8}100%{transform:translate(0,0);opacity:.8}}
         .hologram-platform{position:absolute;bottom:-20px;left:50%;transform:translateX(-50%);width:120px;height:4px;background:linear-gradient(90deg,transparent,#f36,#f36,transparent);border-radius:50%;filter:blur(2px);animation:platformPulse 2s ease-in-out infinite}
         @keyframes platformPulse{0%,100%{opacity:.5;width:120px}50%{opacity:1;width:140px}}
         .scan-lines{position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(255,51,102,0.03) 2px,rgba(255,51,102,0.03) 4px);animation:scanMove 8s linear infinite}
@@ -88,7 +86,6 @@
             <a onclick="scrollToSection('about')" class="glitch-link">> О комиксе</a>
             <a onclick="scrollToSection('characters')" class="glitch-link">> Персонажи</a>
             <a onclick="scrollToSection('chapters')" class="glitch-link">> Главы</a>
-            <a href="#" class="glitch-link">> Мир</a>
         </nav>
         <h2 id="about">> О КОМИКСЕ</h2>
         <div class="about-section"><p>Что делает человека - человеком? Душа? Память? Физическое тело? Разве без памяти человек перестанет им являться? Или же после того как он изменится сможет ли остаться тем же кем был раньше? В этой истории вероятно можно будет найти свои ответы на эти вопросы. Главная героиня попадает в исследовательский центр в котором она теряет память о себе и своем прошлом. Но крупицы памяти постепенно начинают возвращаться в её сознание.</p></div>
@@ -107,8 +104,8 @@
         </div>
     </div>
     <div class="floating-buttons">
-        <a href="https://www.donationalerts.com/r/apelssinka" target="_blank" class="floating-btn">💰 ПОДДЕРЖАТЬ</a>
-        <a href="https://t.me/apelssinka" target="_blank" class="floating-btn">📡 ТЕЛЕГРАМ</a>
+        <a href="https://www.donationalerts.com/r/lina31ty" target="_blank" class="floating-btn">💰 ПОДДЕРЖАТЬ</a>
+        <a href="https://t.me/ft_channel31" target="_blank" class="floating-btn">📡 ТЕЛЕГРАМ</a>
     </div>
     <div class="modal-overlay" id="modal-akiharu">
         <div class="modal-content">
@@ -145,7 +142,12 @@
         <div class="modal-content">
             <button class="modal-close" onclick="closeAllModals()">✕</button>
             <div class="modal-character-name">КАРОЛИНА</div>
-            <div class="hologram-container" style="width:250px;height:350px;border:1px dashed #f36;display:flex;align-items:center;justify-content:center;"><span style="color:#f36;font-size:.9rem;opacity:.6;">[ ГОЛОГРАММА ЗАГРУЖАЕТСЯ ]</span></div>
+            <div class="hologram-container">
+                <div class="scan-lines"></div>
+                <div class="scanner-bar"></div>
+                <img src="images/IMG_9775.PNG" alt="Каролина" class="hologram-image">
+                <div class="hologram-platform"></div>
+            </div>
             <div class="hologram-info"><p>Скоро...</p></div>
         </div>
     </div>
