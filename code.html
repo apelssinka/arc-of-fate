@@ -6,24 +6,13 @@
     <title>Arc of Fate</title>
     
     <meta name="yandex-verification" content="2f4b656845ef9f38" />
-    
-    <!-- Google Search Console подтверждение -->
     <meta name="google-site-verification" content="d62u_CfO-t">
     
-    <!-- СЕО и социальные мета-теги -->
     <meta name="description" content="Arc of Fate — мрачный киберпанк-комикс о девушке, пережившей эксперименты, и бессмертном учёном, который учится быть человеком.">
-    <meta name="keywords" content="Arc of Fate, Арка Судьбы, Акихару, NEX, Каролина, научная фантастика, сайт арка судьбы, комикс, apelsinka, apelssinka, апельсинка, киберпанк, веб-комикс, манга">
+    <meta name="keywords" content="Arc of Fate, Арка Судьбы, Акихару, NEX, Каролина, научная фантастика, сайт арка судьбы, комикс, киберпанк, веб-комикс, манга">
     <meta name="author" content="apelssinka">
-    <meta property="og:title" content="Arc of Fate — комикс">
-    <meta property="og:description" content="Киберпанк-комикс о девушке, пережившей эксперименты, и бессмертном учёном.">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://apelssinka.github.io/arc-of-fate/">
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Arc of Fate — комикс">
-    <meta name="twitter:description" content="Киберпанк-комикс о девушке, пережившей эксперименты, и бессмертном учёном.">
     
-    <!-- ФАВИКОН -->
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext x='50' y='80' font-size='70' text-anchor='middle' fill='%23ff3366' font-family='monospace'%3E⌇%3C/text%3E%3C/svg%3E">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://w3.org' viewBox='0 0 100 100'%3E%3Ctext x='50' y='80' font-size='70' text-anchor='middle' fill='%23ff3366' font-family='monospace'%3E⌇%3C/text%3E%3C/svg%3E">
     
     <style>
         * {
@@ -38,24 +27,19 @@
             font-family: 'Courier New', 'Fira Code', monospace;
             line-height: 1.6;
             padding: 20px;
-            position: relative;
             min-height: 100vh;
             overflow-x: hidden;
         }
 
-        /* Анимированный фон из кода — сетка, смещающаяся */
+        /* Анимированный фон */
         .code-bg {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            top: 0; left: 0; width: 100%; height: 100%;
             z-index: 0;
             overflow: hidden;
             font-family: monospace;
             font-size: 14px;
-            line-height: 1.4;
-            color: rgba(0, 204, 102, 0.25);
+            color: rgba(0, 204, 102, 0.1);
             pointer-events: none;
             display: flex;
             flex-direction: column;
@@ -63,60 +47,32 @@
         }
         .code-row {
             white-space: nowrap;
-            font-size: 14px;
-            display: flex;
-            gap: 20px;
-            margin-bottom: 10px;
-            animation: scrollRow 30s linear infinite;
+            animation: scrollRow 45s linear infinite;
             width: max-content;
-        }
-        .code-row span {
-            display: inline-block;
-            padding-right: 30px;
         }
         @keyframes scrollRow {
             0% { transform: translateX(0); }
             100% { transform: translateX(-50%); }
         }
 
-        /* Эффект помех поверх фона */
         .glitch-overlay {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: repeating-linear-gradient(
-                0deg,
-                rgba(0, 0, 0, 0.2) 0px,
-                rgba(0, 0, 0, 0.2) 2px,
-                transparent 2px,
-                transparent 6px
-            );
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: repeating-linear-gradient(0deg, rgba(0, 0, 0, 0.15) 0px, rgba(0, 0, 0, 0.15) 2px, transparent 2px, transparent 4px);
             pointer-events: none;
             z-index: 1;
-            animation: noise 0.15s infinite;
-        }
-        @keyframes noise {
-            0% { opacity: 0.3; transform: translateX(0); }
-            20% { opacity: 0.5; transform: translateX(-1px); }
-            40% { opacity: 0.3; transform: translateX(1px); }
-            60% { opacity: 0.6; transform: translateX(0); }
-            80% { opacity: 0.4; transform: translateX(2px); }
-            100% { opacity: 0.3; transform: translateX(-1px); }
         }
 
         .container {
             max-width: 1100px;
             margin: 0 auto;
-            background: rgba(10, 10, 10, 0.85);
+            background: rgba(10, 10, 10, 0.9);
             border: 1px solid #00cc66;
             box-shadow: 0 0 20px rgba(0, 204, 102, 0.2);
             padding: 30px;
             border-radius: 8px;
             position: relative;
             z-index: 2;
-            overflow: visible;
         }
 
         h1, h2, h3 {
@@ -128,39 +84,15 @@
             margin-bottom: 20px;
             font-weight: normal;
         }
+        h1 { font-size: 2.5rem; border-bottom: none; text-shadow: 0 0 5px #ff3366; }
 
-        h1 {
-            font-size: 2.5rem;
-            border-bottom: none;
-            text-shadow: 0 0 5px #ff3366;
-        }
-
-        a, .nav-link {
+        a {
             color: #00cc66;
             text-decoration: none;
             border-bottom: 1px dashed #00cc66;
             transition: 0.3s;
-            cursor: pointer;
         }
-        a:hover, .nav-link:hover {
-            color: #ff3366;
-            border-bottom-color: #ff3366;
-        }
-
-        /* Анимация помех при наведении на кнопки */
-        .glitch-link {
-            display: inline-block;
-            transition: 0.1s;
-        }
-        .glitch-link:hover {
-            animation: linkGlitch 0.2s infinite;
-            color: #ff3366;
-        }
-        @keyframes linkGlitch {
-            0% { text-shadow: -1px 0 #ff3366, 1px 0 #00cc66; }
-            50% { text-shadow: 1px 0 #ff3366, -1px 0 #00cc66; }
-            100% { text-shadow: 0 0 #ff3366; }
-        }
+        a:hover { color: #ff3366; border-bottom-color: #ff3366; }
 
         nav {
             margin: 20px 0;
@@ -169,14 +101,9 @@
             border-bottom: 1px solid #00cc66;
             display: flex;
             gap: 20px;
-            flex-wrap: wrap;
-        }
-        nav a {
-            border-bottom: none;
-            font-weight: bold;
         }
 
-        /* Сетка персонажей — прямоугольные глючащие рамки */
+        /* Общая сетка персонажей */
         .characters-grid {
             display: flex;
             flex-wrap: wrap;
@@ -187,34 +114,41 @@
         .character-card {
             text-align: center;
             cursor: pointer;
-            min-width: 140px;
+            width: 220px;
         }
         .character-frame {
-            padding: 15px 25px;
+            padding: 15px;
             border: 2px solid #00cc66;
-            background: #0a0a0a;
-            transition: all 0.2s;
-            animation: frameGlitch 4s infinite;
-        }
-        @keyframes frameGlitch {
-            0% { border-color: #00cc66; box-shadow: 0 0 0 rgba(0,204,102,0); }
-            95% { border-color: #00cc66; box-shadow: 0 0 0 rgba(0,204,102,0); }
-            96% { border-color: #ff3366; box-shadow: 0 0 5px #ff3366; transform: skewX(0.5deg); }
-            97% { border-color: #00cc66; box-shadow: 0 0 0 #ff3366; transform: skewX(-0.5deg); }
-            98% { border-color: #ff3366; box-shadow: 0 0 3px #ff3366; }
-            100% { border-color: #00cc66; box-shadow: 0 0 0 rgba(0,204,102,0); }
+            background: #050505;
+            transition: all 0.3s;
         }
         .character-card:hover .character-frame {
             border-color: #ff3366;
-            animation: frameHoverGlitch 0.2s infinite;
-            transform: scale(1.02);
+            box-shadow: 0 0 15px rgba(255,51,102,0.3);
+            transform: translateY(-2px);
         }
-        @keyframes frameHoverGlitch {
-            0% { border-color: #ff3366; transform: translateX(0); }
-            25% { border-color: #00cc66; transform: translateX(-1px); }
-            75% { border-color: #ff3366; transform: translateX(1px); }
-            100% { border-color: #ff3366; transform: translateX(0); }
+        
+        /* Превью в плашке (без эффекта проекции) */
+        .char-thumb-wrapper {
+            width: 100%;
+            height: 260px;
+            overflow: hidden;
+            background: #000;
+            position: relative;
+            margin-bottom: 15px;
+            border: 1px solid rgba(0, 204, 102, 0.3);
         }
+        .preview-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.9;
+            transition: 0.3s;
+        }
+        .character-card:hover .preview-img {
+            opacity: 1;
+        }
+
         .character-name {
             font-size: 1.1rem;
             letter-spacing: 2px;
@@ -222,343 +156,149 @@
             color: #00cc66;
             text-transform: uppercase;
         }
-        .character-card:hover .character-name {
-            color: #ff3366;
-            text-shadow: 0 0 3px #ff3366;
-        }
-        .character-desc {
+        .character-card:hover .character-name { color: #ff3366; }
+
+        /* ОКНО ПРОЕКЦИИ (HUD MODAL) */
+        .hud-modal {
             display: none;
-            margin-top: 15px;
-            padding: 15px;
-            background: #111;
-            border-left: 3px solid #ff3366;
-            text-align: left;
-            font-size: 0.9rem;
-            color: #bbffbb;
-        }
-        .character-desc.active {
-            display: block;
-        }
-
-        /* Расписание глав со ссылками */
-        .schedule {
-            margin: 40px 0;
-            border-left: 2px solid #ff3366;
-            padding-left: 20px;
-        }
-        .schedule p {
-            margin: 12px 0;
-        }
-        .schedule a {
-            text-decoration: none;
-            border-bottom: 1px dashed #00cc66;
-            transition: 0.2s;
-        }
-        .schedule a:hover {
-            color: #ff3366;
-            border-bottom-color: #ff3366;
-        }
-        .year {
-            color: #ff3366;
-            font-weight: bold;
-            margin-right: 8px;
-        }
-        .chapter-link {
-            margin-left: 10px;
-            font-size: 0.9rem;
-        }
-
-        .question-link {
-            color: #ff3366;
-            text-decoration: none;
-            border-bottom: 1px dashed #ff3366;
-            margin-left: 5px;
-        }
-        .question-link:hover {
-            color: #00cc66;
-            border-bottom-color: #00cc66;
-        }
-
-        footer {
-            text-align: center;
-            margin-top: 40px;
-            font-size: 0.8rem;
-            border-top: 1px solid #00cc66;
-            padding-top: 20px;
-        }
-
-        .tagline {
-            color: #ff3366;
-            font-style: italic;
-            margin: 10px 0;
-        }
-        pre {
-            background: #0a0a0a;
-            padding: 15px;
-            border: 1px solid #00cc66;
-            overflow-x: auto;
-            font-family: monospace;
-            white-space: pre-wrap;
-        }
-
-        /* Модальное окно — системная ошибка */
-        .modal {
-            display: flex;
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.85);
-            z-index: 1000;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(5, 5, 5, 0.96);
+            z-index: 100;
             justify-content: center;
             align-items: center;
-            font-family: monospace;
+            padding: 20px;
         }
-        .modal-content {
+        .hud-modal.active { display: flex; }
+        
+        .hud-window {
             background: #0a0a0a;
-            border: 2px solid #ff3366;
+            border: 2px solid #00cc66;
+            box-shadow: 0 0 35px rgba(0,204,102,0.25);
+            width: 100%;
+            max-width: 950px;
+            display: grid;
+            grid-template-columns: 1fr 1.6fr;
+            position: relative;
+        }
+        @media(max-width: 768px) {
+            .hud-window { grid-template-columns: 1fr; }
+        }
+
+        .hud-left {
+            border-right: 1px dashed rgba(0, 204, 102, 0.4);
             padding: 25px;
-            max-width: 400px;
-            text-align: center;
-            box-shadow: 0 0 20px rgba(255,51,102,0.5);
-            animation: modalGlitch 0.3s;
-        }
-        @keyframes modalGlitch {
-            0% { transform: translateX(-5px); opacity: 0; }
-            100% { transform: translateX(0); opacity: 1; }
-        }
-        .modal-content h3 {
-            color: #ff3366;
-            margin-bottom: 15px;
-            border-bottom: none;
-        }
-        .modal-buttons {
-            margin: 20px 0;
             display: flex;
-            gap: 15px;
-            justify-content: center;
+            flex-direction: column;
+            align-items: center;
+            background: rgba(0, 204, 102, 0.01);
         }
-        .modal-buttons a {
-            display: inline-block;
-            padding: 8px 16px;
-            background: #111;
-            border: 1px solid #00cc66;
-            color: #00cc66;
-            text-decoration: none;
-            transition: 0.2s;
+        .hud-right { padding: 30px; position: relative; }
+
+        /* Оболочка голограммы */
+        .big-hologram-wrapper {
+            width: 100%;
+            max-width: 280px;
+            height: 360px;
+            background: #000;
+            border: 2px solid #00cc66;
+            position: relative;
+            box-shadow: 0 0 20px rgba(0,204,102,0.15);
+            overflow: hidden;
         }
-        .modal-buttons a:hover {
-            background: #ff3366;
-            color: #000;
-            border-color: #ff3366;
+
+        /* ЭФФЕКТ ПРОЕКЦИИ ДЛЯ АРТА */
+        .hologram-projection {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            mix-blend-mode: screen; 
+            filter: brightness(1.25) contrast(1.3) sepia(1) hue-rotate(85deg) saturate(4.5);
+            opacity: 0.9;
+            animation: hologramGlitch 3.5s infinite alternate;
         }
-        .close-modal {
-            margin-top: 10px;
-            background: none;
-            border: 1px solid #ff3366;
+
+        /* Сетка развертки */
+        .scanline::after {
+            content: " ";
+            display: block;
+            position: absolute;
+            top: 0; left: 0; bottom: 0; right: 0;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.4) 50%);
+            background-size: 100% 4px;
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        /* Линия лазера */
+        .laser-line {
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            background: rgba(0, 204, 102, 0.6);
+            box-shadow: 0 0 10px #00cc66;
+            animation: scanLaser 4s linear infinite;
+            z-index: 3;
+            pointer-events: none;
+        }
+        @keyframes scanLaser {
+            0% { top: 0%; }
+            50% { top: 100%; }
+            100% { top: 0%; }
+        }
+
+        /* Глюки голограммы */
+        @keyframes hologramGlitch {
+            0% { transform: translate(0) skew(0deg); filter: brightness(1.2) hue-rotate(85deg) saturate(4.5); }
+            92% { transform: translate(0) skew(0deg); }
+            93% { transform: translate(-2px, 1px) skew(-2deg); filter: brightness(1.5) hue-rotate(60deg); }
+            95% { transform: translate(1px, -1px) skew(3deg); }
+            96% { transform: translate(0) skew(0deg); filter: brightness(1.2) hue-rotate(85deg) saturate(4.5); }
+            98% { transform: translate(3px, 0px) skew(-1deg); filter: brightness(1.4); }
+            100% { transform: translate(0) skew(0deg); }
+        }
+
+        .close-hud {
+            position: absolute;
+            top: 15px; right: 20px;
             color: #ff3366;
-            padding: 5px 15px;
+            font-size: 1.4rem;
             cursor: pointer;
-            font-family: monospace;
+            border: 1px solid #ff3366;
+            padding: 0px 8px;
+            background: transparent;
         }
-        .close-modal:hover {
-            background: #ff3366;
-            color: #000;
+        .close-hud:hover { background: #ff3366; color: #000; }
+
+        /* Поля данных HUD */
+        .bio-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 15px;
         }
-    </style>
-</head>
-<body>
-    <!-- Фон с кодом (числа и строки) -->
-    <div class="code-bg" id="code-bg"></div>
-    <div class="glitch-overlay"></div>
-
-    <!-- Модальное окно "Системная ошибка" -->
-    <div id="donateModal" class="modal" style="display: flex;">
-        <div class="modal-content">
-            <h3>[ СИСТЕМНАЯ ОШИБКА ]</h3>
-            <p>🔴 НЕОБХОДИМА ПОДДЕРЖКА СИСТЕМЫ</p>
-            <p>Без вашей помощи NEX не сможет завершить загрузку.</p>
-            <div class="modal-buttons">
-                <a href="https://new.donatepay.ru/@1422259" target="_blank">ПОДДЕРЖАТЬ</a>
-                <a href="https://t.me/ft_channel31" target="_blank">TELEGRAM</a>
-            </div>
-            <button class="close-modal" id="closeModal">[ ЗАКРЫТЬ ]</button>
-        </div>
-    </div>
-
-    <div class="container">
-        <h1>ARC OF FATE</h1>
-
-        <nav>
-            <a href="#" data-section="top" class="glitch-link">ГЛАВНАЯ</a>
-            <a href="#" data-section="chapters" class="glitch-link">ГЛАВЫ</a>
-            <a href="#" data-section="characters" class="glitch-link">ПЕРСОНАЖИ</a>
-            <a href="#" data-section="about" class="glitch-link">О ПРОЕКТЕ</a>
-        </nav>
-
-        <section id="top">
-            <h2>SISTEM</h2>
-            <pre>
-> NETWORK_EXTENSION_X_CORE: RELEASED
-> WATCHING. WAITING.
-            </pre>
-            <p>Добро пожаловать в мир, где боль становится топливом, а любовь — невозможной. Комикс о девушке, невольно ставшей экспериментом.</p> 
-            <p>Попав в реабилитационный центр, она не помнит своего прошлого, того как оказалась там, но постепенно в её памяти будут раскрываться моменты прошлого. Что же с ней произойдёт дальше?</p>
-        </section>
-
-        <section id="characters">
-            <h2>ПЕРСОНАЖИ</h2>
-            <div class="characters-grid">
-                <div class="character-card" data-target="desc-carolina">
-                    <div class="character-frame">
-                        <div class="character-name">КАРОЛИНА</div>
-                    </div>
-                </div>
-                <div class="character-card" data-target="desc-akiharu">
-                    <div class="character-frame">
-                        <div class="character-name">АКИХАРУ <a href="https://youtube.com/shorts/9SAsyuueQCI" target="_blank" class="question-link" style="font-size:0.9rem;">[???]</a></div>
-                    </div>
-                </div>
-                <div class="character-card" data-target="desc-void">
-                    <div class="character-frame">
-                        <div class="character-name">NEX</div>
-                    </div>
-                </div>
-                <div class="character-card" data-target="desc-hays">
-                    <div class="character-frame">
-                        <div class="character-name">ХАЙС</div>
-                    </div>
-                </div>
-                <div class="character-card" data-target="desc-lia">
-                    <div class="character-frame">
-                        <div class="character-name">ЛИА</div>
-                    </div>
-                </div>
-            </div>
-
-            <div id="desc-carolina" class="character-desc">
-                <strong>Каролина Блэк</strong><br>
-                Объект 0004. 21 год. Рост 164. Регенерирует, но какой ценой. 
-            </div>
-            <div id="desc-akiharu" class="character-desc">
-                <strong>Акихару Раст</strong><br>
-                ???
-            </div>
-            <div id="desc-void" class="character-desc">
-                <strong>NEX</strong><br>
-                [ERROR!:INSUFFICIENT_LEVEL_OF_ACCESS]
-            </div>
-            <div id="desc-hays" class="character-desc">
-                <strong>Доктор Хайс</strong><br>
-                42 года. Является главным Доктором и отличным нейрохирургом. Занимается исследованиями и управляет работой на основных секторах центра.
-            </div>
-            <div id="desc-lia" class="character-desc">
-                <strong>Лиа</strong><br>
-                Объект 0111. 17 лет. Не помнит своего прошлого и находится в центре.
-            </div>
-        </section>
-
-        <section id="chapters">
-            <h2>РАСПИСАНИЕ ВЫХОДА ГЛАВ</h2>
-            <div class="schedule">
-                <p><span class="year">2024</span> — CHAPTER 01: "begin" 
-                    <a href="https://remanga.org/manga/arc-of-fate/992580?page=1" target="_blank" class="chapter-link">[читать]</a>
-                </p>
-                <p><span class="year">2025</span> — CHAPTER 02: "who am I" 
-                    <a href="https://remanga.org/manga/arc-of-fate/1754624?page=1" target="_blank" class="chapter-link">[читать]</a>
-                </p>
-                <p><span class="year">2026</span> — CHAPTER 03: "new friend" 
-                    <a href="#" class="chapter-link">[скоро]</a>
-                </p>
-                <p><span class="year">2026</span> — CHAPTER 04: ??? 
-                    <a href="#" class="chapter-link">[скоро]</a>
-                </p>
-                <p><span class="year">202X</span> — CHAPTER 05: ??? 
-                    <a href="#" class="chapter-link">[скоро]</a>
-                </p>
-                <p><span class="year">202X</span> — CHAPTER 06: ??? 
-                    <a href="#" class="chapter-link">[скоро]</a>
-                </p>
-                <p><span class="year">202X</span> — CHAPTER 07: ??? 
-                    <a href="#" class="chapter-link">[скоро]</a>
-                </p>
-                <p><span class="year">202X</span> — CHAPTER 08: ??? 
-                    <a href="#" class="chapter-link">[скоро]</a>
-                </p>
-                <p><strong>FIRST ARC COMPLETION: 2028</strong></p>
-                <p>STATUS: IN_PROGRESS</p>
-            </div>
-        </section>
-
-        <footer id="about">
-            <p>автор: apelssinka | все права защищены | NEX</p>
-        </footer>
-    </div>
-
-    <script>
-        // Закрытие модального окна
-        document.getElementById('closeModal').addEventListener('click', function() {
-            document.getElementById('donateModal').style.display = 'none';
-        });
-
-        // Плавная прокрутка
-        document.querySelectorAll('nav a[data-section]').forEach(link => {
-            link.addEventListener('click', function(e) {
-                e.preventDefault();
-                const sectionId = this.getAttribute('data-section');
-                let element;
-                if (sectionId === 'top') {
-                    element = document.body;
-                } else {
-                    element = document.getElementById(sectionId);
-                }
-                if (element) {
-                    element.scrollIntoView({ behavior: 'smooth' });
-                }
-            });
-        });
-
-        // Клик по персонажам
-        const cards = document.querySelectorAll('.character-card');
-        cards.forEach(card => {
-            card.addEventListener('click', function(e) {
-                if (e.target.tagName === 'A') return;
-                const targetId = this.getAttribute('data-target');
-                const targetDesc = document.getElementById(targetId);
-                if (targetDesc) {
-                    document.querySelectorAll('.character-desc.active').forEach(desc => {
-                        if (desc !== targetDesc) desc.classList.remove('active');
-                    });
-                    targetDesc.classList.toggle('active');
-                }
-            });
-        });
-
-        // Анимированный фон — сетка кода
-        function generateCodeGrid() {
-            const bg = document.getElementById('code-bg');
-            if (!bg) return;
-            const rows = 12;
-            const symbols = [
-                '> VOID_NEXUS_CORE: ACTIVE', '> 01010101 10101010', '> [DATA_STREAM]', '> CAROLINA_BLAK.FATE: ERROR',
-                '> AKIHARU_RAST: OBSERVER', '> 3% SURVIVAL', '> ANOMALY DETECTED', '> SYSTEM: ARC_OF_FATE',
-                '> 01001110 01100101 01111000', '> [CRITICAL_ERROR]', '> LOCATION: UNKNOWN', '> VOID_NEXUS: RELEASED',
-                '> TIME_REMAINING: CORRUPTED', '> "SYSTEM ACTIVATED..."', '> PREDICTION_IMPOSSIBLE', '> 10101010 01010101'
-            ];
-            for (let i = 0; i < rows; i++) {
-                const row = document.createElement('div');
-                row.className = 'code-row';
-                let rowContent = '';
-                for (let j = 0; j < 25; j++) {
-                    const randomSymbol = symbols[Math.floor(Math.random() * symbols.length)];
-                    rowContent += `<span>${randomSymbol}</span>`;
-                }
-                row.innerHTML = rowContent;
-                bg.appendChild(row);
-            }
+        @media(max-width: 500px) {
+            .bio-grid { grid-template-columns: 1fr; }
         }
-        generateCodeGrid();
-    </script>
-</body>
-</html>
+        .bio-row {
+            font-size: 0.95rem;
+            border-bottom: 1px solid rgba(0, 204, 102, 0.15);
+            padding-bottom: 4px;
+        }
+        .bio-row.full-width {
+            grid-column: 1 / -1;
+        }
+        .bio-label { color: #ff3366; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 1px; display: block;}
+        
+        /* Стилизация скроллбара для досье */
+        .hologram-desc-box {
+            color: #a0ffb0; 
+            font-size: 0.9rem; 
+            line-height: 1.6; 
+            max-height: 240px; 
+            overflow-y: auto;
+            padding-right: 10px;
+            border-left: 2px solid rgba(0, 204, 102, 0.2);
+            padding-left: 10px;
+        }
+        .hologram-desc-box::-webkit-scrollbar {
