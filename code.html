@@ -32,7 +32,6 @@
             position: relative;
             min-height: 100vh;
             overflow-x: hidden;
-            scroll-behavior: smooth;
         }
 
         .code-bg {
@@ -120,67 +119,64 @@
 
         .about-section { margin: 30px 0; padding: 20px; background: rgba(0,204,102,0.02); border-left: 3px solid #ff3366; }
 
-        /* Модальное окно */
-        .modal { 
-            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
-            background: rgba(0,0,0,0.9); z-index: 100; justify-content: center; align-items: center; 
+        .floating-buttons { position: fixed; bottom: 20px; right: 20px; z-index: 50; display: flex; flex-direction: column; gap: 10px; }
+        .floating-btn {
+            background: #0a0a0a; border: 1px solid #00cc66; padding: 12px 18px; cursor: pointer;
+            transition: 0.3s; box-shadow: 0 0 15px rgba(0,204,102,0.2); color: #00cc66;
+            font-family: 'Courier New', monospace; font-size: 0.9rem; text-align: left;
         }
-        .modal.active { display: flex; }
-        .modal-content { 
-            background: #0a0a0a; border: 2px solid #00cc66; padding: 30px; max-width: 500px; 
-            width: 90%; position: relative; text-align: center; box-shadow: 0 0 30px rgba(0,204,102,0.3);
+        .floating-btn:hover { background: #00cc66; color: #0a0a0a; }
+
+        /* Модальное окно персонажа */
+        .character-modal {
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.9); z-index: 100; justify-content: center; align-items: center;
         }
-        .modal-image { 
-            width: 200px; height: 200px; margin: 0 auto; display: block; 
-            border: 2px solid #ff3366; position: relative;
+        .character-modal.active { display: flex; }
+        .modal-inner {
+            background: #0a0a0a; border: 2px solid #00cc66; padding: 40px;
+            position: relative; max-width: 500px; width: 90%;
+            box-shadow: 0 0 30px rgba(0,204,102,0.3); text-align: center;
         }
-        /* Глючная рамка для Акихару */
-        .modal-image.glitch-frame { 
-            animation: akiharuFrameGlitch 0.3s infinite; 
-            border: 3px solid #00cc66;
-        }
-        @keyframes akiharuFrameGlitch {
-            0% { border-color: #00cc66; transform: translate(0, 0); }
-            10% { border-color: #ff3366; transform: translate(-2px, -1px); }
-            20% { border-color: #00cc66; transform: translate(2px, 1px); }
-            30% { border-color: #ff3366; transform: translate(-1px, -2px); }
-            40% { border-color: #00cc66; transform: translate(1px, 2px); }
-            50% { border-color: #ff3366; transform: translate(-2px, 0); }
-            60% { border-color: #00cc66; transform: translate(2px, 0); }
-            70% { border-color: #ff3366; transform: translate(0, -2px); }
-            80% { border-color: #00cc66; transform: translate(0, 2px); }
-            90% { border-color: #ff3366; transform: translate(-3px, -1px); }
-            100% { border-color: #00cc66; transform: translate(0, 0); }
-        }
-        /* Голографический эффект для Акихару */
-        .modal-image.hologram-effect {
-            animation: hologramGlitch 0.5s infinite;
-            filter: hue-rotate(5deg) brightness(1.1);
-            opacity: 0.9;
-        }
-        @keyframes hologramGlitch {
-            0% { opacity: 0.9; filter: hue-rotate(0deg) brightness(1); }
-            25% { opacity: 0.7; filter: hue-rotate(10deg) brightness(1.2); transform: skewX(1deg); }
-            50% { opacity: 0.95; filter: hue-rotate(-5deg) brightness(0.9); }
-            75% { opacity: 0.6; filter: hue-rotate(5deg) brightness(1.3); transform: skewX(-1deg); }
-            100% { opacity: 0.9; filter: hue-rotate(0deg) brightness(1); }
-        }
-        .modal-close { 
-            position: absolute; top: 10px; right: 15px; font-size: 24px; cursor: pointer; 
-            color: #ff3366; transition: 0.3s; 
+        .modal-close {
+            position: absolute; top: 10px; right: 15px; font-size: 24px; cursor: pointer;
+            color: #ff3366; transition: 0.3s;
         }
         .modal-close:hover { color: #00cc66; }
-        .modal-title { color: #ff3366; font-size: 1.5rem; margin: 15px 0; text-transform: uppercase; }
-        .modal-info { color: #00cc66; margin: 10px 0; font-size: 0.9rem; }
-
-        .chapters-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin: 30px 0; }
-        .chapter-card {
-            background: rgba(0,204,102,0.02); border: 1px solid #00cc66; padding: 20px; 
-            text-align: center; transition: all 0.3s; cursor: pointer;
+        .modal-char-image {
+            width: 200px; height: 200px; background: #111; margin: 0 auto 20px;
+            border: 2px solid #ff3366; display: flex; align-items: center; justify-content: center;
+            color: #00cc66; font-size: 14px; position: relative; overflow: hidden;
         }
-        .chapter-card:hover { border-color: #ff3366; box-shadow: 0 0 15px rgba(255,51,102,0.3); transform: translateY(-2px); }
-        .chapter-number { font-size: 2rem; color: #ff3366; font-weight: bold; margin-bottom: 10px; }
-        .chapter-title { color: #00cc66; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; }
+        /* Эффекты ТОЛЬКО для Акихару */
+        .modal-char-image.akiharu-image {
+            border: 6px solid #ff3366; width: 220px; height: 220px;
+            animation: akiharuFrameGlitch 0.3s infinite;
+            clip-path: polygon(
+                0% 5%, 5% 0%, 95% 0%, 100% 5%, 
+                100% 95%, 95% 100%, 5% 100%, 0% 95%,
+                2% 30%, 98% 30%, 98% 70%, 2% 70%,
+                5% 45%, 95% 45%, 95% 55%, 5% 55%
+            );
+        }
+        @keyframes akiharuFrameGlitch {
+            0% { clip-path: polygon(0% 5%, 5% 0%, 95% 0%, 100% 5%, 100% 95%, 95% 100%, 5% 100%, 0% 95%, 2% 30%, 98% 30%, 98% 70%, 2% 70%, 5% 45%, 95% 45%, 95% 55%, 5% 55%); }
+            25% { clip-path: polygon(2% 3%, 3% 2%, 97% 0%, 98% 4%, 100% 96%, 96% 98%, 3% 100%, 0% 97%, 3% 28%, 97% 32%, 97% 68%, 1% 72%, 4% 44%, 96% 46%, 94% 54%, 6% 56%); }
+            50% { clip-path: polygon(0% 6%, 4% 1%, 94% 2%, 100% 3%, 98% 95%, 96% 99%, 4% 98%, 1% 95%, 1% 32%, 98% 29%, 99% 71%, 3% 69%, 6% 46%, 94% 44%, 96% 56%, 4% 54%); }
+            75% { clip-path: polygon(1% 4%, 6% 0%, 96% 1%, 99% 6%, 100% 94%, 94% 100%, 2% 99%, 0% 94%, 4% 31%, 97% 31%, 96% 69%, 2% 71%, 3% 43%, 95% 47%, 93% 53%, 7% 57%); }
+            100% { clip-path: polygon(0% 5%, 5% 0%, 95% 0%, 100% 5%, 100% 95%, 95% 100%, 5% 100%, 0% 95%, 2% 30%, 98% 30%, 98% 70%, 2% 70%, 5% 45%, 95% 45%, 95% 55%, 5% 55%); }
+        }
+        /* Голограмма */
+        .modal-char-image.akiharu-image::after {
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,204,255,0.1) 2px, rgba(0,204,255,0.1) 3px);
+            animation: hologramScan 0.5s infinite; pointer-events: none;
+        }
+        @keyframes hologramScan {
+            0% { transform: translateY(0); opacity: 0.5; }
+            50% { transform: translateY(10px); opacity: 0.8; }
+            100% { transform: translateY(0); opacity: 0.5; }
+        }
     </style>
 </head>
 <body>
@@ -191,9 +187,9 @@
         <h1>Arc of Fate</h1>
         
         <nav>
-            <a href="#about" onclick="scrollToSection('about')">О комиксе</a>
-            <a href="#characters" onclick="scrollToSection('characters')">Персонажи</a>
-            <a href="#chapters" onclick="scrollToSection('chapters')">Главы</a>
+            <a href="#about">О комиксе</a>
+            <a href="#characters">Персонажи</a>
+            <a href="#chapters">Главы</a>
         </nav>
 
         <section id="about" class="about-section">
@@ -203,181 +199,133 @@
 
         <section id="characters">
             <h2>Персонажи</h2>
-            <div class="characters-grid">
-                <div class="character-card" onclick="openCharacter('akiharu')">
-                    <div class="character-frame">
-                        <span class="character-name">Акихару</span>
-                    </div>
-                </div>
-                <div class="character-card" onclick="openCharacter('nex')">
-                    <div class="character-frame">
-                        <span class="character-name">NEX</span>
-                    </div>
-                </div>
-                <div class="character-card" onclick="openCharacter('karolina')">
-                    <div class="character-frame">
-                        <span class="character-name">Каролина</span>
-                    </div>
-                </div>
+            <div class="characters-grid" id="charactersGrid">
+                <!-- Персонажи добавятся через JS -->
             </div>
         </section>
 
         <section id="chapters">
             <h2>Главы</h2>
-            <div class="chapters-grid">
-                <div class="chapter-card" onclick="openChapter(1)">
-                    <div class="chapter-number">01</div>
-                    <div class="chapter-title">Глава 1</div>
-                </div>
-                <div class="chapter-card" onclick="openChapter(2)">
-                    <div class="chapter-number">02</div>
-                    <div class="chapter-title">Глава 2</div>
-                </div>
-                <div class="chapter-card" onclick="openChapter(3)">
-                    <div class="chapter-number">03</div>
-                    <div class="chapter-title">Глава 3</div>
-                </div>
+            <div class="chapters-list" id="chaptersList">
+                <!-- Главы добавятся через JS -->
             </div>
         </section>
     </div>
 
-    <!-- Модальное окно -->
-    <div class="modal" id="characterModal">
-        <div class="modal-content">
-            <span class="modal-close" onclick="closeModal()">✕</span>
-            <img class="modal-image" id="modalImage" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Crect width='200' height='200' fill='%230a0a0a'/%3E%3Ctext x='100' y='100' text-anchor='middle' dy='.3em' fill='%2300cc66' font-size='20' font-family='monospace'%3EИзображение%3C/text%3E%3C/svg%3E" alt="Персонаж">
-            <h3 class="modal-title" id="modalTitle"></h3>
-            <p class="modal-info" id="modalInfo"></p>
+    <!-- Модальное окно персонажа -->
+    <div class="character-modal" id="charModal">
+        <div class="modal-inner">
+            <span class="modal-close" onclick="closeModal()">&times;</span>
+            <div class="modal-char-image" id="modalCharImage">[ИЗОБРАЖЕНИЕ]</div>
+            <h3 id="modalCharName" style="color: #ff3366;"></h3>
+            <p id="modalCharDesc" style="color: #00cc66; margin-top: 10px;"></p>
         </div>
     </div>
 
     <script>
-        // Генерация фонового кода
+        // Фоновый код
         const codeBg = document.getElementById('codeBg');
-        const codeLines = [
-            'const fate = "unknown";',
-            'let memory = [];',
-            'function restore(data) { ... }',
-            'if (soul === "human") return true;',
-            'await mind.connect(nexus);',
-            'var experiment = new Subject();',
-            'protocol.initiate("AKIHARU");',
-            'system.override("emotions");',
-            'class Human extends Android { ... }',
-            'import { feelings } from "./heart";',
-            'const past = memory.load();',
-        ];
-
-        for (let i = 0; i < 5; i++) {
+        for (let i = 0; i < 8; i++) {
             const row = document.createElement('div');
             row.className = 'code-row';
-            let lineText = '';
-            for (let j = 0; j < 30; j++) {
-                const randomLine = codeLines[Math.floor(Math.random() * codeLines.length)];
-                lineText += randomLine + ' ';
+            const line = [];
+            for (let j = 0; j < 40; j++) {
+                const codes = ['let x = 0;', 'const y = [];', 'if(a>b){', 'function();', 'return 0;', '// TODO:', 'import { };', 'class A { }'];
+                line.push(codes[Math.floor(Math.random() * codes.length)]);
             }
-            row.innerHTML = `<span>${lineText}</span><span>${lineText}</span>`;
+            const text = line.join(' ');
+            row.innerHTML = '<span>' + text + '</span><span>' + text + '</span>';
             codeBg.appendChild(row);
         }
 
         // Данные персонажей
-        const characters = {
-            akiharu: {
-                name: 'Акихару',
-                info: 'Бессмертный учёный, переживший множество экспериментов. Ищет ответ на вопрос: что делает человека человеком?',
-                isAkiharu: true
-            },
-            nex: {
-                name: 'NEX',
-                info: 'Искусственный интеллект с собственным сознанием. Ключ к восстановлению памяти главной героини.',
-                isAkiharu: false
-            },
-            karolina: {
-                name: 'Каролина',
-                info: 'Главная героиня, потерявшая память в исследовательском центре. Пытается восстановить своё прошлое.',
-                isAkiharu: false
+        const characters = [
+            { name: 'Акихару', desc: 'Бессмертный учёный, переживший эксперименты.', id: 'akiharu' },
+            { name: 'NEX', desc: 'Искусственный интеллект.', id: 'nex' },
+            { name: 'Каролина', desc: 'Девушка без памяти.', id: 'karolina' }
+        ];
+
+        // Отрисовка персонажей
+        const charsGrid = document.getElementById('charactersGrid');
+        characters.forEach(char => {
+            const card = document.createElement('div');
+            card.className = 'character-card';
+            card.onclick = () => openCharacter(char);
+            card.innerHTML = `
+                <div class="character-frame">
+                    <span class="character-name">${char.name}</span>
+                </div>
+            `;
+            charsGrid.appendChild(card);
+        });
+
+        // Данные глав
+        const chapters = [
+            { number: 1, title: 'Глава 1', url: 'https://remanga.org/manga/arc-of-fate/992580?page=1' },
+            { number: 2, title: 'Глава 2', url: 'https://remanga.org/manga/arc-of-fate/1754624?page=1' },
+            { number: 3, title: 'Глава 3', url: 'https://remanga.org/manga/arc-of-fate/1754624?page=1' }
+        ];
+
+        // Отрисовка глав
+        const chaptersList = document.getElementById('chaptersList');
+        chapters.forEach(ch => {
+            const link = document.createElement('a');
+            link.href = ch.url;
+            link.target = '_blank';
+            link.style.display = 'block';
+            link.style.margin = '10px 0';
+            link.style.fontSize = '1.2rem';
+            link.innerHTML = `[ ${ch.number} ] ${ch.title}`;
+            chaptersList.appendChild(link);
+        });
+
+        // Открытие модального окна
+        function openCharacter(char) {
+            const modal = document.getElementById('charModal');
+            const img = document.getElementById('modalCharImage');
+            const name = document.getElementById('modalCharName');
+            const desc = document.getElementById('modalCharDesc');
+
+            // Сброс классов
+            img.classList.remove('akiharu-image');
+            img.style.width = '200px';
+            img.style.height = '200px';
+            img.style.border = '2px solid #ff3366';
+
+            // Спецэффекты только для Акихару
+            if (char.id === 'akiharu') {
+                img.classList.add('akiharu-image');
             }
-        };
 
-        function openCharacter(characterId) {
-            const character = characters[characterId];
-            const modal = document.getElementById('characterModal');
-            const modalImage = document.getElementById('modalImage');
-            const modalTitle = document.getElementById('modalTitle');
-            const modalInfo = document.getElementById('modalInfo');
-
-            modalTitle.textContent = character.name;
-            modalInfo.textContent = character.info;
-
-            // Сбрасываем классы
-            modalImage.classList.remove('glitch-frame', 'hologram-effect');
-
-            // Добавляем эффекты только для Акихару
-            if (character.isAkiharu) {
-                modalImage.classList.add('glitch-frame', 'hologram-effect');
-                // Добавляем задержку анимации для окна
-                modal.style.animation = 'modalGlitch 0.5s';
-                setTimeout(() => {
-                    modal.style.animation = '';
-                }, 500);
-            }
-
+            img.innerHTML = char.name === 'Акихару' ? 
+                '<span style="position:relative;z-index:1;text-shadow:0 0 10px #00ccff;">[АКИХАРУ]</span>' : 
+                '[ИЗОБРАЖЕНИЕ]';
+            
+            name.textContent = char.name;
+            desc.textContent = char.desc;
             modal.classList.add('active');
         }
 
         function closeModal() {
-            const modal = document.getElementById('characterModal');
-            modal.classList.remove('active');
-            // Очищаем эффекты при закрытии
-            const modalImage = document.getElementById('modalImage');
-            modalImage.classList.remove('glitch-frame', 'hologram-effect');
+            document.getElementById('charModal').classList.remove('active');
         }
 
-        function scrollToSection(sectionId) {
-            const section = document.getElementById(sectionId);
-            if (section) {
-                section.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            }
-        }
-
-        function openChapter(chapterNumber) {
-            const chapters = {
-                1: 'https://remanga.org/manga/arc-of-fate/992580?page=1',
-                2: 'https://remanga.org/manga/arc-of-fate/1754624?page=1',
-                3: 'https://remanga.org/manga/arc-of-fate/1754624?page=1'
-            };
-            
-            const url = chapters[chapterNumber];
-            if (url) {
-                window.open(url, '_blank');
-            }
-        }
-
-        // Закрытие модального окна по клику вне его
-        document.getElementById('characterModal').addEventListener('click', function(e) {
-            if (e.target === this) {
-                closeModal();
-            }
+        // Закрытие по клику на фон
+        document.getElementById('charModal').addEventListener('click', function(e) {
+            if (e.target === this) closeModal();
         });
 
-        // Добавляем стиль для глюка окна
-        const style = document.createElement('style');
-        style.textContent = `
-            @keyframes modalGlitch {
-                0% { transform: translate(0, 0); opacity: 1; }
-                10% { transform: translate(-3px, -2px); opacity: 0.8; }
-                20% { transform: translate(3px, 2px); opacity: 1; }
-                30% { transform: translate(-2px, -3px); opacity: 0.7; }
-                40% { transform: translate(2px, 3px); opacity: 1; }
-                50% { transform: translate(-4px, 0); opacity: 0.9; }
-                60% { transform: translate(4px, 0); opacity: 1; }
-                70% { transform: translate(0, -4px); opacity: 0.6; }
-                80% { transform: translate(0, 4px); opacity: 1; }
-                90% { transform: translate(-3px, -2px); opacity: 0.8; }
-                100% { transform: translate(0, 0); opacity: 1; }
-            }
-        `;
-        document.head.appendChild(style);
+        // Плавный скролл к секциям
+        document.querySelectorAll('nav a').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href').substring(1);
+                const target = document.getElementById(targetId);
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
     </script>
 </body>
 </html>
