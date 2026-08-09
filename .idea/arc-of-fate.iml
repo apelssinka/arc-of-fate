@@ -7,7 +7,7 @@
     <meta name="yandex-verification" content="2f4b656845ef9f38" />
     <meta name="google-site-verification" content="d62u_CfO-t">
     <meta name="description" content="Arc of Fate — мрачный киберпанк-комикс о девушке, пережившей эксперименты, и бессмертном учёном, который учится быть человеком.">
-    <meta name="keywords" content="Arc of Fate, Арка Судьбы, Акихару, NEX, Каролина, комикс, apelsinka, киберпанк, веб-комикс, манга">
+    <meta name="keywords" content="Arc of Fate, Арка Судьбы, Акихару, Рэй, Каролина, комикс, apelsinka, киберпанк, веб-комикс, манга">
     <meta name="author" content="apelssinka">
     <meta property="og:title" content="Arc of Fate — комикс">
     <meta property="og:description" content="Киберпанк-комикс о девушке, пережившей эксперименты, и бессмертном учёном.">
@@ -54,7 +54,24 @@
         @keyframes modalIn{0%{opacity:0;transform:scale(0.9)}100%{opacity:1;transform:scale(1)}}
         .modal-content::-webkit-scrollbar{width:5px}
         .modal-content::-webkit-scrollbar-track{background:#0a0a0a}
-        .modal-content::-webkit-scrollbar-thumb{background:#f36;border-radius:3px}
+        .modal-close{position:sticky;top:0;float:right;font-size:24px;cursor:pointer;border:none;background:none;font-family:monospace;transition:.2s;z-index:101}
+        .modal-close:hover{transform:scale(1.2)}
+        .modal-character-name{text-align:center;font-size:1.6rem;letter-spacing:3px;margin-bottom:15px;text-transform:uppercase}
+        .hologram-container{position:relative;width:250px;height:350px;margin:0 auto 25px;display:flex;justify-content:center;align-items:center}
+        .hologram-image{max-width:100%;max-height:100%;object-fit:contain;opacity:.8;animation:hologramFloat 3s ease-in-out infinite,hologramFlicker 4s infinite;mix-blend-mode:screen}
+        @keyframes hologramFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+        @keyframes hologramFlicker{0%{opacity:.8}5%{opacity:.85}10%{opacity:.75}15%{opacity:.85}20%{opacity:.8}50%{opacity:.7}52%{opacity:.9}54%{opacity:.75}56%{opacity:.8}100%{opacity:.8}}
+        .hologram-platform{position:absolute;bottom:-20px;left:50%;transform:translateX(-50%);width:120px;height:4px;border-radius:50%;filter:blur(2px);animation:platformPulse 2s ease-in-out infinite}
+        @keyframes platformPulse{0%,100%{opacity:.5;width:120px}50%{opacity:1;width:140px}}
+        .scan-lines{position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;animation:scanMove 8s linear infinite}
+        @keyframes scanMove{0%{background-position:0 0}100%{background-position:0 100px}}
+        .scanner-bar{position:absolute;left:0;width:100%;height:2px;pointer-events:none;animation:scannerSweep 3s ease-in-out infinite}
+        @keyframes scannerSweep{0%{top:0%;opacity:0}20%{opacity:1}80%{opacity:1}100%{top:100%;opacity:0}}
+        .hologram-info{color:#0c6;font-family:'Courier New',monospace;text-align:left;padding-top:15px;margin-top:10px;font-size:.85rem;line-height:1.7;white-space:pre-line}
+        .chapters-section{margin:30px 0}
+        .chapter-item{display:flex;justify-content:space-between;align-items:center;padding:10px 15px;border-left:3px solid #0c6;margin:8px 0;background:rgba(0,204,102,0.03);transition:.3s;flex-wrap:wrap;gap:10px}
+        .chapter-item:hover{background:rgba(0,204,102,0.08);border-left-color:#f36}
+        .chapter-date{color:#f36;font-size:.85rem;opacity:.8}
 
         /* Акихару — красный */
         #modal-akiharu .modal-content{border:2px solid #f36;box-shadow:0 0 30px rgba(255,51,102,0.3),inset 0 0 30px rgba(255,51,102,0.05);animation:modalIn .3s ease-out,akiharuBorderGlitch .3s infinite}
@@ -92,25 +109,6 @@
         #modal-rei .modal-close{color:#4dc4ff}
         #modal-rei .modal-close:hover{text-shadow:0 0 10px #4dc4ff}
         #modal-rei .hologram-info{border-top:1px dashed #4dc4ff}
-
-        .modal-close{position:sticky;top:0;float:right;font-size:24px;cursor:pointer;border:none;background:none;font-family:monospace;transition:.2s;z-index:101}
-        .modal-close:hover{transform:scale(1.2)}
-        .modal-character-name{text-align:center;font-size:1.6rem;letter-spacing:3px;margin-bottom:15px;text-transform:uppercase}
-        .hologram-container{position:relative;width:250px;height:350px;margin:0 auto 25px;display:flex;justify-content:center;align-items:center}
-        .hologram-image{max-width:100%;max-height:100%;object-fit:contain;opacity:.8;animation:hologramFloat 3s ease-in-out infinite,hologramFlicker 4s infinite;mix-blend-mode:screen}
-        @keyframes hologramFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
-        @keyframes hologramFlicker{0%{opacity:.8}5%{opacity:.85}10%{opacity:.75}15%{opacity:.85}20%{opacity:.8}50%{opacity:.7}52%{opacity:.9}54%{opacity:.75}56%{opacity:.8}100%{opacity:.8}}
-        .hologram-platform{position:absolute;bottom:-20px;left:50%;transform:translateX(-50%);width:120px;height:4px;border-radius:50%;filter:blur(2px);animation:platformPulse 2s ease-in-out infinite}
-        @keyframes platformPulse{0%,100%{opacity:.5;width:120px}50%{opacity:1;width:140px}}
-        .scan-lines{position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;animation:scanMove 8s linear infinite}
-        @keyframes scanMove{0%{background-position:0 0}100%{background-position:0 100px}}
-        .scanner-bar{position:absolute;left:0;width:100%;height:2px;pointer-events:none;animation:scannerSweep 3s ease-in-out infinite}
-        @keyframes scannerSweep{0%{top:0%;opacity:0}20%{opacity:1}80%{opacity:1}100%{top:100%;opacity:0}}
-        .hologram-info{color:#0c6;font-family:'Courier New',monospace;text-align:left;padding-top:15px;margin-top:10px;font-size:.85rem;line-height:1.7;white-space:pre-line}
-        .chapters-section{margin:30px 0}
-        .chapter-item{display:flex;justify-content:space-between;align-items:center;padding:10px 15px;border-left:3px solid #0c6;margin:8px 0;background:rgba(0,204,102,0.03);transition:.3s;flex-wrap:wrap;gap:10px}
-        .chapter-item:hover{background:rgba(0,204,102,0.08);border-left-color:#f36}
-        .chapter-date{color:#f36;font-size:.85rem;opacity:.8}
     </style>
 </head>
 <body>
@@ -188,7 +186,33 @@
                 <img src="images/IMG_9823.PNG" alt="Каролина" class="hologram-image">
                 <div class="hologram-platform"></div>
             </div>
-            <div class="hologram-info"><p>Скоро...</p></div>
+            <div class="hologram-info">ДОСЬЕ ОБЪЕКТА
+
+ОБОЗНАЧЕНИЕ: Объект №0004
+ТЕКУЩЕЕ ИМЯ: Каролина Блэк
+ПСЕВДОНИМ: Somnia
+СТАТУС: Разыскивается. Предположительно жива.
+МЕСТОНАХОЖДЕНИЕ: Не установлено.
+ВОЗРАСТ: 21 год (на момент поступления в лабораторию).
+РОСТ: 165 см.
+ПРОИСХОЖДЕНИЕ: Деревня Затерянные Холмы; затем ~3 года — г. Квантан (Регион 101).
+УРОВЕНЬ УГРОЗЫ: Неизвестен (предварительная оценка — высокий/критический).
+
+ОБЩАЯ ИНФОРМАЦИЯ: Объект №0004 — бывшая пациентка Клинической больницы «Алая Роза», переведённая в программу Red-C Protocol для экспериментальных исследований по клеточной регенерации. В ходе эксперимента введено вещество C-VII, вызвавшее аномальное ускорение регенерации тканей и необратимый дегенеративный процесс. Организм самостоятельно поддерживает жизнедеятельность за счёт циклического некроза и регенерации. Прогнозируемый срок жизни без вмешательства — около трёх месяцев. Юридически объект числится умершей.
+
+РАННИЕ ГОДЫ (0–18): Родилась в деревне Затерянные Холмы. Семейный климат — хронически напряжённый. Отец — источник постоянного страха. Старший брат (разница 10 лет) — фигура защиты; погиб, когда объекту было 10 лет. Потеря не прожита открыто — с этого момента фиксируется устойчивая эмоциональная отстранённость. Характеризовалась как замкнутая, необщительная. Сформированные паттерны: социальная мимикрия, высокая терпимость к боли, внешнее спокойствие в угрозе, заслуживание безопасности через удобность.
+
+ПЕРИОД ИЗОЛЯЦИИ (18–21): В 18 лет переехала в Квантан. Университет посещала редко. Социальные контакты не длились дольше месяца. Творчество (рисование) — единственный канал самовыражения. Эмоциональный профиль: утрата способности полноценно чувствовать; наиболее устойчивое чувство — страх («единственное честное чувство»). Оперирует набором закреплённых ролей; при невозможности применить роль — признаки диссоциации. Агрессия подавленная, разряжается точечно.
+
+ОБСТОЯТЕЛЬСТВА ПОСТУПЛЕНИЯ: Доставлена в больницу «Алая Роза» после наезда грузового ТС. Кома, клиническая смерть. Тело изъято в Закрытый Корпус №2. Инцидент рассматривается как возможно неслучайный.
+
+ЛАБОРАТОРНЫЙ ПЕРИОД (RED-C PROTOCOL): День 1–2 — приход в сознание, полная дезориентация. День 3 — контакт с Объектом №0011 (Лия); понимание, что находится в лаборатории; прекращение приёма препаратов. День 4–6 — тайные контакты с Лией, наблюдение за персоналом. День ХХ — получение информации о планах ликвидации Объекта №0011. [ДАННЫЕ УДАЛЕНЫ]. День 14 (27 июля) — взрыв, уничтоживший центральную часть Корпуса №2. Объект выведен с территории неизвестным лицом.
+
+МЕДИЦИНСКИЕ ПОКАЗАТЕЛИ: Прогноз выживаемости (первичный): 3%. Прогноз выживаемости (текущий): ~3 месяца. Скорость регенерации: выше нормы в 8 раз. Побочные эффекты C-VII: галлюцинации, голоса, кошмары с физическими проявлениями, дереализация, мигрени, постоянное мышечное напряжение, повышенная температура тела, быстрая истощаемость.
+
+ПСИХОЛОГИЧЕСКИЙ ПРОФИЛЬ: В ясности — связная речь и аналитическое мышление. В обострениях — потеря связи с реальностью. Противоречия: способна на эмпатию, но прячет её; нуждается в близости и боится её; хочет быть увиденной, но отворачивается. Привычки: садится спиной к стене; не отвечает сразу; рисует в стрессе; почти не смотрит в глаза; улыбается не к месту.
+
+ЗАКЛЮЧЕНИЕ: Уникальный случай спонтанного выживания. Тело, ежедневно умирающее и воскресающее. Открытые вопросы: личность спасшего; содержание удалённых данных; судьба Объекта №0011; возможный умысел в инциденте с ТС. Местонахождение не установлено.</div>
         </div>
     </div>
 
@@ -203,7 +227,31 @@
                 <img src="images/IMG_9824.PNG" alt="Рэй" class="hologram-image">
                 <div class="hologram-platform"></div>
             </div>
-            <div class="hologram-info"><p>Скоро...</p></div>
+            <div class="hologram-info">ДОСЬЕ СУБЪЕКТА
+
+ОБОЗНАЧЕНИЕ: Рэй Фрост (Ray Frost)
+ИЗВЕСТНЫЕ ПСЕВДОНИМЫ: «Призрак», «Агент 41» (статус удалён).
+СТАТУС: Активен. В розыске (Omnicorps / ОСЗ). Скрытен.
+МЕСТОНАХОЖДЕНИЕ: Нулевой сектор (Эклипс), окраинные жилые зоны.
+ВОЗРАСТ: 26 лет. РОСТ: 182 см.
+ПРОИСХОЖДЕНИЕ: Европа (человек).
+УРОВЕНЬ УГРОЗЫ: Средний (для корпоративных структур), низкий (для гражданских).
+
+ОБЩАЯ ИНФОРМАЦИЯ: Рэй Фрост — бывший оперативник Отдела Стратегической Защиты (ОСЗ), дезертир и беглец от корпорации Omnicorps. Высококлассный специалист, отвергнутый системой. Отличается выносливостью, дисциплиной и непредсказуемой тактикой выживания.
+
+РАННИЕ ГОДЫ: Вырос в тяжёлых условиях в Европе. Отец покинул семью после рождения младшего брата Феликса (разница 9 лет). С детства — глава семьи и кормилец. Работал на стройках, в автомастерских и на складах. Сформировал навыки: ремонт механизмов, ориентация в городских районах, уличные драки, рукопашный бой, стрессоустойчивость в условиях голода и недосыпа.
+
+ВОЕННАЯ СЛУЖБА: 18 лет — призыв. 19 лет — отбор на спецкурс, интенсивная подготовка (3–6 месяцев). 20–22 года — служба в ОСЗ. 23 года — Omnicorps проводит скрытую приватизацию ОСЗ. Рэй получает доступ к информации о незаконной деятельности. При попытке увольнения — угрозы в адрес брата Феликса. Рэй организует побег без документов и денег.
+
+ЖИЗНЬ В ЭКЛИПСЕ: Около года скитаний. Эклипс («Нулевой сектор») — закрытая территория для беглецов и изгоев. Рэй скрывает прошлое: местные жители ненавидят бывших сотрудников служб безопасности. Живёт на окраинах, минимизирует выходы за припасами, полагается на бартер.
+
+ОТНОШЕНИЕ К NEX И АКИХАРУ: Рэй столкнулся с системой NEX в Эклипсе. Испытывает глубокую идеологическую неприязнь: NEX используется для продажи оружия и контроля, превращая людей в ресурс. С Акихару Растом лично не знаком, но проецирует на него образ руководителя Omnicorps: абсолютная власть, цинизм, пренебрежение к человеческой жизни.
+
+ПСИХОЛОГИЧЕСКИЙ ПРОФИЛЬ: Основные черты: дисциплинированность, тактическое мышление, цинизм к структурам, крайняя гиперопека, практический интеллект, сдержанность, мрачный юмор. Ключевая мотивация: безопасность брата Феликса — единственный смысл существования. Готов на любое преступление или самопожертвование ради него. В стрессе пульс замедляется — признак профессиональной деформации. Чувства выражает через действия.
+
+ПРИВЫЧКИ И ОСОБЕННОСТИ: Не сидит спиной к двери. Спит рывками по 2–3 часа, часто в одежде. Вещи расположены в порядке «под руку» — позволяет собраться за 30 секунд. Бессознательно насвистывает мелодию из старого рекламного ролика (единственное тёплое воспоминание детства). Чинит технику как способ медитации.
+
+АНАЛИТИЧЕСКОЕ ЗАКЛЮЧЕНИЕ: Оружие, отказавшееся стрелять по приказу. Не обладает ресурсами Omnicorps или интеллектом Акихару, но компенсирует это абсолютной решимостью. Загнан в угол, лишён поддержки. Единственная уязвимость — брат. Именно она делает его самым опасным противником.</div>
         </div>
     </div>
 
