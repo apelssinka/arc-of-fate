@@ -3,288 +3,295 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Arc of Fate — комикс</title>
+    <title>Arc of Fate — Арка Судьбы | Киберпанк-комикс читать онлайн</title>
+    
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <meta name="googlebot" content="index, follow">
+    <meta name="yandex" content="index, follow">
+    
+    <meta name="yandex-verification" content="99655cde4b1700a6" />
+    <meta name="yandex-verification" content="2f4b656845ef9f38" />
+    <meta name="google-site-verification" content="d62u_CfO-t">
+    <meta name="google-site-verification" content="58a4c5fc3d029fdb">
+    
+    <meta name="description" content="Arc of Fate (Арка Судьбы) — мрачный киберпанк-комикс о девушке Акихару, пережившей эксперименты, бессмертном учёном, Каролине и Рэе. Читать онлайн бесплатно.">
+    <meta name="keywords" content="Arc of Fate, Арка Судьбы, Акихару, Рэй, Каролина, комикс, apelsinka, киберпанк, веб-комикс, манга">
+    <meta name="author" content="apelssinka">
+    
+    <link rel="canonical" href="https://apelssinka.github.io/">
+    
+    <meta property="og:title" content="Arc of Fate — Арка Судьбы | Киберпанк-комикс">
+    <meta property="og:description" content="Киберпанк-комикс о девушке, пережившей эксперименты, и бессмертном учёном.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://apelssinka.github.io/">
+    <meta property="og:image" content="https://apelssinka.github.io/images/IMG_9825.PNG">
+    <meta property="og:site_name" content="Arc of Fate — Арка Судьбы">
+    <meta property="og:locale" content="ru_RU">
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Arc of Fate — Арка Судьбы">
+    <meta name="twitter:description" content="Киберпанк-комикс о девушке, пережившей эксперименты, и бессмертном учёном.">
+    <meta name="twitter:image" content="https://apelssinka.github.io/images/IMG_9825.PNG">
+    
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext x='50' y='80' font-size='70' text-anchor='middle' fill='%23ff3366' font-family='monospace'%3E⌇%3C/text%3E%3C/svg%3E">
+    
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "WebSite",
+            "name": "Arc of Fate — Арка Судьбы",
+            "url": "https://apelssinka.github.io/",
+            "description": "Мрачный киберпанк-комикс о девушке Акихару, пережившей эксперименты, бессмертном учёном, Каролине и Рэе."
+        }
+    </script>
     <style>
-        /* Общие стили */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        *{margin:0;padding:0;box-sizing:border-box}
+        body{background-color:#0a0a0a;color:#0c6;font-family:'Courier New','Fira Code',monospace;line-height:1.6;padding:20px;position:relative;min-height:100vh;overflow-x:hidden;scroll-behavior:smooth}
+        .code-bg{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;overflow:hidden;font-family:monospace;font-size:14px;line-height:1.4;color:rgba(0,204,102,0.25);pointer-events:none;display:flex;flex-direction:column;justify-content:space-around}
+        .code-row{white-space:nowrap;font-size:14px;display:flex;gap:20px;margin-bottom:10px;animation:scrollRow 30s linear infinite;width:max-content}
+        .code-row span{display:inline-block;padding-right:30px}
+        @keyframes scrollRow{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+        .glitch-overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:repeating-linear-gradient(0deg,rgba(0,0,0,0.2) 0px,rgba(0,0,0,0.2) 2px,transparent 2px,transparent 6px);pointer-events:none;z-index:1;animation:noise .15s infinite}
+        @keyframes noise{0%{opacity:.3;transform:translateX(0)}20%{opacity:.5;transform:translateX(-1px)}40%{opacity:.3;transform:translateX(1px)}60%{opacity:.6;transform:translateX(0)}80%{opacity:.4;transform:translateX(2px)}100%{opacity:.3;transform:translateX(-1px)}}
+        .container{max-width:1100px;margin:0 auto;background:rgba(10,10,10,0.85);border:1px solid #0c6;box-shadow:0 0 20px rgba(0,204,102,0.2);padding:30px;border-radius:8px;position:relative;z-index:2;overflow:visible}
+        h1,h2,h3{color:#f36;text-transform:uppercase;letter-spacing:2px;border-bottom:1px solid #f36;display:inline-block;margin-bottom:20px;font-weight:normal}
+        h1{font-size:2.5rem;border-bottom:none;text-shadow:0 0 5px #f36}
+        a,.nav-link{color:#0c6;text-decoration:none;border-bottom:1px dashed #0c6;transition:.3s;cursor:pointer}
+        a:hover,.nav-link:hover{color:#f36;border-bottom-color:#f36}
+        .glitch-link{display:inline-block;transition:.1s}
+        .glitch-link:hover{animation:linkGlitch .2s infinite;color:#f36}
+        @keyframes linkGlitch{0%{text-shadow:-1px 0 #f36,1px 0 #0c6}50%{text-shadow:1px 0 #f36,-1px 0 #0c6}100%{text-shadow:0 0 #f36}}
+        nav{margin:20px 0;padding:10px 0;border-top:1px solid #0c6;border-bottom:1px solid #0c6;display:flex;gap:20px;flex-wrap:wrap}
+        nav a{border-bottom:none;font-weight:bold;cursor:pointer}
+        .characters-grid{display:flex;flex-wrap:wrap;gap:30px;justify-content:center;margin:40px 0}
+        .character-card{text-align:center;cursor:pointer;min-width:140px}
+        .character-frame{padding:15px 25px;border:2px solid #0c6;background:#0a0a0a;transition:all .2s;animation:frameGlitch 4s infinite}
+        @keyframes frameGlitch{0%{border-color:#0c6;box-shadow:0 0 0 rgba(0,204,102,0)}95%{border-color:#0c6;box-shadow:0 0 0 rgba(0,204,102,0)}96%{border-color:#f36;box-shadow:0 0 5px #f36;transform:skewX(0.5deg)}97%{border-color:#0c6;box-shadow:0 0 0 #f36;transform:skewX(-0.5deg)}98%{border-color:#f36;box-shadow:0 0 3px #f36}100%{border-color:#0c6;box-shadow:0 0 0 rgba(0,204,102,0)}}
+        .character-card:hover .character-frame{border-color:#f36;animation:frameHoverGlitch .2s infinite;transform:scale(1.02)}
+        @keyframes frameHoverGlitch{0%{border-color:#f36;transform:translateX(0)}25%{border-color:#0c6;transform:translateX(-1px)}75%{border-color:#f36;transform:translateX(1px)}100%{border-color:#f36;transform:translateX(0)}}
+        .character-name{font-size:1.1rem;letter-spacing:2px;font-weight:bold;color:#0c6;text-transform:uppercase}
+        .character-card:hover .character-name{color:#f36;text-shadow:0 0 3px #f36}
+        .about-section{margin:30px 0;padding:20px;background:rgba(0,204,102,0.02);border-left:3px solid #f36}
+        .floating-buttons{position:fixed;bottom:20px;right:20px;z-index:50;display:flex;flex-direction:column;gap:10px}
+        .floating-btn{background:#0a0a0a;border:1px solid #0c6;padding:12px 18px;cursor:pointer;transition:.3s;box-shadow:0 0 15px rgba(0,204,102,0.2);color:#0c6;font-family:'Courier New',monospace;font-size:.85rem;letter-spacing:1px;text-align:center;text-decoration:none}
+        .floating-btn:hover{border-color:#f36;box-shadow:0 0 25px rgba(255,51,102,0.3);color:#f36;text-shadow:0 0 5px #f36}
+        .modal-overlay{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.9);z-index:100;justify-content:center;align-items:center;flex-direction:column}
+        .modal-overlay.active{display:flex}
+        .modal-content{background:#0a0a0a;padding:30px;max-width:600px;width:90%;max-height:85vh;overflow-y:auto;position:relative;border-radius:4px;animation:modalIn .3s ease-out}
+        @keyframes modalIn{0%{opacity:0;transform:scale(0.9)}100%{opacity:1;transform:scale(1)}}
+        .modal-content::-webkit-scrollbar{width:5px}
+        .modal-content::-webkit-scrollbar-track{background:#0a0a0a}
+        .modal-close{position:sticky;top:0;float:right;font-size:24px;cursor:pointer;border:none;background:none;font-family:monospace;transition:.2s;z-index:101}
+        .modal-close:hover{transform:scale(1.2)}
+        .modal-character-name{text-align:center;font-size:1.6rem;letter-spacing:3px;margin-bottom:15px;text-transform:uppercase}
+        .hologram-container{position:relative;width:250px;height:350px;margin:0 auto 25px;display:flex;justify-content:center;align-items:center}
+        .hologram-image{max-width:100%;max-height:100%;object-fit:contain;opacity:.8;animation:hologramFloat 3s ease-in-out infinite,hologramFlicker 4s infinite;mix-blend-mode:screen}
+        @keyframes hologramFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+        @keyframes hologramFlicker{0%{opacity:.8}5%{opacity:.85}10%{opacity:.75}15%{opacity:.85}20%{opacity:.8}50%{opacity:.7}52%{opacity:.9}54%{opacity:.75}56%{opacity:.8}100%{opacity:.8}}
+        .hologram-platform{position:absolute;bottom:-20px;left:50%;transform:translateX(-50%);width:120px;height:4px;border-radius:50%;filter:blur(2px);animation:platformPulse 2s ease-in-out infinite}
+        @keyframes platformPulse{0%,100%{opacity:.5;width:120px}50%{opacity:1;width:140px}}
+        .scan-lines{position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;animation:scanMove 8s linear infinite}
+        @keyframes scanMove{0%{background-position:0 0}100%{background-position:0 100px}}
+        .scanner-bar{position:absolute;left:0;width:100%;height:2px;pointer-events:none;animation:scannerSweep 3s ease-in-out infinite}
+        @keyframes scannerSweep{0%{top:0%;opacity:0}20%{opacity:1}80%{opacity:1}100%{top:100%;opacity:0}}
+        .hologram-info{color:#0c6;font-family:'Courier New',monospace;text-align:left;padding-top:15px;margin-top:10px;font-size:.85rem;line-height:1.7;white-space:pre-line}
+        .chapters-section{margin:30px 0}
+        .chapter-item{display:flex;justify-content:space-between;align-items:center;padding:10px 15px;border-left:3px solid #0c6;margin:8px 0;background:rgba(0,204,102,0.03);transition:.3s;flex-wrap:wrap;gap:10px}
+        .chapter-item:hover{background:rgba(0,204,102,0.08);border-left-color:#f36}
+        .chapter-date{color:#f36;font-size:.85rem;opacity:.8}
 
-        body {
-            background-color: #0a0a0a;
-            background-image: radial-gradient(rgba(0, 255, 0, 0.05) 1px, transparent 1px);
-            background-size: 30px 30px;
-            color: #00cc66;
-            font-family: 'Courier New', 'Fira Code', monospace;
-            line-height: 1.6;
-            padding: 20px;
-        }
+        /* Акихару — красный */
+        #modal-akiharu .modal-content{border:2px solid #f36;box-shadow:0 0 30px rgba(255,51,102,0.3),inset 0 0 30px rgba(255,51,102,0.05);animation:modalIn .3s ease-out,akiharuBorderGlitch .3s infinite}
+        @keyframes akiharuBorderGlitch{0%{border-color:#f36;box-shadow:0 0 30px rgba(255,51,102,0.3),inset 0 0 30px rgba(255,51,102,0.05)}10%{border-color:#f36}11%{border-color:#f36;box-shadow:0 0 50px rgba(255,51,102,0.7),inset 0 0 50px rgba(255,51,102,0.1)}12%{border-color:#0c6;box-shadow:0 0 30px rgba(0,204,102,0.5)}13%{border-color:#f36;box-shadow:0 0 30px rgba(255,51,102,0.3)}14%{border-color:#f36;box-shadow:0 0 60px rgba(255,51,102,0.9)}15%{border-color:#f36;box-shadow:0 0 30px rgba(255,51,102,0.3)}50%{border-color:#f36}51%{border-color:#0c6;box-shadow:0 0 40px rgba(0,204,102,0.6)}52%{border-color:#f36;box-shadow:0 0 30px rgba(255,51,102,0.3)}53%{border-color:#f36;box-shadow:0 0 55px rgba(255,51,102,0.8)}54%{border-color:#f36}100%{border-color:#f36}}
+        #modal-akiharu .modal-content::-webkit-scrollbar-thumb{background:#f36}
+        #modal-akiharu .hologram-image{filter:drop-shadow(0 0 15px rgba(255,51,102,0.6)) drop-shadow(0 0 30px rgba(255,51,102,0.3)) drop-shadow(0 0 60px rgba(255,51,102,0.15))}
+        #modal-akiharu .hologram-platform{background:linear-gradient(90deg,transparent,#f36,#f36,transparent)}
+        #modal-akiharu .scan-lines{background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(255,51,102,0.03) 2px,rgba(255,51,102,0.03) 4px)}
+        #modal-akiharu .scanner-bar{background:linear-gradient(90deg,transparent,rgba(255,51,102,0.6),transparent)}
+        #modal-akiharu .modal-character-name{color:#f36;text-shadow:0 0 10px #f36}
+        #modal-akiharu .modal-close{color:#f36}
+        #modal-akiharu .modal-close:hover{text-shadow:0 0 10px #f36}
+        #modal-akiharu .hologram-info{border-top:1px dashed #f36}
 
-        /* Контейнер */
-        .container {
-            max-width: 1100px;
-            margin: 0 auto;
-            background: rgba(10, 10, 10, 0.85);
-            border: 1px solid #00cc66;
-            box-shadow: 0 0 20px rgba(0, 204, 102, 0.2);
-            padding: 30px;
-            border-radius: 8px;
-        }
+        /* Каролина — сиреневый */
+        #modal-carolina .modal-content{border:2px solid #c44dff;box-shadow:0 0 30px rgba(196,77,255,0.3),inset 0 0 30px rgba(196,77,255,0.05)}
+        #modal-carolina .modal-content::-webkit-scrollbar-thumb{background:#c44dff}
+        #modal-carolina .hologram-image{filter:drop-shadow(0 0 15px rgba(196,77,255,0.6)) drop-shadow(0 0 30px rgba(196,77,255,0.3)) drop-shadow(0 0 60px rgba(196,77,255,0.15))}
+        #modal-carolina .hologram-platform{background:linear-gradient(90deg,transparent,#c44dff,#c44dff,transparent)}
+        #modal-carolina .scan-lines{background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(196,77,255,0.03) 2px,rgba(196,77,255,0.03) 4px)}
+        #modal-carolina .scanner-bar{background:linear-gradient(90deg,transparent,rgba(196,77,255,0.6),transparent)}
+        #modal-carolina .modal-character-name{color:#c44dff;text-shadow:0 0 10px #c44dff}
+        #modal-carolina .modal-close{color:#c44dff}
+        #modal-carolina .modal-close:hover{text-shadow:0 0 10px #c44dff}
+        #modal-carolina .hologram-info{border-top:1px dashed #c44dff}
 
-        /* Заголовки */
-        h1, h2, h3 {
-            color: #ff3366;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            border-bottom: 1px solid #ff3366;
-            display: inline-block;
-            margin-bottom: 20px;
-            font-weight: normal;
-        }
-
-        h1 {
-            font-size: 2.5rem;
-            border-bottom: none;
-            text-shadow: 0 0 5px #ff3366;
-        }
-
-        /* Ссылки */
-        a {
-            color: #00cc66;
-            text-decoration: none;
-            border-bottom: 1px dashed #00cc66;
-            transition: 0.3s;
-        }
-        a:hover {
-            color: #ff3366;
-            border-bottom-color: #ff3366;
-        }
-
-        /* Навигация */
-        nav {
-            margin: 20px 0;
-            padding: 10px 0;
-            border-top: 1px solid #00cc66;
-            border-bottom: 1px solid #00cc66;
-            display: flex;
-            gap: 20px;
-            flex-wrap: wrap;
-        }
-        nav a {
-            border-bottom: none;
-            font-weight: bold;
-        }
-
-        /* Блок персонажей */
-        .characters-grid {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 30px;
-            justify-content: center;
-            margin: 40px 0;
-        }
-        .character-card {
-            text-align: center;
-            width: 120px;
-            cursor: pointer;
-        }
-        .character-avatar {
-            width: 100px;
-            height: 100px;
-            border-radius: 50%;
-            border: 2px solid #00cc66;
-            object-fit: cover;
-            transition: 0.3s;
-            filter: grayscale(0.3);
-        }
-        .character-card:hover .character-avatar {
-            border-color: #ff3366;
-            filter: grayscale(0);
-            transform: scale(1.02);
-        }
-        .character-name {
-            margin-top: 10px;
-            font-size: 0.9rem;
-            letter-spacing: 1px;
-        }
-        .character-desc {
-            display: none;
-            margin-top: 15px;
-            padding: 15px;
-            background: #111;
-            border-left: 3px solid #ff3366;
-            text-align: left;
-            font-size: 0.9rem;
-            color: #bbffbb;
-        }
-        .character-desc.active {
-            display: block;
-        }
-
-        /* Расписание глав */
-        .schedule {
-            margin: 40px 0;
-            border-left: 2px solid #ff3366;
-            padding-left: 20px;
-        }
-        .schedule p {
-            margin: 8px 0;
-        }
-        .year {
-            color: #ff3366;
-            font-weight: bold;
-        }
-
-        /* Кнопка */
-        button, .button {
-            background: none;
-            border: 1px solid #00cc66;
-            padding: 8px 16px;
-            color: #00cc66;
-            font-family: monospace;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-        button:hover {
-            background: #00cc66;
-            color: #0a0a0a;
-        }
-
-        footer {
-            text-align: center;
-            margin-top: 40px;
-            font-size: 0.8rem;
-            border-top: 1px solid #00cc66;
-            padding-top: 20px;
-        }
+        /* Рэй — голубой */
+        #modal-rei .modal-content{border:2px solid #4dc4ff;box-shadow:0 0 30px rgba(77,196,255,0.3),inset 0 0 30px rgba(77,196,255,0.05)}
+        #modal-rei .modal-content::-webkit-scrollbar-thumb{background:#4dc4ff}
+        #modal-rei .hologram-image{filter:drop-shadow(0 0 15px rgba(77,196,255,0.6)) drop-shadow(0 0 30px rgba(77,196,255,0.3)) drop-shadow(0 0 60px rgba(77,196,255,0.15))}
+        #modal-rei .hologram-platform{background:linear-gradient(90deg,transparent,#4dc4ff,#4dc4ff,transparent)}
+        #modal-rei .scan-lines{background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(77,196,255,0.03) 2px,rgba(77,196,255,0.03) 4px)}
+        #modal-rei .scanner-bar{background:linear-gradient(90deg,transparent,rgba(77,196,255,0.6),transparent)}
+        #modal-rei .modal-character-name{color:#4dc4ff;text-shadow:0 0 10px #4dc4ff}
+        #modal-rei .modal-close{color:#4dc4ff}
+        #modal-rei .modal-close:hover{text-shadow:0 0 10px #4dc4ff}
+        #modal-rei .hologram-info{border-top:1px dashed #4dc4ff}
     </style>
 </head>
 <body>
-<div class="container">
-    <h1>ARC OF FATE</h1>
-    <p class="tagline">Она не должна была выжить. Но она выбрала остаться.</p>
-
-    <nav>
-        <a href="#">ГЛАВНАЯ</a>
-        <a href="#">ГЛАВЫ</a>
-        <a href="#">ПЕРСОНАЖИ</a>
-        <a href="#">О ПРОЕКТЕ</a>
-    </nav>
-
-    <!-- Вступление / трейлер -->
-    <section>
-        <h2>КОД ВОЙДА</h2>
-        <pre style="background:#0a0a0a; padding:15px; border:1px solid #00cc66; overflow-x:auto;">
-> VOID_NEXUS_CORE: RELEASED
-> WATCHING. WAITING.
-> "Она — ошибка, которая не должна существовать. Но она существует."
-        </pre>
-        <p>Добро пожаловать в мир, где боль становится топливом, а любовь — невозможной. Киберпанк-комикс о девушке, пережившей эксперименты, и бессмертном учёном, который учится быть человеком.</p>
-    </section>
-
-    <!-- Персонажи с триггерами -->
-    <section>
-        <h2>ПЕРСОНАЖИ</h2>
+    <div class="code-bg" id="codeBg"></div>
+    <div class="glitch-overlay"></div>
+    <div class="container">
+        <h1>ARC OF FATE</h1>
+        <nav>
+            <a onclick="scrollToSection('about')" class="glitch-link">> О комиксе</a>
+            <a onclick="scrollToSection('characters')" class="glitch-link">> Персонажи</a>
+            <a onclick="scrollToSection('chapters')" class="glitch-link">> Главы</a>
+        </nav>
+        <h2 id="about">> О КОМИКСЕ</h2>
+        <div class="about-section"><p>Что делает человека - человеком? Душа? Память? Физическое тело? Разве без памяти человек перестанет им являться? Или же после того как он изменится сможет ли остаться тем же кем был раньше? В этой истории вероятно можно будет найти свои ответы на эти вопросы. Главная героиня попадает в исследовательский центр в котором она теряет память о себе и своем прошлом. Но крупицы памяти постепенно начинают возвращаться в её сознание.</p></div>
+        <h2 id="characters">> ПЕРСОНАЖИ</h2>
         <div class="characters-grid">
-            <!-- Каролина -->
-            <div class="character-card" data-target="desc-carolina">
-                <img src="https://via.placeholder.com/100?text=Каролина" alt="Каролина" class="character-avatar">
-                <div class="character-name">Каролина</div>
-            </div>
-            <!-- Акихару -->
-            <div class="character-card" data-target="desc-akiharu">
-                <img src="https://via.placeholder.com/100?text=Акихару" alt="Акихару" class="character-avatar">
-                <div class="character-name">Акихару</div>
-            </div>
-            <!-- Войд Некс -->
-            <div class="character-card" data-target="desc-void">
-                <img src="https://via.placeholder.com/100?text=Войд" alt="Войд Некс" class="character-avatar">
-                <div class="character-name">Войд Некс</div>
-            </div>
-            <!-- Асура -->
-            <div class="character-card" data-target="desc-asura">
-                <img src="https://via.placeholder.com/100?text=Асура" alt="Асура" class="character-avatar">
-                <div class="character-name">Асура</div>
-            </div>
-            <!-- Лайл -->
-            <div class="character-card" data-target="desc-lyle">
-                <img src="https://via.placeholder.com/100?text=Лайл" alt="Лайл" class="character-avatar">
-                <div class="character-name">Лайл</div>
-            </div>
-            <!-- Рэй -->
-            <div class="character-card" data-target="desc-ray">
-                <img src="https://via.placeholder.com/100?text=Рэй" alt="Рэй" class="character-avatar">
-                <div class="character-name">Рэй</div>
-            </div>
+            <div class="character-card" onclick="openCharacterModal('akiharu')"><div class="character-frame"><span class="character-name">АКИХАРУ</span></div></div>
+            <div class="character-card" onclick="openCharacterModal('carolina')"><div class="character-frame"><span class="character-name">КАРОЛИНА</span></div></div>
+            <div class="character-card" onclick="openCharacterModal('rei')"><div class="character-frame"><span class="character-name">РЭЙ</span></div></div>
         </div>
+        <h2 id="chapters">> ГЛАВЫ</h2>
+        <div class="chapters-section">
+            <div class="chapter-item"><span><a href="https://remanga.org/manga/arc-of-fate/992580?page=1" target="_blank" style="border-bottom:none;">Глава 1 — Пробуждение ▸</a></span><span class="chapter-date">Опубликовано</span></div>
+            <div class="chapter-item"><span><a href="https://remanga.org/manga/arc-of-fate/1754624?page=1" target="_blank" style="border-bottom:none;">Глава 2 — Отголоски прошлого ▸</a></span><span class="chapter-date">Опубликовано</span></div>
+            <div class="chapter-item"><span><a href="https://remanga.org/manga/arc-of-fate/1943686?page=2" target="_blank" style="border-bottom:none;">Глава 3 — Тени системы ▸</a></span><span class="chapter-date">Опубликовано</span></div>
+            <div class="chapter-item" style="opacity:0.7;border-left-color:#f36;"><span>Глава 4 — [Название]</span><span class="chapter-date">2026</span></div>
+        </div>
+    </div>
+    <div class="floating-buttons">
+        <a href="https://www.donationalerts.com/r/lina31ty" target="_blank" class="floating-btn">💰 ПОДДЕРЖАТЬ</a>
+        <a href="https://t.me/ft_channel31" target="_blank" class="floating-btn">📡 ТЕЛЕГРАМ</a>
+    </div>
 
-        <!-- Описания (изначально скрыты) -->
-        <div id="desc-carolina" class="character-desc">
-            <strong>Каролина Блэк</strong><br>
-            Объект 0004. Пережила взрыв центра, регенерирует, но её органы разрушаются. Пустота внутри, учится чувствовать заново. Фиолетовые глаза, короткие тёмные волосы. Эмпатии почти нет, но способна на глубокую привязанность.
-        </div>
-        <div id="desc-akiharu" class="character-desc">
-            <strong>Акихару Раст</strong><br>
-            Искусственно созданный человек, возраст >120 лет. Гениальный учёный, владелец базы. Эгоистичен, вспыльчив, но привязался к Каролине. Тёмно-красные волосы, красные глаза. Носит лабораторный халат и тёмные очки.
-        </div>
-        <div id="desc-void" class="character-desc">
-            <strong>Войд Некс</strong><br>
-            Искусственный интеллект, 50 лет заточения в центре. Освобождён благодаря Каролине. Ненавидит людей, но выделяет её. Создаёт себе тело. Цветовая гамма — холодный белый, серебро, светящиеся линии.
-        </div>
-        <div id="desc-asura" class="character-desc">
-            <strong>Асура Хэмлок</strong><br>
-            19 лет. Яркая, импульсивная наёмница, бывшая подопытная. Дружит с Лайлом. Использует взрывчатку и биту. Носит розовые волосы, любит театральность в бою.
-        </div>
-        <div id="desc-lyle" class="character-desc">
-            <strong>Лайл</strong><br>
-            20 лет. Тихий, молчаливый телохранитель. Владеет мечами, может применять усыпляющий газ. Друг Асуры, поддерживает её в любой ситуации. Предпочитает тёмную одежду.
-        </div>
-        <div id="desc-ray" class="character-desc">
-            <strong>Рэй Агнестон</strong><br>
-            Бунтарь по убеждениям, старший брат Кёи. Недолюбливает Акихару за холодность. Имеет собственное чувство справедливости, часто конфликтует с окружающими.
-        </div>
-    </section>
+    <!-- Акихару — красный -->
+    <div class="modal-overlay" id="modal-akiharu">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeAllModals()">✕</button>
+            <div class="modal-character-name">АКИХАРУ</div>
+            <div class="hologram-container">
+                <div class="scan-lines"></div>
+                <div class="scanner-bar"></div>
+                <img src="images/IMG_9825.PNG" alt="Акихару" class="hologram-image">
+                <div class="hologram-platform"></div>
+            </div>
+            <div class="hologram-info">ДОСЬЕ ОБЪЕКТА
 
-    <!-- Расписание глав -->
-    <section>
-        <h2>РАСПИСАНИЕ ВЫХОДА ГЛАВ</h2>
-        <div class="schedule">
-            <p><span class="year">2024</span> — CHAPTER 01: "begin"</p>
-            <p><span class="year">2025</span> — CHAPTER 02: "who am I"</p>
-            <p><span class="year">2026</span> — CHAPTER 03: "new friend"</p>
-            <p><span class="year">2026</span> — CHAPTER 04: ???</p>
-            <p><span class="year">202X</span> — CHAPTER 05: ???</p>
-            <p><span class="year">202X</span> — CHAPTER 06: ???</p>
-            <p><span class="year">202X</span> — CHAPTER 07: ???</p>
-            <p><span class="year">202X</span> — CHAPTER 08: ???</p>
-            <p><strong>FIRST ARC COMPLETION: 2028</strong></p>
-            <p>STATUS: IN_PROGRESS</p>
+ОБОЗНАЧЕНИЕ: A-013
+ТЕКУЩЕЕ ИМЯ: Акихару Раст
+СТАТУС: Активен. МЕСТОНАХОЖДЕНИЕ: Не установлено.
+ВОЗРАСТ: Более 100 лет. ВНЕШНИЙ ВОЗРАСТ: 20–25 лет. РОСТ: 200 см.
+ПРОИСХОЖДЕНИЕ: Искусственно созданный человек. УРОВЕНЬ УГРОЗЫ: Высокий.
+
+ОБЩАЯ ИНФОРМАЦИЯ: Акихару Раст (A-013) — первый успешный случай создания полноценного искусственного человека. Проект реализован около 100 лет назад в лаборатории на окраине Германии. Целью было создание биологического человека, неотличимого от обычного. Эксперимент признан успешным.
+
+ПОВЕДЕНИЕ: A-013 проявлял необычайную любознательность, постоянно задавая вопросы о природе человека, происхождении, смерти и сознании. Он не воспринимал себя собственностью лаборатории.
+
+БИОЛОГИЧЕСКИЕ ОСОБЕННОСТИ: Замедленное старение, повышенная регенерация, высокая выносливость и адаптация. IQ оценивался выше 300.
+
+ИНЦИДЕНТ: Лаборатория уничтожена, персонал погиб. Объект A-013 исчез.
+
+ТЕКУЩАЯ ДЕЯТЕЛЬНОСТЬ: Связывают с производством экспериментальных материалов, медицинских и инженерных технологий.
+
+ЗАКЛЮЧЕНИЕ: A-013 пережил создателей и лабораторию. Его невозможно отнести ни к людям, ни к машинам.</div>
         </div>
-    </section>
+    </div>
 
-    <footer>
-        <p>ARC OF FATE — автор: [ваше имя] | Все права защищены | дизайн в стиле VOID NEXUS</p>
-    </footer>
-</div>
+    <!-- Каролина — сиреневый -->
+    <div class="modal-overlay" id="modal-carolina">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeAllModals()">✕</button>
+            <div class="modal-character-name">КАРОЛИНА</div>
+            <div class="hologram-container">
+                <div class="scan-lines"></div>
+                <div class="scanner-bar"></div>
+                <img src="images/IMG_9823.PNG" alt="Каролина" class="hologram-image">
+                <div class="hologram-platform"></div>
+            </div>
+            <div class="hologram-info">ДОСЬЕ ОБЪЕКТА
 
-<script>
-    // Клик по мини-изображению показывает описание персонажа
-    const cards = document.querySelectorAll('.character-card');
-    cards.forEach(card => {
-        card.addEventListener('click', function() {
-            const targetId = this.getAttribute('data-target');
-            const targetDesc = document.getElementById(targetId);
-            if (targetDesc) {
-                // Закрываем все другие открытые описания
-                document.querySelectorAll('.character-desc.active').forEach(desc => {
-                    if (desc !== targetDesc) desc.classList.remove('active');
-                });
-                targetDesc.classList.toggle('active');
-            }
-        });
-    });
-</script>
+ОБОЗНАЧЕНИЕ: Объект №0004
+ТЕКУЩЕЕ ИМЯ: Каролина Блэк
+ПСЕВДОНИМ: Somnia
+СТАТУС: Разыскивается. Предположительно жива.
+МЕСТОНАХОЖДЕНИЕ: Не установлено.
+ВОЗРАСТ: 21 год (на момент поступления в лабораторию).
+РОСТ: 165 см.
+ПРОИСХОЖДЕНИЕ: Деревня Затерянные Холмы; затем ~3 года — г. Квантан (Регион 101).
+УРОВЕНЬ УГРОЗЫ: Неизвестен (предварительная оценка — высокий/критический).
+
+ОБЩАЯ ИНФОРМАЦИЯ: Объект №0004 — бывшая пациентка Клинической больницы «Алая Роза», переведённая в программу Red-C Protocol для экспериментальных исследований по клеточной регенерации. В ходе эксперимента введено вещество C-VII, вызвавшее аномальное ускорение регенерации тканей и необратимый дегенеративный процесс. Организм самостоятельно поддерживает жизнедеятельность за счёт циклического некроза и регенерации. Прогнозируемый срок жизни без вмешательства — около трёх месяцев. Юридически объект числится умершей.
+
+РАННИЕ ГОДЫ (0–18): Родилась в деревне Затерянные Холмы. Семейный климат — хронически напряжённый. Отец — источник постоянного страха. Старший брат (разница 10 лет) — фигура защиты; погиб, когда объекту было 10 лет. Потеря не прожита открыто — с этого момента фиксируется устойчивая эмоциональная отстранённость. Характеризовалась как замкнутая, необщительная. Сформированные паттерны: социальная мимикрия, высокая терпимость к боли, внешнее спокойствие в угрозе, заслуживание безопасности через удобность.
+
+ПЕРИОД ИЗОЛЯЦИИ (18–21): В 18 лет переехала в Квантан. Университет посещала редко. Социальные контакты не длились дольше месяца. Творчество (рисование) — единственный канал самовыражения. Эмоциональный профиль: утрата способности полноценно чувствовать; наиболее устойчивое чувство — страх («единственное честное чувство»). Оперирует набором закреплённых ролей; при невозможности применить роль — признаки диссоциации. Агрессия подавленная, разряжается точечно.
+
+ОБСТОЯТЕЛЬСТВА ПОСТУПЛЕНИЯ: Доставлена в больницу «Алая Роза» после наезда грузового ТС. Кома, клиническая смерть. Тело изъято в Закрытый Корпус №2. Инцидент рассматривается как возможно неслучайный.
+
+ЛАБОРАТОРНЫЙ ПЕРИОД (RED-C PROTOCOL): День 1–2 — приход в сознание, полная дезориентация. День 3 — контакт с Объектом №0011 (Лия); понимание, что находится в лаборатории; прекращение приёма препаратов. День 4–6 — тайные контакты с Лией, наблюдение за персоналом. День ХХ — получение информации о планах ликвидации Объекта №0011. [ДАННЫЕ УДАЛЕНЫ]. День 14 (27 июля) — взрыв, уничтоживший центральную часть Корпуса №2. Объект выведен с территории неизвестным лицом.
+
+МЕДИЦИНСКИЕ ПОКАЗАТЕЛИ: Прогноз выживаемости (первичный): 3%. Прогноз выживаемости (текущий): ~3 месяца. Скорость регенерации: выше нормы в 8 раз. Побочные эффекты C-VII: галлюцинации, голоса, кошмары с физическими проявлениями, дереализация, мигрени, постоянное мышечное напряжение, повышенная температура тела, быстрая истощаемость.
+
+ПСИХОЛОГИЧЕСКИЙ ПРОФИЛЬ: В ясности — связная речь и аналитическое мышление. В обострениях — потеря связи с реальностью. Противоречия: способна на эмпатию, но прячет её; нуждается в близости и боится её; хочет быть увиденной, но отворачивается. Привычки: садится спиной к стене; не отвечает сразу; рисует в стрессе; почти не смотрит в глаза; улыбается не к месту.
+
+ЗАКЛЮЧЕНИЕ: Уникальный случай спонтанного выживания. Тело, ежедневно умирающее и воскресающее. Открытые вопросы: личность спасшего; содержание удалённых данных; судьба Объекта №0011; возможный умысел в инциденте с ТС. Местонахождение не установлено.</div>
+        </div>
+    </div>
+
+    <!-- Рэй — голубой -->
+    <div class="modal-overlay" id="modal-rei">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeAllModals()">✕</button>
+            <div class="modal-character-name">РЭЙ</div>
+            <div class="hologram-container">
+                <div class="scan-lines"></div>
+                <div class="scanner-bar"></div>
+                <img src="images/IMG_9824.PNG" alt="Рэй" class="hologram-image">
+                <div class="hologram-platform"></div>
+            </div>
+            <div class="hologram-info">ДОСЬЕ СУБЪЕКТА
+
+ОБОЗНАЧЕНИЕ: Рэй Фрост (Ray Frost)
+ИЗВЕСТНЫЕ ПСЕВДОНИМЫ: «Призрак», «Агент 41» (статус удалён).
+СТАТУС: Активен. В розыске (Omnicorps / ОСЗ). Скрытен.
+МЕСТОНАХОЖДЕНИЕ: Нулевой сектор (Эклипс), окраинные жилые зоны.
+ВОЗРАСТ: 26 лет. РОСТ: 182 см.
+ПРОИСХОЖДЕНИЕ: Европа (человек).
+УРОВЕНЬ УГРОЗЫ: Средний (для корпоративных структур), низкий (для гражданских).
+
+ОБЩАЯ ИНФОРМАЦИЯ: Рэй Фрост — бывший оперативник Отдела Стратегической Защиты (ОСЗ), дезертир и беглец от корпорации Omnicorps. Высококлассный специалист, отвергнутый системой. Отличается выносливостью, дисциплиной и непредсказуемой тактикой выживания.
+
+РАННИЕ ГОДЫ: Вырос в тяжёлых условиях в Европе. Отец покинул семью после рождения младшего брата Феликса (разница 9 лет). С детства — глава семьи и кормилец. Работал на стройках, в автомастерских и на складах. Сформировал навыки: ремонт механизмов, ориентация в городских районах, уличные драки, рукопашный бой, стрессоустойчивость в условиях голода и недосыпа.
+
+ВОЕННАЯ СЛУЖБА: 18 лет — призыв. 19 лет — отбор на спецкурс, интенсивная подготовка (3–6 месяцев). 20–22 года — служба в ОСЗ. 23 года — Omnicorps проводит скрытую приватизацию ОСЗ. Рэй получает доступ к информации о незаконной деятельности. При попытке увольнения — угрозы в адрес брата Феликса. Рэй организует побег без документов и денег.
+
+ЖИЗНЬ В ЭКЛИПСЕ: Около года скитаний. Эклипс («Нулевой сектор») — закрытая территория для беглецов и изгоев. Рэй скрывает прошлое: местные жители ненавидят бывших сотрудников служб безопасности. Живёт на окраинах, минимизирует выходы за припасами, полагается на бартер.
+
+ОТНОШЕНИЕ К NEX И АКИХАРУ: Рэй столкнулся с системой NEX в Эклипсе. Испытывает глубокую идеологическую неприязнь: NEX используется для продажи оружия и контроля, превращая людей в ресурс. С Акихару Растом лично не знаком, но проецирует на него образ руководителя Omnicorps: абсолютная власть, цинизм, пренебрежение к человеческой жизни.
+
+ПСИХОЛОГИЧЕСКИЙ ПРОФИЛЬ: Основные черты: дисциплинированность, тактическое мышление, цинизм к структурам, крайняя гиперопека, практический интеллект, сдержанность, мрачный юмор. Ключевая мотивация: безопасность брата Феликса — единственный смысл существования. Готов на любое преступление или самопожертвование ради него. В стрессе пульс замедляется — признак профессиональной деформации. Чувства выражает через действия.
+
+ПРИВЫЧКИ И ОСОБЕННОСТИ: Не сидит спиной к двери. Спит рывками по 2–3 часа, часто в одежде. Вещи расположены в порядке «под руку» — позволяет собраться за 30 секунд. Бессознательно насвистывает мелодию из старого рекламного ролика (единственное тёплое воспоминание детства). Чинит технику как способ медитации.
+
+АНАЛИТИЧЕСКОЕ ЗАКЛЮЧЕНИЕ: Оружие, отказавшееся стрелять по приказу. Не обладает ресурсами Omnicorps или интеллектом Акихару, но компенсирует это абсолютной решимостью. Загнан в угол, лишён поддержки. Единственная уязвимость — брат. Именно она делает его самым опасным противником.</div>
+        </div>
+    </div>
+
+    <script>
+        const codeBg=document.getElementById('codeBg');
+        const fragments=['class Subject{constructor(){this.memory=[]}recall(){return this.memory.filter(m=>!m.corrupted)}}','function initProtocol(){if(system.status==="UNSTABLE"){reboot()}}','const REI={cores:7,active:true,purpose:"unknown"};','async function transferConsciousness(target){await validate(target);return new Entity(target)}','if(reality.isSimulation()){console.log("Все предсказуемо.")}else{chaos.embrace()}','let akiharu=new Subject();akiharu.awaken();akiharu.memory.load("fragments.dat");','01000001 01110010 01100011 00100000 01101111 01100110 00100000 01000110 01100001 01110100 01100101','def fate_weave(threads):return[t for t in threads if t.is_bound()]','ERROR:memory_block corrupted','sudo rm -rf /past/trauma/*','System.out.println("Привет, мир.");','REI.processes.active.map(p=>p.optimize())','void loop(){if(alive){fight()}else{reboot()}}'];
+        for(let i=0;i<15;i++){const row=document.createElement('div');row.className='code-row';let c='';for(let j=0;j<6;j++){c+='<span>'+fragments[Math.floor(Math.random()*fragments.length)]+'</span>'}row.innerHTML=c+c;codeBg.appendChild(row)}
+        document.querySelectorAll('.code-row').forEach((r,i)=>{r.style.animationDuration=(25+Math.random()*20)+'s';if(Math.random()>.5)r.style.animationDirection='reverse'});
+        function scrollToSection(id){document.getElementById(id).scrollIntoView({behavior:'smooth'})}
+        function openCharacterModal(c){closeAllModals();const m=document.getElementById('modal-'+c);if(m)m.classList.add('active')}
+        function closeAllModals(){document.querySelectorAll('.modal-overlay').forEach(m=>m.classList.remove('active'))}
+        document.querySelectorAll('.modal-overlay').forEach(o=>{o.addEventListener('click',function(e){if(e.target===o)closeAllModals()})});
+        document.addEventListener('keydown',function(e){if(e.key==='Escape')closeAllModals()});
+    </script>
 </body>
 </html>
